@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Home Base</title>
+<meta name="description" content="Home Base: news, today, schedule, goals, diary, routine and finance in one place.">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Home Base">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one narrow column, black on white, hairlines instead of cards. Excel-style sheet tabs pinned to the bottom.
+   The only colour is a single accent that follows the weekday (or stays black/white when switched off). */
+:root{
+  --bg:#FFFFFF;--surface-2:#F4F4F4;--ink:#0A0A0A;--muted:#6B6B6B;--line:#E3E3E3;
+  --accent:#0A0A0A;--accent-ink:#FFFFFF;--scrim:rgba(0,0,0,.45);
+  --font:'IBM Plex Sans Thai','Noto Sans Thai',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --label:var(--mono);
+  --k-stock:var(--accent);
+  --k-fund:color-mix(in srgb,var(--ink) 66%,var(--bg));
+  --k-cash:color-mix(in srgb,var(--ink) 38%,var(--bg));
+  --k-gold:color-mix(in srgb,var(--ink) 20%,var(--bg));
+  --k-other:color-mix(in srgb,var(--ink) 9%,var(--bg));
+}
+:root:lang(th){--label:var(--font)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--font);
+  padding-block:0 calc(72px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--ink);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+.wrap{max-width:680px;margin:0 auto}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sub{color:var(--muted);font-size:13px}
+small{font-size:12.5px;color:var(--muted)}
+
+/* header */
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:22px}
+.eyebrow{font:500 11.5px/1.4 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+:root:lang(th) .eyebrow{letter-spacing:0;text-transform:none;font-size:13px}
+h1{font:600 30px/1.15 var(--font);letter-spacing:-.01em}
+h1.big{font-size:38px;font-weight:300;letter-spacing:-.02em}
+.top-r{display:flex;align-items:center;gap:2px;flex:none}
+.status{font:11.5px var(--mono);color:var(--muted)}
+.icon{flex:none;width:40px;height:40px;border:0;background:none;color:var(--ink);display:inline-grid;place-items:center;border-radius:10px;padding:0}
+.icon:hover{background:var(--surface-2)}
+.icon.dim{color:var(--muted)}
+.link-btn{border:0;background:none;color:var(--ink);padding:4px 2px;font-size:13px;font-weight:500;text-decoration:underline;text-underline-offset:3px}
+
+main{padding-top:18px;display:grid;gap:26px;align-content:start}
+.sec{display:grid;gap:0;align-content:start}
+.sec-h{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.sec-h h2{font:600 12px/1.4 var(--label);letter-spacing:.1em;text-transform:uppercase}
+:root:lang(th) .sec-h h2{letter-spacing:0;text-transform:none;font-size:14px}
+.row-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+/* controls */
+.btn{border:1px solid var(--ink);background:transparent;color:var(--ink);padding:0 16px;min-height:44px;border-radius:10px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13.5px}
+.btn.quiet{border-color:var(--line)}
+.btn.wide{width:100%}
+.btn.danger{border-color:var(--line)}
+.btn.danger.armed{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.seg{display:flex;border:1px solid var(--ink);border-radius:10px;overflow:hidden}
+.seg button{flex:1;border:0;border-right:1px solid var(--line);background:none;min-height:40px;font-weight:500;color:var(--muted);padding:0 6px}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bar{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+@media(prefers-reduced-motion:no-preference){.bar>i{transition:width .3s ease}}
+.pill{display:inline-block;font:500 10.5px/1 var(--label);letter-spacing:.04em;padding:3px 6px;border-radius:5px;border:1px solid var(--line);color:var(--muted);white-space:nowrap;vertical-align:middle}
+.pill.ink{border-color:var(--ink);color:var(--ink)}
+:root:lang(th) .pill{font-size:11.5px;letter-spacing:0}
+
+.note{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.note.warn{color:var(--ink);border-bottom-color:var(--ink)}
+.empty{padding:22px 16px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center;display:grid;gap:12px;justify-items:center;margin-top:12px}
+.sk{height:14px;border-radius:6px;background:var(--surface-2);margin-top:14px}
+
+/* stat boxes */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stats.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat{border:1px solid var(--ink);border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.stats.three .stat{border-color:var(--line);padding:12px}
+.sn{font:500 44px/1.1 var(--mono)}
+.stats.three .sn{font-size:20px}
+.sl{font-size:13px;color:var(--muted)}
+
+/* Good morning */
+.lede{color:var(--muted);font-size:14px;margin-top:6px}
+.chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.news-sec{display:grid;gap:0}
+.sym-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:6px}
+.sym-h h3{font:600 26px/1.2 var(--mono);letter-spacing:-.01em}
+.news{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.news:last-child{border-bottom:0}
+.meta{font:500 11.5px/1.4 var(--label);color:var(--muted);letter-spacing:.04em}
+:root:lang(th) .meta{font-size:12.5px;letter-spacing:0}
+.news h3{font:600 20px/1.35 var(--font);letter-spacing:-.005em}
+.news>p:not(.meta){font-size:15px;line-height:1.7;color:color-mix(in srgb,var(--ink) 82%,var(--bg))}
+.more{font-size:13.5px;font-weight:500;justify-self:start}
+.src-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* tasks */
+.add-inline{display:flex;gap:8px}
+.add-inline .inp{flex:1;min-width:0}
+.list>li{border-bottom:1px solid var(--line)}
+.task{display:flex;align-items:center;gap:14px;padding:12px 0}
+.chk-btn{flex:none;border:0;background:none;padding:10px;margin:-10px;display:grid;place-items:center;border-radius:50%}
+.chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;color:var(--accent-ink)}
+.chk svg{opacity:0}
+[aria-checked="true"]>.chk{background:var(--accent);border-color:var(--accent)}
+[aria-checked="true"]>.chk svg{opacity:1}
+.chk-btn:disabled{opacity:.35;cursor:default}
+.task-main{flex:1;min-width:0;border:0;background:none;text-align:left;padding:2px 0;display:grid;gap:2px}
+.task-t{font-weight:500;overflow-wrap:anywhere}
+.task-m{font-size:12.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.task.is-done{opacity:.55}
+.task.is-done .task-t{color:var(--muted);text-decoration:line-through;font-weight:400}
+
+/* calendar */
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-h h2{font:600 18px var(--font)}
+.cal-h .r{display:flex;align-items:center;gap:2px}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;margin-top:8px}
+.cal .wd{text-align:center;font:500 11px var(--label);color:var(--muted);padding:6px 0}
+.cal button{min-height:46px;border:0;background:none;border-radius:10px;display:grid;place-items:center;align-content:center;gap:3px;padding:0}
+.cal .dn{font:500 15px/1 var(--mono)}
+.dots{display:flex;gap:3px;height:4px}
+.dots i{width:4px;height:4px;border-radius:50%;background:var(--ink)}
+.cal button.today{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.cal button.sel{background:var(--accent);color:var(--accent-ink)}
+.cal button.sel .dots i{background:var(--accent-ink)}
+
+/* goals */
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:3px;align-content:start;min-width:0}
+.tile .tl{font:500 10.5px/1.3 var(--label);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+:root:lang(th) .tile .tl{letter-spacing:0;text-transform:none;font-size:12px}
+.tile .tn{font:500 28px/1.1 var(--mono);margin-top:4px}
+.tile .tu{font-size:11.5px;color:var(--muted)}
+.tile .tt{font-size:12.5px;line-height:1.35;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.goal{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.goal:last-child{border-bottom:0}
+.g-h{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.g-h h3{font:600 17px/1.4 var(--font);overflow-wrap:anywhere}
+.g-h .icon{margin:-6px -8px 0 0}
+.why{color:var(--muted);font-size:13.5px}
+.g-meta{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.g-meta b{color:var(--ink);font-weight:500}
+.subs li{display:flex;align-items:center;gap:12px;padding:8px 0}
+.subs .st{flex:1;min-width:0;overflow-wrap:anywhere;font-size:14.5px}
+.subs li.is-done .st{color:var(--muted);text-decoration:line-through}
+.subs .chk{width:20px;height:20px}
+.subs .chk svg{width:12px;height:12px}
+.subs .icon{width:32px;height:32px;color:var(--muted)}
+
+/* diary */
+.box{border:1px solid var(--ink);border-radius:14px;padding:14px;display:grid;gap:10px}
+.dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.dbox{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:left;background:none;display:grid;gap:8px;align-content:start;min-height:132px;min-width:0}
+.dbox .dd{font:500 28px/1 var(--mono)}
+.dbox .dm{font-size:11.5px;color:var(--muted);margin-top:-4px}
+.dbox p{font-size:13.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line;overflow-wrap:anywhere}
+
+/* routine */
+.wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.wk button{border:1px solid transparent;border-radius:12px;background:none;padding:8px 0 6px;display:grid;justify-items:center;gap:5px}
+.wk button[aria-pressed="true"]{border-color:var(--ink)}
+.wk .wl{font:500 11px var(--label);color:var(--muted)}
+.wk .today .wl{color:var(--ink);font-weight:600}
+.ring{position:relative;width:34px;height:34px}
+.ring svg{display:block;width:100%;height:100%}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font:500 12px var(--mono)}
+.grp-h{font:500 12px var(--label);color:var(--muted);padding:14px 0 2px}
+.rg{width:100%;border-collapse:collapse}
+.rg th{font:500 11px var(--label);color:var(--muted);text-align:center;padding:0 0 6px;font-weight:500}
+.rg th.today{color:var(--ink);font-weight:600}
+.rg td{padding:3px 0;text-align:center;border-top:1px solid var(--line)}
+.rg td.n{text-align:left;font-size:13px;padding-right:8px;max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:38%}
+.dot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:none;padding:0;display:inline-grid;place-items:center;color:var(--accent-ink)}
+.dot.on{background:var(--accent);border-color:var(--accent)}
+.dot.due{border-color:var(--ink)}
+.dot:disabled{opacity:.3;cursor:default}
+.na{display:inline-block;width:10px;height:10px}
+.sp{display:inline-block;width:.9em}
+
+/* finance */
+.nw-l{font-size:13px;color:var(--muted)}
+.nw{font:500 42px/1.15 var(--mono);letter-spacing:-.01em}
+.donut{position:relative;width:208px;height:208px;margin:6px auto 4px}
+.donut svg{display:block;width:100%;height:100%}
+.donut .mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:0}
+.donut .mid b{font:500 28px/1.1 var(--mono)}
+.donut .mid span{font-size:12.5px;color:var(--muted)}
+.lg li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sw{flex:none;width:12px;height:12px;border-radius:3px;border:1px solid var(--line)}
+.lg .nm{flex:1}
+.lg .pc{color:var(--muted);font-size:13px;min-width:44px;text-align:right}
+.lg .am{min-width:84px;text-align:right}
+.hold{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;width:100%;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;padding:13px 0;min-width:0}
+.hold .l{display:grid;gap:1px;min-width:0}
+.hold .r{display:grid;gap:1px;text-align:right;justify-items:end;flex:none}
+.hold b{font-weight:500;overflow-wrap:anywhere}
+.fg{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.fg:last-child{border-bottom:0}
+.fg-n{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.fg-n .big{font:500 22px/1.2 var(--mono)}
+.need{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px}
+.need b{font-weight:600}
+.catr{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:12px;align-items:center;padding:7px 0;font-size:13.5px}
+.cat-sec{display:grid;gap:0;margin-top:4px}
+.day-h{display:flex;justify-content:space-between;font:500 12px var(--label);color:var(--muted);padding:16px 0 4px}
+.tx{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;padding:11px 0}
+.tx .l{display:grid;gap:1px;min-width:0}
+.tx .l b{font-weight:500;overflow-wrap:anywhere}
+.tx .am{font:500 15px var(--mono);flex:none}
+.tx .am.in{font-weight:600}
+.row-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+/* excel-style sheet tabs */
+.xl{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;overflow-x:auto;scrollbar-width:none;background:var(--surface-2);border-top:1px solid var(--ink);
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.xl::-webkit-scrollbar{display:none}
+.xt{flex:none;height:46px;padding:0 18px;border:0;border-right:1px solid var(--line);background:none;color:var(--muted);font:500 14px var(--font);white-space:nowrap}
+.xt[aria-current="page"]{background:var(--bg);color:var(--ink);font-weight:600;box-shadow:inset 0 -3px 0 var(--accent);margin-top:-1px;padding-top:1px}
+
+/* modal */
+.ov{position:fixed;inset:0;background:var(--scrim);display:grid;place-items:end center;z-index:50}
+@media(min-width:640px){.ov{place-items:center;padding:24px}}
+.mdl{background:var(--bg);width:100%;max-width:480px;max-height:92%;overflow:auto;border-radius:18px 18px 0 0;padding:20px;border:1px solid var(--ink);
+  padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+@media(min-width:640px){.mdl{border-radius:18px}}
+.mdl h2{font:600 18px/1.3 var(--font);margin-bottom:16px}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field>label,.field>.lbl{font-size:13px;color:var(--muted);font-weight:500}
+.inp{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:44px}
+.inp:focus{border-color:var(--ink);outline:0}
+.inp[type=number]{-moz-appearance:textfield;appearance:textfield}
+.inp[type=number]::-webkit-outer-spin-button,.inp[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
+.inp.big{font:500 28px/1.2 var(--mono);min-height:56px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.cp{position:relative}
+.cp input{position:absolute;opacity:0;inset:0;margin:0;width:100%;height:100%;cursor:pointer}
+.cp span{display:grid;place-items:center;min-width:44px;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:13.5px}
+.cp input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.cp input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.err{font-size:13.5px;margin-bottom:12px;padding:8px 12px;border:1px solid var(--ink);border-radius:10px}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.actions .r{display:flex;gap:8px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pk{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:left;background:none;display:grid;gap:2px;min-height:76px;align-content:start}
+.pk b{font-weight:600}
+.pk small{line-height:1.35}
+.set-g{display:grid;gap:8px;margin-bottom:18px}
+.set-g>.lbl{font-size:13px;color:var(--muted);font-weight:500}
+.dayc{display:grid;gap:6px;padding:6px 0;font-size:14px}
+.g12{display:grid;gap:12px}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.swb{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);padding:0;position:relative;display:grid;place-items:center}
+.swb[aria-pressed="true"]{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.swb.mono{background:linear-gradient(135deg,var(--ink) 50%,var(--bg) 50%)}
+.prev li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.prev .l{flex:1;min-width:0;display:grid;gap:1px}
+.prev .l b{font-weight:500;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div><p class="eyebrow" id="eyebrow"></p><h1 id="ptitle"></h1></div>
+    <div class="top-r"><span class="status" id="status" role="status" aria-live="polite"></span>
+      <button class="icon" data-act="settings" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+    </div>
+  </header>
+  <div id="notice"></div>
+  <main id="view"></main>
+</div>
+<nav class="xl" id="xl" aria-label="Sheets"></nav>
+<div class="ov" id="ov" hidden><div class="mdl" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t"></div></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[].slice.call(r.querySelectorAll(s));
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const uid=()=>Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-4);
+const num=v=>{const n=typeof v==='number'?v:parseFloat(v);return Number.isFinite(n)?n:0};
+const pnum=s=>{const n=parseFloat(String(s).replace(/,/g,''));return Number.isFinite(n)?n:NaN};
+const nf=new Intl.NumberFormat('en-US',{maximumFractionDigits:0});
+const nf2=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+const baht=v=>'฿'+nf.format(Math.round(num(v)));
+const bahtS=v=>(v>=0.5?'+':v<=-0.5?'−':'')+'฿'+nf.format(Math.abs(Math.round(v)));
+const compact=v=>{const a=Math.abs(v);return'฿'+(a>=1e6?nf2.format(Math.round(a/1e4)/100)+'M':a>=1e4?nf.format(Math.round(a/1e3))+'K':nf.format(Math.round(a)))};
+const pcS=v=>(v>0.005?'+':v<-0.005?'−':'')+nf2.format(Math.abs(v))+'%';
+const safeUrl=u=>{u=String(u||'').trim();if(!u)return'';if(!/^[a-z][a-z0-9+.-]*:/i.test(u))u='https://'+u;try{const x=new URL(u);return/^https?:$/.test(x.protocol)?x.href:''}catch(e){return''}};
+const cleanSym=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9&.\-]/g,'').slice(0,12);
+
+const dateKey=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const fromKey=k=>{const p=String(k).split('-').map(Number);return new Date(p[0],(p[1]||1)-1,p[2]||1,12)};
+const todayKey=()=>dateKey(new Date());
+const addDays=(d,n)=>{const r=new Date(d);r.setDate(r.getDate()+n);return r};
+const dayDiff=(a,b)=>Math.round((fromKey(b)-fromKey(a))/864e5);
+const wdi=d=>(d.getDay()+6)%7; /* Monday-first index */
+const isKey=k=>/^\d{4}-\d{2}-\d{2}$/.test(String(k||''));
+
+/* language: x(english, thai) */
+let lang='th';
+const x=(en,th)=>lang==='th'?th:en;
+const LOC=()=>lang==='th'?'th-TH-u-ca-gregory':'en-GB';
+const fmt=(d,o)=>d.toLocaleDateString(LOC(),o);
+const fDay=d=>fmt(d,{weekday:'long',day:'numeric',month:'long'});
+const fShort=d=>fmt(d,{day:'numeric',month:'short'});
+const fMonth=d=>fmt(d,{month:'long',year:'numeric'});
+const wdName=(i,style)=>fmt(new Date(2024,0,1+i,12),{weekday:style||'short'}).replace('.','');
+
+const CHECK='<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+const PEN='<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16l-4 1 1-4z"/></svg>';
+const PLUS='<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>';
+const XIC='<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>';
+const CHEV=d=>'<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(d<0?'M12.5 4.5L7 10l5.5 5.5':'M7.5 4.5L13 10l-5.5 5.5')+'"/></svg>';
+const SP='<span class="sp" aria-hidden="true"></span>';
+const empty=(msg,btn,act,data)=>'<div class="empty"><p>'+msg+'</p>'+(btn?'<button class="btn sm" data-act="'+act+'" '+(data||'')+'>'+btn+'</button>':'')+'</div>';
+
+/* ---------- sample content translations (Thai overlay for items flagged seed:true) ---------- */
+const TH_SEED={};
+const tr=(o,f,id)=>{id=id||o.id;const s=lang==='th'&&o&&o.seed&&TH_SEED[id];return(s&&s[f])||o[f]||''};
+
+/* ---------- state ---------- */
+const BASE=['settings','brief','goals','schedule','routines','money','fingoals','inbox'];
+const MONTHLY=/^(diary|txn)-\d{4}-\d{2}$/;
+const isDoc=n=>BASE.indexOf(n)>-1||MONTHLY.test(n);
+const baseOf=n=>n.replace(/-\d{4}-\d{2}$/,'');
+const DEF={
+  settings:()=>({lang:'th',theme:'auto',wk:true,colors:{}}),
+  brief:()=>({date:'',updatedAt:'',market:[],stocks:[],prices:{}}),
+  goals:()=>({items:[]}),
+  schedule:()=>({items:[]}),
+  routines:()=>({items:[],log:{}}),
+  money:()=>({assets:[],priceAt:null}),
+  fingoals:()=>({items:[]}),
+  inbox:()=>({items:[]}),
+  diary:()=>({entries:{}}),
+  txn:()=>({items:[]})
+};
+function norm(name,d){
+  const b=baseOf(name),def=DEF[b](),o=Object.assign({},def,d||{});
+  Object.keys(def).forEach(k=>{
+    const dv=def[k];
+    if(Array.isArray(dv)&&!Array.isArray(o[k]))o[k]=[];
+    else if(dv&&typeof dv==='object'&&!Array.isArray(dv)&&(!o[k]||typeof o[k]!=='object'||Array.isArray(o[k])))o[k]={};
+  });
+  if(b==='goals')o.items.forEach(g=>{if(!Array.isArray(g.subs))g.subs=[]});
+  if(b==='schedule')o.items.forEach(i=>{if(!Array.isArray(i.doneDates))i.doneDates=[]});
+  if(b==='brief'){o.stocks=o.stocks.filter(s=>s&&s.sym);o.stocks.forEach(s=>{if(!Array.isArray(s.items))s.items=[]})}
+  return o;
+}
+let S={};
+BASE.forEach(n=>{S[n]=norm(n,{})});
+let col=null,userId=null,dbReady=false,loaded=false,confirmed=false,slow=false,loadError=false,sampleFn=null;
+const VIEW_IDS=['brief','today','sched','goals','diary','routine','fin'];
+let view='brief',saveState='idle',slowT=null,lastKey=todayKey();
+let selDate=todayKey(),calMonth=new Date(),rtDay=todayKey(),finTab='port',flowYm=todayKey().slice(0,7),diaryKey=todayKey(),dTimer=null;
+calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth(),1,12);
+const HOST_THEME=document.documentElement.getAttribute('data-theme');
+
+/* ---------- theme / language / weekday colour ---------- */
+const COLORS={mono:null,red:'#E5484D',orange:'#F76B15',yellow:'#F5C400',green:'#30A46C',blue:'#3E63DD',purple:'#8E4EC6',pink:'#D6409F'};
+const COLOR_ORDER=['mono','red','orange','yellow','green','blue','purple','pink'];
+const COLOR_NAME={mono:['Black / white','ขาวดำ'],red:['Red','แดง'],orange:['Orange','ส้ม'],yellow:['Yellow','เหลือง'],green:['Green','เขียว'],blue:['Blue','น้ำเงิน'],purple:['Purple','ม่วง'],pink:['Pink','ชมพู']};
+const DEF_DAY={1:'yellow',2:'pink',3:'green',4:'orange',5:'blue',6:'purple',0:'red'}; /* by JS getDay() */
+function colorOf(day){const s=S.settings;if(!s.wk)return'mono';const c=s.colors&&s.colors[day];return COLORS.hasOwnProperty(c)?c:DEF_DAY[day]}
+function hexInk(h){const n=parseInt(h.slice(1),16),r=n>>16&255,g=n>>8&255,b=n&255;return(0.2126*r+0.7152*g+0.0722*b)/255>0.6?'#0A0A0A':'#FFFFFF'}
+function applyTheme(){
+  const r=document.documentElement,s=S.settings;
+  if(s.theme==='light'||s.theme==='dark')r.setAttribute('data-theme',s.theme);
+  else if(HOST_THEME)r.setAttribute('data-theme',HOST_THEME);else r.removeAttribute('data-theme');
+  const h=COLORS[colorOf(new Date().getDay())];
+  if(h){r.style.setProperty('--accent',h);r.style.setProperty('--accent-ink',hexInk(h))}
+  else{r.style.setProperty('--accent','var(--ink)');r.style.setProperty('--accent-ink','var(--bg)')}
+  lang=s.lang==='en'?'en':'th';r.lang=lang;
+}
+
+/* ---------- saving ---------- */
+const dirty={},timers={},busy={};
+const pending=()=>Object.keys(dirty).some(k=>dirty[k]||busy[k]||timers[k]);
+function pruned(n){
+  const d=JSON.parse(JSON.stringify(S[n])),b=baseOf(n);
+  if(b==='routines'){const ks=Object.keys(d.log).sort();ks.slice(0,Math.max(0,ks.length-90)).forEach(k=>delete d.log[k])}
+  if(b==='schedule')d.items.forEach(i=>{if(i.doneDates.length>120)i.doneDates=i.doneDates.sort().slice(-120)});
+  if(b==='inbox'&&d.items.length>200)d.items=d.items.slice(-200);
+  return d;
+}
+function touch(n){dirty[n]=true;clearTimeout(timers[n]);timers[n]=setTimeout(()=>flush(n),500);setSave('saving')}
+async function flush(n,retried){
+  timers[n]=null;
+  if(!col||!dirty[n])return;
+  if(busy[n]){timers[n]=setTimeout(()=>flush(n),300);return}
+  dirty[n]=false;busy[n]=true;
+  try{await col.doc(n).set(pruned(n))}
+  catch(e){
+    dirty[n]=true;busy[n]=false;
+    if(e&&e.code==='unavailable'&&!retried){timers[n]=setTimeout(()=>flush(n,true),1000+Math.random()*1000);return}
+    setSave('error');return;
+  }
+  busy[n]=false;
+  if(dirty[n]){timers[n]=setTimeout(()=>flush(n),100)}
+  else if(!pending())setSave('saved');
+}
+function setSave(s){saveState=s;paintStatus()}
+function paintStatus(){
+  const el=$('#status');if(!el)return;
+  if(saveState==='error'){el.innerHTML='<button class="link-btn" data-act="retry">'+x('Not saved. Retry','บันทึกไม่สำเร็จ ลองอีกครั้ง')+'</button>';return}
+  el.textContent=(loaded&&!dbReady)?x('Not saving','ยังไม่บันทึก'):saveState==='saving'?x('Saving…','กำลังบันทึก…'):saveState==='saved'?x('Saved','บันทึกแล้ว'):'';
+}
+function ensureDoc(n){if(!S[n])S[n]=norm(n,{});return S[n]}
+
+/* ---------- derived: schedule ---------- */
+const timeCmp=(a,b)=>((a.time||'99:99')+a.title).localeCompare((b.time||'99:99')+b.title);
+function occursOn(it,key){
+  if(!isKey(it.date))return false;
+  if(it.repeat==='daily')return key>=it.date;
+  if(key<it.date)return false;
+  if(!it.repeat||it.repeat==='none')return key===it.date;
+  const a=fromKey(it.date),b=fromKey(key);
+  if(it.repeat==='weekdays')return b.getDay()>=1&&b.getDay()<=5;
+  if(it.repeat==='weekly')return a.getDay()===b.getDay();
+  if(it.repeat==='monthly')return a.getDate()===b.getDate();
+  return false;
+}
+const isDone=(it,key)=>it.doneDates.indexOf(key)>-1;
+const isOneOff=it=>!it.repeat||it.repeat==='none';
+const isOverdue=(it,key)=>isOneOff(it)&&isKey(it.date)&&it.date<key&&!it.doneDates.length;
+const itemsOn=key=>S.schedule.items.filter(i=>occursOn(i,key)).sort(timeCmp);
+function todayList(){
+  const k=todayKey();
+  const rows=S.schedule.items.filter(i=>occursOn(i,k)||isOverdue(i,k)||isDone(i,k)).map(i=>({i:i,over:isOneOff(i)&&i.date<k,done:isDone(i,k)}));
+  rows.sort((a,b)=>(a.done-b.done)||(b.over-a.over)||timeCmp(a.i,b.i));
+  return rows;
+}
+const REPEATS=()=>[['none',x('Does not repeat','ไม่ทำซ้ำ')],['daily',x('Every day','ทุกวัน')],['weekdays',x('Weekdays','จันทร์–ศุกร์')],['weekly',x('Every week','ทุกสัปดาห์')],['monthly',x('Every month','ทุกเดือน')]];
+
+/* ---------- derived: routines ---------- */
+const rtDue=wd=>S.routines.items.filter(r=>!r.days||!r.days.length||r.days.indexOf(wd)>-1);
+const rtDoneSet=k=>new Set(S.routines.log[k]||[]);
+function rtStat(d){const due=rtDue(d.getDay()),done=rtDoneSet(dateKey(d)),n=due.filter(r=>done.has(r.id)).length;return{total:due.length,done:n,pct:due.length?n/due.length:0}}
+function weekStart(){const d=new Date();d.setHours(12,0,0,0);return addDays(d,-wdi(d))}
+function streak(){
+  let s=0;const d=new Date();d.setHours(12,0,0,0);
+  for(let i=0;i<90;i++,d.setDate(d.getDate()-1)){
+    const st=rtStat(d);
+    if(!st.total)continue;
+    if(st.pct>=0.8)s++;else if(i===0)continue;else break;
+  }
+  return s;
+}
+const rtTime=r=>r.time||'';
+const period=r=>{const t=rtTime(r);if(!t)return 3;const h=+t.slice(0,2);return h<12?0:h<18?1:2};
+const PERIODS=()=>[x('Morning','เช้า'),x('Afternoon','บ่าย'),x('Evening','เย็น'),x('Anytime','ไม่ระบุเวลา')];
+
+/* ---------- derived: goals & finance ---------- */
+const TERMS=['short','mid','long'];
+const termName=t=>t==='short'?x('Short-term','ระยะสั้น'):t==='mid'?x('Mid-term','ระยะกลาง'):x('Long-term','ระยะยาว');
+const termHint=t=>t==='short'?x('about a year or less','ราว 1 ปีหรือน้อยกว่า'):t==='mid'?x('1–5 years','1–5 ปี'):x('5+ years','5 ปีขึ้นไป');
+function subStat(g){const n=g.subs.length,d=g.subs.filter(s=>s.done).length;return{n:n,d:d,pct:n?Math.round(d/n*100):0,all:n>0&&d===n}}
+const KINDS=['cash','stock','fund','gold','other'];
+const kindName=k=>({cash:x('Cash','เงินสด'),stock:x('Stocks','หุ้น'),fund:x('Funds','กองทุน'),gold:x('Gold','ทองคำ'),other:x('Other','อื่นๆ')})[k];
+const isUnit=a=>a.kind==='stock'||a.kind==='fund';
+const assetVal=a=>isUnit(a)?num(a.qty)*num(a.price):num(a.value);
+const assetCost=a=>isUnit(a)?num(a.qty)*num(a.cost):0;
+function totals(){
+  const by={cash:0,stock:0,fund:0,gold:0,other:0};let net=0,cost=0,mv=0;
+  S.money.assets.forEach(a=>{const k=KINDS.indexOf(a.kind)>-1?a.kind:'other',v=assetVal(a);by[k]+=v;net+=v;if(isUnit(a)){cost+=assetCost(a);mv+=v}});
+  return{by:by,net:net,cost:cost,mv:mv,pl:mv-cost,plPct:cost>0?(mv-cost)/cost*100:0};
+}
+function monthsLeft(dateStr){
+  if(!isKey(dateStr))return 0;
+  const a=new Date(),b=fromKey(dateStr);
+  return (b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth())+(b.getDate()-a.getDate())/30;
+}
+function needPerMonth(g){
+  const n=Math.max(1,Math.round(monthsLeft(g.date))),r=num(g.ret)/100/12,fvSaved=num(g.saved)*Math.pow(1+r,n),gap=num(g.target)-fvSaved;
+  if(gap<=0)return 0;
+  return r>0?gap*r/(Math.pow(1+r,n)-1):gap/n;
+}
+const OUT_CATS=['food','transport','shopping','bills','health','fun','other'];
+const IN_CATS=['salary','bonus','invest','inother'];
+const catName=c=>({food:x('Food','อาหาร'),transport:x('Transport','เดินทาง'),shopping:x('Shopping','ช้อปปิ้ง'),bills:x('Bills','บิล/ค่าบริการ'),health:x('Health','สุขภาพ'),fun:x('Fun','บันเทิง'),other:x('Other','อื่นๆ'),salary:x('Salary','เงินเดือน'),bonus:x('Bonus','โบนัส'),invest:x('Investing','ลงทุน'),inother:x('Other income','รายได้อื่น')})[c]||c;
+const srcName=s=>s==='email'?'Email':s==='line'?'LINE':s==='paste'?x('Pasted','วางข้อความ'):'';
+const txnDocs=()=>Object.keys(S).filter(k=>k.indexOf('txn-')===0);
+const txnsOf=ym=>(S['txn-'+ym]&&S['txn-'+ym].items)||[];
+function findTxn(id){const ns=txnDocs();for(let i=0;i<ns.length;i++){const it=S[ns[i]].items.find(t=>t.id===id);if(it)return{doc:ns[i],it:it}}return null}
+function addTxns(list){
+  let n=0;
+  list.forEach(t=>{
+    if(!isKey(t.date)||!(num(t.amount)>0))return;
+    const doc='txn-'+t.date.slice(0,7),d=ensureDoc(doc);
+    if(d.items.some(o=>o.date===t.date&&o.type===t.type&&Math.round(num(o.amount)*100)===Math.round(num(t.amount)*100)&&String(o.note||'')===String(t.note||'')))return;
+    d.items.push({id:uid(),date:t.date,type:t.type==='in'?'in':'out',amount:Math.round(num(t.amount)*100)/100,cat:t.cat||(t.type==='in'?'inother':'other'),note:String(t.note||'').slice(0,80),src:t.src||'manual'});
+    touch(doc);n++;
+  });
+  return n;
+}
+
+/* diary */
+const diaryDocs=()=>Object.keys(S).filter(k=>k.indexOf('diary-')===0);
+function diaryAll(){const out=[];diaryDocs().forEach(n=>{const e=S[n].entries;Object.keys(e).forEach(k=>{if(e[k]&&e[k].text)out.push({key:k,e:e[k]})})});out.sort((a,b)=>b.key.localeCompare(a.key));return out}
+const diaryGet=k=>{const d=S['diary-'+k.slice(0,7)];return(d&&d.entries[k])||null};
+function diarySet(k,text){
+  const n='diary-'+k.slice(0,7),d=ensureDoc(n),tx=String(text).replace(/\s+$/,'');
+  if(tx.trim())d.entries[k]={text:tx,at:new Date().toISOString()};else delete d.entries[k];
+  touch(n);
+}
+const diaryText=(k)=>{const e=diaryGet(k);return e?tr(e,'text','d_'+k):''};
+
+/* seeds */
+const hasSeed=()=>{
+  if(['goals','schedule','routines','fingoals'].some(n=>S[n].items.some(i=>i.seed)))return true;
+  if(S.money.assets.some(a=>a.seed))return true;
+  if(txnDocs().some(n=>S[n].items.some(t=>t.seed)))return true;
+  return diaryDocs().some(n=>Object.keys(S[n].entries).some(k=>S[n].entries[k]&&S[n].entries[k].seed));
+};
+function clearSeeds(){
+  ['goals','schedule','routines','fingoals'].forEach(n=>{if(S[n].items.some(i=>i.seed)){S[n].items=S[n].items.filter(i=>!i.seed);touch(n)}});
+  if(S.money.assets.some(a=>a.seed)){S.money.assets=S.money.assets.filter(a=>!a.seed);touch('money')}
+  txnDocs().forEach(n=>{if(S[n].items.some(t=>t.seed)){S[n].items=S[n].items.filter(t=>!t.seed);touch(n)}});
+  diaryDocs().forEach(n=>{let c=false;Object.keys(S[n].entries).forEach(k=>{if(S[n].entries[k]&&S[n].entries[k].seed){delete S[n].entries[k];c=true}});if(c)touch(n)});
+}
+
+/* ---------- views ---------- */
+const TABS=[['brief','Good morning','สวัสดีตอนเช้า'],['today','Today','วันนี้'],['sched','Scheduled','กำหนดการ'],['goals','Goals','เป้าหมาย'],['diary','Diary','ไดอารี่'],['routine','Routine','กิจวัตร'],['fin','Finance','การเงิน']];
+const tabName=v=>{const t=TABS.find(a=>a[0]===v);return t?x(t[1],t[2]):''};
+const chkBtn=(on,label,data,disabled)=>'<button class="chk-btn" role="checkbox" aria-checked="'+!!on+'" aria-label="'+esc(label)+'" '+data+(disabled?' disabled':'')+'><span class="chk">'+CHECK+'</span></button>';
+
+/* 1 Good morning */
+function heldSyms(){const out=[];S.money.assets.forEach(a=>{if(a.kind==='stock'){const s=cleanSym(a.sym||a.name);if(s&&out.indexOf(s)<0)out.push(s)}});return out}
+const pickLang=o=>(o&&(o[lang]||o[lang==='th'?'en':'th']))||{title:'',summary:''};
+function newsItem(n){
+  const c=pickLang(n),u=safeUrl(n.url),dt=isKey(n.date)?fShort(fromKey(n.date)):'';
+  return'<article class="news"><p class="meta">'+[esc(n.source||''),esc(dt)].filter(Boolean).join(SP)+'</p><h3>'+esc(c.title)+'</h3>'+(c.summary?'<p>'+esc(c.summary)+'</p>':'')
+    +(u?'<a class="more" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+(n.source?x('Read the full story at ','อ่านต่อที่ ')+esc(n.source):x('Read the full story','อ่านต่อที่ต้นทาง'))+' ↗</a>':'')+'</article>';
+}
+function vBrief(){
+  const b=S.brief,syms=heldSyms(),k=todayKey();
+  const upd=b.date?(b.date===k?x('Updated today','อัปเดตวันนี้'):x('Latest brief: ','สรุปล่าสุด: ')+fShort(fromKey(b.date))):'';
+  let h='<div><p class="lede">'+x('What moved the market, and what is happening with the stocks you hold.','ความเคลื่อนไหวของตลาด และข่าวของหุ้นที่คุณถืออยู่')+'</p>';
+  h+='<div class="chips-row">'+(upd?'<span class="pill'+(b.date===k?' ink':'')+'">'+esc(upd)+'</span>':'')
+    +syms.map(s=>'<span class="pill ink">'+esc(s)+(b.prices&&b.prices[s]&&num(b.prices[s].price)?SP+'฿'+nf2.format(num(b.prices[s].price)):'')+'</span>').join('')+'</div></div>';
+  if(!b.market.length&&!b.stocks.length)return h+empty(x('No news yet. Headlines are collected each morning. Open the app while online to load them.','ยังไม่มีข่าว ระบบรวบรวมหัวข่าวให้ทุกเช้า เปิดแอปตอนมีอินเทอร์เน็ตเพื่อโหลด'));
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Market','ตลาด')+'</h2></div>'
+    +(b.market.length?b.market.map(newsItem).join(''):'<p class="sub" style="padding:14px 0">'+x('No market news in this brief.','สรุปนี้ไม่มีข่าวตลาด')+'</p>')+'</section>';
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Stocks you hold','หุ้นที่ถืออยู่')+'</h2></div>';
+  if(!syms.length)h+=empty(x('Add a stock in Finance and its news will show up here.','เพิ่มหุ้นในหน้าการเงิน แล้วข่าวของหุ้นนั้นจะมาแสดงที่นี่'),x('Open Finance','ไปหน้าการเงิน'),'tab','data-v="fin"');
+  syms.forEach(s=>{
+    const e=b.stocks.find(z=>cleanSym(z.sym)===s),pr=b.prices&&b.prices[s];
+    h+='<div class="news-sec"><div class="sym-h"><h3>'+esc(s)+'</h3>'+(pr&&num(pr.price)?'<span class="meta mono">฿'+nf2.format(num(pr.price))+(isKey(pr.date)?SP+esc(fShort(fromKey(pr.date))):'')+'</span>':'')+'</div>'
+      +(e&&e.items.length?e.items.map(newsItem).join(''):'<p class="sub" style="padding:10px 0 18px">'+x('No headlines for this stock today. ','วันนี้ไม่มีหัวข่าวของหุ้นนี้ ')+'<a href="https://news.google.com/search?q='+encodeURIComponent(s+' หุ้น')+'&hl=th&gl=TH&ceid=TH%3Ath" target="_blank" rel="noopener noreferrer">'+x('Search Google News','ค้นหาใน Google News')+' ↗</a></p>')+'</div>';
+  });
+  return h+'</section><p class="src-note">'+x('Headlines are collected automatically through Google News. Open the story and read it in full before you act on anything.','หัวข่าวรวบรวมอัตโนมัติผ่าน Google News เปิดอ่านต้นฉบับให้ครบก่อนตัดสินใจ')+'</p>';
+}
+
+/* 2 Today */
+function taskRow(i,key,o){
+  o=o||{};const done=isDone(i,key),t=tr(i,'title'),note=tr(i,'note'),meta=[];
+  if(i.time)meta.push('<span class="mono">'+esc(i.time)+(i.end?'–'+esc(i.end):'')+'</span>');
+  if(o.over&&!done)meta.push('<span class="pill ink">'+x('Overdue','เลยกำหนด')+' '+esc(fShort(fromKey(i.date)))+'</span>');
+  if(!isOneOff(i))meta.push('<span class="pill">'+esc((REPEATS().find(r=>r[0]===i.repeat)||['',''])[1])+'</span>');
+  if(note)meta.push('<span>'+esc(note)+'</span>');
+  return'<li class="task'+(done?' is-done':'')+'">'+chkBtn(done,t,'data-act="toggleTask" data-id="'+esc(i.id)+'" data-k="'+key+'" data-fk="tk-'+esc(i.id)+'"')
+    +'<button class="task-main" data-act="editTask" data-id="'+esc(i.id)+'"><span class="task-t">'+esc(t)+'</span>'+(meta.length?'<span class="task-m">'+meta.join('')+'</span>':'')+'</button></li>';
+}
+function vToday(){
+  const rows=todayList(),k=todayKey(),total=rows.length,done=rows.filter(r=>r.done).length,p=total?done/total*100:0;
+  let h='<div class="g12"><div class="stats"><div class="stat"><span class="sn">'+total+'</span><span class="sl">'+x('To do today','ต้องทำวันนี้')+'</span></div>'
+    +'<div class="stat"><span class="sn">'+done+'</span><span class="sl">'+x('Done','เสร็จแล้ว')+'</span></div></div>'
+    +'<div class="bar" role="progressbar" aria-label="'+x('Progress','ความคืบหน้า')+'" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(p)+'"><i style="width:'+p+'%"></i></div></div>';
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Tasks','งานวันนี้')+'</h2><button class="link-btn" data-act="tab" data-v="sched">'+x('Open Scheduled','เปิดกำหนดการ')+'</button></div>'
+    +'<form class="add-inline" style="padding:12px 0" data-submit="quickAdd"><input class="inp" name="t" aria-label="'+x('New task for today','งานใหม่วันนี้')+'" placeholder="'+x('Add a task for today…','เพิ่มงานของวันนี้…')+'" maxlength="120" autocomplete="off" data-fk="qa"><button class="btn primary" type="submit" aria-label="'+x('Add','เพิ่ม')+'">'+PLUS+'</button></form>';
+  h+=rows.length?'<ul class="list">'+rows.map(r=>taskRow(r.i,k,{over:r.over})).join('')+'</ul>':empty(x('Nothing planned for today. Add a task above, or plan ahead in Scheduled.','วันนี้ยังไม่มีงาน เพิ่มด้านบน หรือวางแผนล่วงหน้าที่หน้ากำหนดการ'));
+  return h+'</section>';
+}
+
+/* 3 Scheduled */
+function vSched(){
+  const y=calMonth.getFullYear(),mo=calMonth.getMonth(),off=wdi(new Date(y,mo,1,12)),dim=new Date(y,mo+1,0).getDate(),tk=todayKey();
+  let cells='';
+  for(let i=0;i<7;i++)cells+='<span class="wd">'+esc(wdName(i,'short'))+'</span>';
+  for(let i=0;i<off;i++)cells+='<span></span>';
+  for(let d=1;d<=dim;d++){
+    const key=y+'-'+pad(mo+1)+'-'+pad(d),n=itemsOn(key).length;
+    cells+='<button class="'+(key===tk?'today ':'')+(key===selDate?'sel':'')+'" data-act="selDay" data-k="'+key+'" aria-label="'+esc(fDay(fromKey(key)))+(n?', '+n+' '+x('tasks','งาน'):'')+'" aria-pressed="'+(key===selDate)+'"><span class="dn">'+d+'</span><span class="dots">'+'<i></i>'.repeat(Math.min(3,n))+'</span></button>';
+  }
+  const list=itemsOn(selDate);
+  let h='<section><div class="cal-h"><h2>'+esc(fMonth(calMonth))+'</h2><div class="r"><button class="icon" data-act="calPrev" aria-label="'+x('Previous month','เดือนก่อน')+'">'+CHEV(-1)+'</button><button class="btn sm quiet" data-act="calToday">'+x('Today','วันนี้')+'</button><button class="icon" data-act="calNext" aria-label="'+x('Next month','เดือนถัดไป')+'">'+CHEV(1)+'</button></div></div><div class="cal">'+cells+'</div></section>';
+  h+='<section class="sec"><div class="sec-h"><h2>'+esc(fDay(fromKey(selDate)))+'</h2><button class="btn sm" data-act="addTask">'+PLUS+x('Add','เพิ่ม')+'</button></div>'
+    +(list.length?'<ul class="list">'+list.map(i=>taskRow(i,selDate)).join('')+'</ul>':empty(x('Nothing scheduled for this day.','วันนี้ยังไม่มีนัดหรืองาน')))+'</section>';
+  return h;
+}
+
+/* 4 Goals */
+function daysLeftText(g){
+  if(!isKey(g.target))return'';
+  const d=dayDiff(todayKey(),g.target);
+  return d>0?x(nf.format(d)+' days left','เหลืออีก '+nf.format(d)+' วัน'):d===0?x('Due today','ครบกำหนดวันนี้'):x(nf.format(-d)+' days overdue','เลยกำหนด '+nf.format(-d)+' วัน');
+}
+function goalCard(g){
+  const st=subStat(g),title=tr(g,'title'),desc=tr(g,'desc');
+  const subs=g.subs.map(s=>'<li class="'+(s.done?'is-done':'')+'">'+chkBtn(s.done,tr(s,'text'),'data-act="toggleSub" data-g="'+esc(g.id)+'" data-id="'+esc(s.id)+'" data-fk="sb-'+esc(s.id)+'"')
+    +'<span class="st">'+esc(tr(s,'text'))+'</span><button class="icon" data-act="rmSub" data-g="'+esc(g.id)+'" data-id="'+esc(s.id)+'" aria-label="'+x('Remove step','ลบขั้นตอน')+'">'+XIC+'</button></li>').join('');
+  return'<article class="goal"><div class="g-h"><h3>'+esc(title)+(st.all?' <span class="pill ink">'+x('Done','สำเร็จ')+'</span>':'')+'</h3><button class="icon dim" data-act="editGoal" data-id="'+esc(g.id)+'" aria-label="'+x('Edit','แก้ไข')+'">'+PEN+'</button></div>'
+    +(desc?'<p class="why">'+esc(desc)+'</p>':'')
+    +'<div class="g-meta"><span>'+(isKey(g.target)?x('Target ','ถึงเมื่อ ')+esc(fShort(fromKey(g.target)))+' '+fromKey(g.target).getFullYear():'')+'</span><b class="mono">'+esc(daysLeftText(g))+'</b></div>'
+    +(st.n?'<div class="g-meta"><span>'+x('Steps','ขั้นตอน')+' '+st.d+'/'+st.n+'</span><span class="mono">'+st.pct+'%</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+st.pct+'" aria-label="'+esc(title)+'"><i style="width:'+st.pct+'%"></i></div>':'')
+    +(subs?'<ul class="subs">'+subs+'</ul>':'')
+    +'<form class="add-inline" data-submit="addSub" data-g="'+esc(g.id)+'"><input class="inp" name="t" aria-label="'+x('New step','ขั้นตอนใหม่')+'" placeholder="'+x('Add a step…','เพิ่มขั้นตอน…')+'" maxlength="120" autocomplete="off" data-fk="sub-'+esc(g.id)+'"><button class="btn sm" type="submit" aria-label="'+x('Add step','เพิ่มขั้นตอน')+'">'+PLUS+'</button></form></article>';
+}
+function vGoals(){
+  const tk=todayKey();
+  const tiles=TERMS.map(t=>{
+    const g=S.goals.items.filter(z=>z.term===t&&isKey(z.target)&&!subStat(z).all).sort((a,b)=>a.target.localeCompare(b.target))[0];
+    if(!g)return'<div class="tile"><span class="tl">'+esc(termName(t))+'</span><span class="tn">—</span><span class="tu">'+x('no goal yet','ยังไม่มีเป้าหมาย')+'</span></div>';
+    const d=dayDiff(tk,g.target);
+    return'<div class="tile"><span class="tl">'+esc(termName(t))+'</span><span class="tn">'+(d<0?'−':'')+nf.format(Math.abs(d))+'</span><span class="tu">'+(d<0?x('days overdue','วันที่เลยกำหนด'):x('days to go','วันที่เหลือ'))+'</span><span class="tt">'+esc(tr(g,'title'))+'</span></div>';
+  }).join('');
+  let h='<section class="sec"><div class="sec-h"><h2>'+x('Countdown','นับถอยหลัง')+'</h2></div><div class="tiles" style="margin-top:12px">'+tiles+'</div></section>';
+  TERMS.forEach(t=>{
+    const gs=S.goals.items.filter(g=>g.term===t).sort((a,b)=>(a.target||'9').localeCompare(b.target||'9'));
+    h+='<section class="sec"><div class="sec-h"><h2>'+esc(termName(t))+SP+'<span class="sub" style="text-transform:none;letter-spacing:0;font-weight:400">'+esc(termHint(t))+'</span></h2><button class="btn sm" data-act="addGoal" data-term="'+t+'">'+PLUS+x('Add','เพิ่ม')+'</button></div>'
+      +(gs.length?gs.map(goalCard).join(''):empty(x('No plan here yet.','ยังไม่มีแผนในหมวดนี้')))+'</section>';
+  });
+  return h;
+}
+
+/* 5 Diary */
+function vDiary(){
+  const k=diaryKey,tk=todayKey(),all=diaryAll();
+  let h='<section class="box"><div class="row-h"><input class="inp" style="width:auto;min-height:40px" type="date" id="ddate" value="'+k+'" max="'+tk+'" aria-label="'+x('Date','วันที่')+'"><span class="sub">'+(k===tk?x('Today','วันนี้'):esc(fDay(fromKey(k))))+'</span></div>'
+    +'<textarea class="inp" id="dtext" rows="7" maxlength="8000" aria-label="'+x('What did you do?','วันนี้ทำอะไรบ้าง')+'" placeholder="'+x('What did you do today? Anything goes — it saves as you type.','วันนี้ทำอะไรบ้าง? เขียนได้เลย บันทึกให้อัตโนมัติตอนพิมพ์')+'">'+esc(diaryText(k))+'</textarea></section>';
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Past entries','ที่เขียนไว้แล้ว')+'</h2><span class="sub mono" id="dcount">'+all.length+'</span></div><div class="dgrid" id="dgrid">'+diaryGrid(all)+'</div></section>';
+  return h;
+}
+function diaryGrid(all){
+  if(!all.length)return'<div class="empty" style="grid-column:1/-1">'+x('Nothing written yet. Your entries will appear here as boxes.','ยังไม่มีบันทึก สิ่งที่เขียนจะแสดงเป็นกล่องตรงนี้')+'</div>';
+  return all.map(e=>{const d=fromKey(e.key);return'<button class="dbox" data-act="openDiary" data-k="'+e.key+'"><span class="dd">'+d.getDate()+'</span><span class="dm">'+esc(fmt(d,{weekday:'short',month:'short',year:'numeric'}))+'</span><p>'+esc(tr(e.e,'text','d_'+e.key))+'</p></button>'}).join('');
+}
+
+/* 6 Routine */
+function ringSvg(p){
+  const C=2*Math.PI*15;
+  return'<svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--line)" stroke-width="3"/>'+(p>0?'<circle cx="18" cy="18" r="15" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="'+(C*p).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 18 18)"/>':'')+'</svg>';
+}
+function vRoutine(){
+  const ws=weekStart(),tk=todayKey(),sel=fromKey(rtDay);
+  let strip='',wd=0,wt=0;
+  for(let i=0;i<7;i++){
+    const d=addDays(ws,i),key=dateKey(d),st=rtStat(d);
+    if(key<=tk){wd+=st.done;wt+=st.total}
+    strip+='<button class="'+(key===tk?'today':'')+'" data-act="rtDay" data-k="'+key+'" aria-pressed="'+(key===rtDay)+'" aria-label="'+esc(fDay(d))+(st.total?', '+st.done+'/'+st.total:'')+'"><span class="wl">'+esc(wdName(i,'short'))+'</span><span class="ring">'+ringSvg(st.pct)+'<span>'+d.getDate()+'</span></span></button>';
+  }
+  const tst=rtStat(new Date());
+  let h='<div class="g12"><div class="wk" role="group" aria-label="'+x('Week','สัปดาห์นี้')+'">'+strip+'</div>'
+    +'<div class="stats three"><div class="stat"><span class="sn">'+streak()+'</span><span class="sl">'+x('Day streak','วันต่อเนื่อง')+'</span></div>'
+    +'<div class="stat"><span class="sn">'+(wt?Math.round(wd/wt*100):0)+'%</span><span class="sl">'+x('This week','สัปดาห์นี้')+'</span></div>'
+    +'<div class="stat"><span class="sn">'+tst.done+'/'+tst.total+'</span><span class="sl">'+x('Today','วันนี้')+'</span></div></div>'
+    +'<p class="sub">'+x('A day counts toward the streak when you finish 80% or more.','นับเป็นวันต่อเนื่องเมื่อทำได้ตั้งแต่ 80% ขึ้นไป')+'</p></div>';
+  const due=rtDue(sel.getDay()).slice().sort(timeCmp),done=rtDoneSet(rtDay),future=rtDay>tk;
+  h+='<section class="sec"><div class="sec-h"><h2>'+(rtDay===tk?esc(x('Today','วันนี้'))+SP+esc(fShort(sel)):esc(fDay(sel)))+'</h2><button class="btn sm" data-act="addRt">'+PLUS+x('Add','เพิ่ม')+'</button></div>';
+  if(!S.routines.items.length)h+=empty(x('No routines yet. Add the habits you want to repeat.','ยังไม่มีกิจวัตร เพิ่มสิ่งที่อยากทำซ้ำทุกวัน'),x('Add a routine','เพิ่มกิจวัตร'),'addRt');
+  else if(!due.length)h+=empty(x('No routines on this day.','วันนี้ไม่มีกิจวัตร'));
+  else{
+    const P=PERIODS();
+    [0,1,2,3].forEach(p=>{
+      const rs=due.filter(r=>period(r)===p);if(!rs.length)return;
+      h+='<p class="grp-h">'+esc(P[p])+'</p><ul class="list">'+rs.map(r=>{
+        const on=done.has(r.id),t=tr(r,'title');
+        return'<li class="task'+(on?' is-done':'')+'">'+chkBtn(on,t,'data-act="toggleRt" data-id="'+esc(r.id)+'" data-k="'+rtDay+'" data-fk="rt-'+esc(r.id)+'"',future)
+          +'<button class="task-main" data-act="editRt" data-id="'+esc(r.id)+'"><span class="task-t">'+esc(t)+'</span>'+(r.time?'<span class="task-m mono">'+esc(r.time)+'</span>':'')+'</button></li>';
+      }).join('')+'</ul>';
+    });
+  }
+  h+='</section>';
+  if(S.routines.items.length){
+    let th='',days=[];
+    for(let i=0;i<7;i++){const d=addDays(ws,i);days.push(d);th+='<th class="'+(dateKey(d)===tk?'today':'')+'" scope="col">'+esc(wdName(i,'short'))+'</th>'}
+    const rows=S.routines.items.slice().sort(timeCmp).map(r=>{
+      let tds='';
+      days.forEach(d=>{
+        const key=dateKey(d),isDue=!r.days||!r.days.length||r.days.indexOf(d.getDay())>-1;
+        if(!isDue){tds+='<td><span class="na" aria-hidden="true"></span></td>';return}
+        const on=rtDoneSet(key).has(r.id);
+        tds+='<td><button class="dot due'+(on?' on':'')+'" role="checkbox" aria-checked="'+on+'" aria-label="'+esc(tr(r,'title')+', '+fDay(d))+'" data-act="toggleRt" data-id="'+esc(r.id)+'" data-k="'+key+'"'+(key>tk?' disabled':'')+'>'+(on?CHECK.replace('width="16" height="16"','width="14" height="14"'):'')+'</button></td>';
+      });
+      return'<tr><td class="n">'+esc(tr(r,'title'))+'</td>'+tds+'</tr>';
+    }).join('');
+    h+='<section class="sec"><div class="sec-h"><h2>'+x('This week','ภาพรวมสัปดาห์นี้')+'</h2></div><table class="rg" style="margin-top:10px"><thead><tr><th scope="col"></th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></section>';
+  }
+  return h;
+}
+
+/* 7 Finance */
+function donut(t){
+  const R=42,C=2*Math.PI*R,parts=KINDS.filter(k=>t.by[k]>0),gap=parts.length>1?1.8:0;let off=0,segs='';
+  parts.forEach(k=>{const len=t.by[k]/t.net*C,d=Math.max(0,len-gap);segs+='<circle cx="50" cy="50" r="'+R+'" fill="none" stroke-width="13" style="stroke:var(--k-'+k+')" stroke-dasharray="'+d.toFixed(2)+' '+(C-d).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'"/>';off+=len});
+  let top=parts[0];parts.forEach(k=>{if(t.by[k]>t.by[top])top=k});
+  return'<div class="donut" role="img" aria-label="'+x('Portfolio split by type','สัดส่วนพอร์ตแยกตามประเภท')+'"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="'+R+'" fill="none" stroke-width="13" style="stroke:var(--line)"/><g transform="rotate(-90 50 50)">'+segs+'</g></svg>'
+    +'<div class="mid"><b>'+Math.round(t.by[top]/t.net*100)+'%</b><span>'+esc(kindName(top))+'</span></div></div>';
+}
+function holdRow(a){
+  const v=assetVal(a),unit=isUnit(a);let l,sub='',r='<b class="mono">'+baht(v)+'</b>';
+  if(a.kind==='stock')l=cleanSym(a.sym||a.name)||a.name;else l=tr(a,'name');
+  if(unit){
+    sub='<small class="mono">'+nf2.format(num(a.qty))+' × ฿'+nf2.format(num(a.price))+'</small>';
+    const c=assetCost(a);if(c>0)r+='<small class="mono">'+bahtS(v-c)+SP+pcS((v-c)/c*100)+'</small>';
+  }
+  return'<button class="hold" data-act="editAsset" data-id="'+esc(a.id)+'"><span class="l"><b>'+esc(l)+'</b>'+sub+'</span><span class="r">'+r+'</span></button>';
+}
+function finPort(){
+  const t=totals(),has=S.money.assets.length,anyUnit=S.money.assets.some(isUnit);
+  let h='<div class="g12"><div><p class="nw-l">'+x('Net worth','มูลค่าสินทรัพย์รวม')+'</p><p class="nw">'+baht(t.net)+'</p>'
+    +(t.cost>0?'<p class="sub">'+x('Stocks and funds: ','หุ้นและกองทุน: ')+'<span class="mono">'+bahtS(t.pl)+' ('+pcS(t.plPct)+')</span></p>':'')+'</div>'
+    +'<div class="row-btns"><button class="btn primary" data-act="addAsset">'+PLUS+x('Add to portfolio','เพิ่มในพอร์ต')+'</button><button class="btn" data-act="prices"'+(anyUnit?'':' disabled')+'>'+x('Update prices','อัปเดตราคา')+'</button></div></div>';
+  if(!has||t.net<=0)return h+empty(x('Add what you own — cash, stocks, funds — and you will see how it is split.','เพิ่มสิ่งที่คุณมี เช่น เงินสด หุ้น กองทุน แล้วจะเห็นสัดส่วนที่นี่'));
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Allocation','สัดส่วน')+'</h2></div>'+donut(t)+'<ul class="lg">'
+    +KINDS.filter(k=>t.by[k]>0).map(k=>'<li><span class="sw" style="background:var(--k-'+k+')"></span><span class="nm">'+esc(kindName(k))+'</span><span class="pc mono">'+Math.round(t.by[k]/t.net*100)+'%</span><span class="am mono">'+baht(t.by[k])+'</span></li>').join('')+'</ul></section>';
+  KINDS.forEach(k=>{
+    const as=S.money.assets.filter(a=>(KINDS.indexOf(a.kind)>-1?a.kind:'other')===k).sort((a,b)=>assetVal(b)-assetVal(a));
+    if(as.length)h+='<section class="sec"><div class="sec-h"><h2>'+esc(kindName(k))+'</h2><span class="sub mono">'+baht(t.by[k])+'</span></div>'+as.map(holdRow).join('')+'</section>';
+  });
+  if(anyUnit&&S.money.priceAt)h+='<p class="src-note">'+x('Prices as of ','ราคาอัปเดตเมื่อ ')+esc(isKey(S.money.priceAt)?fShort(fromKey(S.money.priceAt)):S.money.priceAt)+'</p>';
+  return h;
+}
+function fgCard(g){
+  const t=num(g.target),sv=num(g.saved),p=t>0?Math.min(100,sv/t*100):0,n=Math.round(monthsLeft(g.date));
+  let need;
+  if(t>0&&sv>=t)need='<b>'+x('Goal reached','ถึงเป้าแล้ว')+'</b>';
+  else if(!isKey(g.date))need=x('Set a target date to see what to save each month.','ใส่วันที่เป้าหมายเพื่อดูว่าควรออมเดือนละเท่าไร');
+  else if(monthsLeft(g.date)<=0)need=x('The target date has passed. Move it or add savings.','เลยวันที่เป้าหมายแล้ว ลองเลื่อนวันหรือเพิ่มเงินออม');
+  else{const m=needPerMonth(g);need=m<=0?'<b>'+x('On track:','ไปได้ตามเป้า:')+'</b> '+x('your savings will grow to the target by itself at this return.','เงินที่มีจะโตถึงเป้าเองด้วยผลตอบแทนนี้'):x('Save about ','ควรออมประมาณ ')+'<b class="mono">'+baht(m)+'</b> '+x('a month','ต่อเดือน')}
+  return'<article class="fg"><div class="g-h"><h3>'+esc(tr(g,'title'))+'</h3><button class="icon dim" data-act="editFg" data-id="'+esc(g.id)+'" aria-label="'+x('Edit','แก้ไข')+'">'+PEN+'</button></div>'
+    +'<div class="fg-n"><span class="big">'+baht(sv)+'</span><span class="sub mono">'+x('of ','จาก ')+baht(t)+SP+Math.round(p)+'%</span></div>'
+    +'<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(p)+'" aria-label="'+esc(tr(g,'title'))+'"><i style="width:'+p+'%"></i></div>'
+    +'<div class="g-meta"><span>'+(isKey(g.date)?x('By ','ภายใน ')+esc(fShort(fromKey(g.date)))+' '+fromKey(g.date).getFullYear()+(n>0?SP+(n>=12?x((n/12).toFixed(1).replace('.0','')+' yrs',(n/12).toFixed(1).replace('.0','')+' ปี'):x(n+' mo',n+' เดือน')):''):'')+'</span><span class="mono">'+x('Return ','ผลตอบแทน ')+nf2.format(num(g.ret))+'%/'+x('yr','ปี')+'</span></div>'
+    +'<p class="need">'+need+'</p>'
+    +'<div><button class="btn sm" data-act="addSaving" data-id="'+esc(g.id)+'">'+PLUS+x('Add savings','เพิ่มเงินออม')+'</button></div></article>';
+}
+function finGoals(){
+  const gs=S.fingoals.items,all=gs.reduce((s,g)=>s+(num(g.saved)>=num(g.target)?0:needPerMonth(g)),0);
+  let h='<div class="g12">'+(gs.length?'<div><p class="nw-l">'+x('To save across all goals','ต้องออมรวมทุกเป้าหมาย')+'</p><p class="nw">'+baht(all)+'<span class="sub" style="font-family:var(--font)"> '+x('/ month','/ เดือน')+'</span></p></div>':'')
+    +'<button class="btn primary wide" data-act="addFg" data-term="short">'+PLUS+x('New financial goal','เพิ่มเป้าหมายการเงิน')+'</button></div>';
+  if(!gs.length)return h+empty(x('Name a goal, the amount and the date. We work out the monthly saving for you.','ตั้งชื่อ จำนวนเงิน และวันที่ ระบบจะคำนวณว่าต้องออมเดือนละเท่าไร'));
+  TERMS.forEach(t=>{
+    const xs=gs.filter(g=>g.term===t).sort((a,b)=>(a.date||'9').localeCompare(b.date||'9'));
+    if(xs.length)h+='<section class="sec"><div class="sec-h"><h2>'+esc(termName(t))+'</h2><span class="sub">'+esc(termHint(t))+'</span></div>'+xs.map(fgCard).join('')+'</section>';
+  });
+  return h;
+}
+function finFlow(){
+  const ym=flowYm,items=txnsOf(ym).slice(),mDate=fromKey(ym+'-01');
+  const inc=items.filter(t=>t.type==='in').reduce((s,t)=>s+num(t.amount),0),out=items.filter(t=>t.type!=='in').reduce((s,t)=>s+num(t.amount),0);
+  let h='<div class="g12"><div class="cal-h"><h2>'+esc(fMonth(mDate))+'</h2><div class="r"><button class="icon" data-act="flowPrev" aria-label="'+x('Previous month','เดือนก่อน')+'">'+CHEV(-1)+'</button><button class="icon" data-act="flowNext" aria-label="'+x('Next month','เดือนถัดไป')+'">'+CHEV(1)+'</button></div></div>'
+    +'<div class="stats three"><div class="stat"><span class="sn">'+compact(inc)+'</span><span class="sl">'+x('Income','รายรับ')+'</span></div><div class="stat"><span class="sn">'+compact(out)+'</span><span class="sl">'+x('Spent','รายจ่าย')+'</span></div><div class="stat"><span class="sn">'+(inc-out<0?'−':'')+compact(Math.abs(inc-out))+'</span><span class="sl">'+x('Left','คงเหลือ')+'</span></div></div>'
+    +'<div class="row-btns"><button class="btn primary" data-act="addTx">'+PLUS+x('Add','เพิ่มรายการ')+'</button>'+(sampleFn?'<button class="btn" data-act="importTx">'+x('From email / LINE','จากอีเมล / LINE')+'</button>':'<span></span>')+'</div></div>';
+  if(S.inbox.items.length)h+='<div class="note warn" role="status"><span>'+x(S.inbox.items.length+' new from email to review','มี '+S.inbox.items.length+' รายการใหม่จากอีเมลรอตรวจสอบ')+'</span><button class="link-btn" data-act="reviewInbox">'+x('Review','ตรวจสอบ')+'</button></div>';
+  if(!items.length)return h+empty(x('No entries this month. Tap Add to record income or spending.','เดือนนี้ยังไม่มีรายการ กดเพิ่มเพื่อจดรายรับหรือรายจ่าย'));
+  const byCat={};items.filter(t=>t.type!=='in').forEach(t=>{byCat[t.cat]=(byCat[t.cat]||0)+num(t.amount)});
+  const cats=Object.keys(byCat).sort((a,b)=>byCat[b]-byCat[a]),mx=cats.length?byCat[cats[0]]:0;
+  if(cats.length)h+='<section class="sec"><div class="sec-h"><h2>'+x('Where it went','ใช้ไปกับอะไร')+'</h2></div><div class="cat-sec">'+cats.map(c=>'<div class="catr"><span>'+esc(catName(c))+'</span><div class="bar"><i style="width:'+(mx?byCat[c]/mx*100:0)+'%"></i></div><span class="mono">'+baht(byCat[c])+'</span></div>').join('')+'</div></section>';
+  const days=Object.keys(items.reduce((o,t)=>{o[t.date]=1;return o},{})).sort().reverse();
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Entries','รายการ')+'</h2><span class="sub mono">'+items.length+'</span></div>';
+  days.forEach(d=>{
+    h+='<p class="day-h">'+esc(fDay(fromKey(d)))+'</p>';
+    items.filter(t=>t.date===d).forEach(t=>{
+      const inn=t.type==='in',note=tr(t,'note'),src=srcName(t.src);
+      h+='<button class="tx" data-act="editTx" data-id="'+esc(t.id)+'"><span class="l"><b>'+esc(note||catName(t.cat))+'</b><small>'+esc(catName(t.cat))+(src&&t.src!=='manual'?SP+esc(src):'')+'</small></span><span class="am'+(inn?' in':'')+'">'+(inn?'+':'−')+baht(t.amount)+'</span></button>';
+    });
+  });
+  return h+'</section>';
+}
+function vFin(){
+  const seg='<div class="seg" role="group" aria-label="'+x('Finance sections','ส่วนของการเงิน')+'">'+[['port',x('Portfolio','พอร์ต')],['goals',x('Goals','เป้าหมายเงิน')],['flow',x('Cash flow','รายรับ-จ่าย')]].map(a=>'<button data-act="finTab" data-v="'+a[0]+'" aria-pressed="'+(finTab===a[0])+'">'+esc(a[1])+'</button>').join('')+'</div>';
+  return seg+(finTab==='goals'?finGoals():finTab==='flow'?finFlow():finPort());
+}
+
+const VIEWS={brief:vBrief,today:vToday,sched:vSched,goals:vGoals,diary:vDiary,routine:vRoutine,fin:vFin};
+function skeleton(){return'<section><p class="sub">'+x('Loading your data…','กำลังโหลดข้อมูลของคุณ…')+'</p><div class="sk" style="width:60%"></div><div class="sk"></div><div class="sk" style="width:80%"></div></section>'}
+
+/* ---------- render ---------- */
+let armedKey=null,armT=null,sheetKind=null;
+function arm(key,fn){
+  if(armedKey===key){clearTimeout(armT);armedKey=null;fn();return}
+  armedKey=key;clearTimeout(armT);armT=setTimeout(()=>{armedKey=null;render();repaintSheet()},4000);render();repaintSheet();
+}
+function noticeHtml(){
+  let h='';
+  if(loaded&&!dbReady)h+='<p class="note warn" role="status">'+x('This page cannot reach its storage, so nothing you enter will be saved.','หน้านี้ยังเชื่อมต่อที่เก็บข้อมูลไม่ได้ สิ่งที่กรอกจะไม่ถูกบันทึก')+'</p>';
+  if(slow)h+='<p class="note warn" role="status">'+x('Storage is slow to respond; what you see may not be the latest.','เชื่อมต่อที่เก็บข้อมูลช้า ข้อมูลที่เห็นอาจไม่ใช่ล่าสุด')+'</p>';
+  if(loadError)h+='<p class="note warn" role="status">'+x('Could not read your data. Reopen the page to try again.','อ่านข้อมูลไม่สำเร็จ ลองเปิดหน้านี้ใหม่อีกครั้ง')+'</p>';
+  if(loaded&&hasSeed())h+='<div class="note"><span>'+x('Sample data is showing','มีข้อมูลตัวอย่างอยู่')+'</span><button class="link-btn" data-act="clearSeeds">'+(armedKey==='clr'?x('Tap again to remove all','กดอีกครั้งเพื่อลบทั้งหมด'):x('Remove samples','ลบข้อมูลตัวอย่าง'))+'</button></div>';
+  return h;
+}
+function buildTabs(){
+  const nav=$('#xl');
+  if(nav.dataset.lang===lang&&nav.children.length)return;
+  nav.dataset.lang=lang;
+  nav.innerHTML=TABS.map(t=>'<button class="xt" data-act="tab" data-v="'+t[0]+'">'+esc(x(t[1],t[2]))+'</button>').join('');
+}
+function centerTab(){
+  const nav=$('#xl'),el=nav.querySelector('[aria-current="page"]');
+  if(el)nav.scrollLeft=Math.max(0,el.offsetLeft-(nav.clientWidth-el.offsetWidth)/2);
+  if(!centerTab.t){centerTab.t=1;setTimeout(()=>{centerTab.t=0;const e2=nav.querySelector('[aria-current="page"]');if(e2)nav.scrollLeft=Math.max(0,e2.offsetLeft-(nav.clientWidth-e2.offsetWidth)/2)},350)}
+}
+function render(soft){
+  const v=$('#view'),a=document.activeElement;
+  if(soft&&a&&v.contains(a)&&(a.tagName==='INPUT'||a.tagName==='TEXTAREA'))return;
+  const fk=(a&&v.contains(a)&&a.dataset&&a.dataset.fk)||null;
+  v.innerHTML=loaded?VIEWS[view]():skeleton();
+  buildTabs();
+  $$('.xt').forEach(t=>{if(t.dataset.v===view)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current')});
+  centerTab();
+  $('#eyebrow').textContent=fDay(new Date());
+  const pt=$('#ptitle');pt.textContent=tabName(view);pt.className=view==='brief'?'big':'';
+  $('#gear').setAttribute('aria-label',x('Settings','ตั้งค่า'));
+  $('#notice').innerHTML=noticeHtml();
+  paintStatus();
+  if(fk){const el=v.querySelector('[data-fk="'+fk+'"]');if(el)el.focus({preventScroll:true})}
+}
+const readHash=()=>{const h=location.hash.replace('#','');return VIEW_IDS.indexOf(h)>-1?h:'brief'};
+function go(v){
+  view=VIEW_IDS.indexOf(v)>-1?v:'brief';
+  try{if(location.hash!=='#'+view)location.hash=view}catch(e){}
+  render();window.scrollTo(0,0);
+}
+
+/* ---------- sheet + forms ---------- */
+let lastFocus=null;
+function openSheet(html,kind){
+  const ov=$('#ov'),sh=$('#sheet');
+  if(ov.hidden)lastFocus=document.activeElement;
+  sheetKind=kind||'form';sh.innerHTML=html;ov.hidden=false;document.body.style.overflow='hidden';
+}
+function closeForm(){
+  const ov=$('#ov');ov.hidden=true;$('#sheet').innerHTML='';document.body.style.overflow='';sheetKind=null;
+  if(lastFocus&&lastFocus.isConnected)lastFocus.focus({preventScroll:true});
+}
+function fieldHtml(f){
+  const id='f-'+f.name,val=f.value==null?'':f.value;let ctl;
+  if(f.type==='textarea')ctl='<textarea class="inp" id="'+id+'" name="'+f.name+'" rows="'+(f.rows||3)+'" placeholder="'+esc(f.placeholder||'')+'">'+esc(val)+'</textarea>';
+  else if(f.type==='select')ctl='<select class="inp" id="'+id+'" name="'+f.name+'">'+f.options.map(o=>'<option value="'+esc(o[0])+'"'+(String(o[0])===String(val)?' selected':'')+'>'+esc(o[1])+'</option>').join('')+'</select>';
+  else if(f.type==='days')ctl='<div class="chips" role="group" aria-label="'+esc(f.label)+'">'+[1,2,3,4,5,6,0].map(d=>'<label class="cp"><input type="checkbox" name="'+f.name+'" value="'+d+'"'+((val||[]).indexOf(d)>-1?' checked':'')+'><span>'+esc(wdName((d+6)%7,'short'))+'</span></label>').join('')+'</div>';
+  else if(f.type==='chips')ctl='<div class="chips" role="radiogroup" aria-label="'+esc(f.label)+'">'+f.options.map(o=>'<label class="cp"><input type="radio" name="'+f.name+'" value="'+esc(o[0])+'"'+(String(o[0])===String(val)?' checked':'')+'><span>'+esc(o[1])+'</span></label>').join('')+'</div>';
+  else ctl='<input class="inp'+(f.big?' big':'')+'" id="'+id+'" name="'+f.name+'" type="'+(f.type||'text')+'" value="'+esc(val)+'" placeholder="'+esc(f.placeholder||'')+'"'+(f.type==='number'?' inputmode="decimal" step="any" min="0"':'')+' autocomplete="off">';
+  const grouped=f.type==='days'||f.type==='chips';
+  return'<div class="field" data-f="'+f.name+'"'+(f.showIf?' data-showif="'+esc(JSON.stringify(f.showIf))+'"':'')+'>'+(grouped?'<span class="lbl">'+esc(f.label)+'</span>':'<label for="'+id+'">'+esc(f.label)+'</label>')+ctl+(f.hint?'<small>'+esc(f.hint)+'</small>':'')+'</div>';
+}
+function collect(form,fields){
+  const v={};
+  fields.forEach(f=>{
+    if(f.type==='days')v[f.name]=$$('input[name="'+f.name+'"]:checked',form).map(i=>+i.value);
+    else if(f.type==='chips'){const c=$('input[name="'+f.name+'"]:checked',form);v[f.name]=c?c.value:''}
+    else v[f.name]=form.elements[f.name].value;
+  });
+  return v;
+}
+function syncShow(form){
+  $$('[data-showif]',form).forEach(el=>{
+    let c;try{c=JSON.parse(el.dataset.showif)}catch(e){return}
+    const cur=$('input[name="'+c.name+'"]:checked',form),val=cur?cur.value:'';
+    el.hidden=val!==c.value;
+  });
+}
+function openForm(cfg){
+  const h='<h2 id="sheet-t">'+esc(cfg.title)+'</h2><form id="mf" novalidate>'+cfg.fields.map(fieldHtml).join('')+(cfg.note?'<p class="sub" style="margin:-4px 0 14px">'+esc(cfg.note)+'</p>':'')
+    +'<p class="err" id="mf-err" role="alert" hidden></p><div class="actions">'+(cfg.onDelete?'<button type="button" class="btn danger" id="mf-del">'+x('Delete','ลบ')+'</button>':'<span></span>')
+    +'<span class="r"><button type="button" class="btn" id="mf-x">'+x('Cancel','ยกเลิก')+'</button><button type="submit" class="btn primary">'+esc(cfg.submit||x('Save','บันทึก'))+'</button></span></div></form>';
+  openSheet(h,'form');
+  const form=$('#mf');
+  syncShow(form);
+  form.addEventListener('change',()=>syncShow(form));
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const err=cfg.onSubmit(collect(form,cfg.fields));
+    if(err){const el=$('#mf-err');el.textContent=err;el.hidden=false;return}
+    closeForm();render();
+  });
+  $('#mf-x').addEventListener('click',closeForm);
+  const del=$('#mf-del');
+  if(del){
+    let armed=false,t=null;
+    del.addEventListener('click',()=>{
+      if(!armed){armed=true;del.classList.add('armed');del.textContent=x('Tap again to delete','กดอีกครั้งเพื่อลบ');t=setTimeout(()=>{armed=false;del.classList.remove('armed');del.textContent=x('Delete','ลบ')},4000);return}
+      clearTimeout(t);cfg.onDelete();closeForm();render();
+    });
+  }
+  const first=form.querySelector('input:not([type=checkbox]):not([type=radio]),textarea,select');
+  if(first&&!cfg.noFocus)first.focus({preventScroll:true});
+}
+document.addEventListener('keydown',e=>{
+  const ov=$('#ov');if(!ov||ov.hidden)return;
+  if(e.key==='Escape'){closeForm();return}
+  if(e.key==='Tab'){
+    const f=$$('button,input,select,textarea,a[href]',$('#sheet')).filter(z=>!z.disabled&&z.offsetParent!==null);
+    if(!f.length)return;
+    const a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+  }
+});
+$('#ov').addEventListener('mousedown',e=>{if(e.target.id==='ov')closeForm()});
+
+function formTask(id,date){
+  const it=id?S.schedule.items.find(z=>z.id===id):null;
+  openForm({title:it?x('Edit task','แก้ไขงาน'):x('New task','งานใหม่'),
+    fields:[
+      {name:'title',label:x('What needs doing','ต้องทำอะไร'),value:it?tr(it,'title'):'',placeholder:x('e.g. Send the monthly report','เช่น ส่งรายงานประจำเดือน')},
+      {name:'date',label:x('Date','วันที่'),type:'date',value:it?it.date:(date||selDate)},
+      {name:'time',label:x('Start time (optional)','เวลาเริ่ม (ไม่ใส่ก็ได้)'),type:'time',value:it?it.time:''},
+      {name:'end',label:x('End time (optional)','เวลาจบ (ไม่ใส่ก็ได้)'),type:'time',value:it?it.end:''},
+      {name:'repeat',label:x('Repeat','ทำซ้ำ'),type:'select',options:REPEATS(),value:it?(it.repeat||'none'):'none'},
+      {name:'note',label:x('Note','โน้ต'),type:'textarea',rows:2,value:it?tr(it,'note'):''}
+    ],
+    note:it&&!isOneOff(it)?x('Editing or deleting changes every repeat of this task.','การแก้ไขหรือลบจะมีผลกับทุกครั้งที่ทำซ้ำ'):'',
+    onSubmit(v){
+      const title=v.title.trim();
+      if(!title)return x('Write what needs doing first.','ใส่ชื่องานก่อน');
+      if(!isKey(v.date))return x('Pick a date.','เลือกวันที่');
+      if(v.time&&v.end&&v.end<=v.time)return x('The end time must be after the start time.','เวลาจบต้องหลังเวลาเริ่ม');
+      const rec={title:title,date:v.date,time:v.time||'',end:v.time?(v.end||''):'',repeat:v.repeat||'none',note:v.note.trim()};
+      if(it){Object.assign(it,rec);delete it.seed}
+      else S.schedule.items.push(Object.assign({id:uid(),doneDates:[]},rec));
+      selDate=v.date;calMonth=new Date(fromKey(v.date).getFullYear(),fromKey(v.date).getMonth(),1,12);
+      touch('schedule');
+    },
+    onDelete:it?()=>{S.schedule.items=S.schedule.items.filter(z=>z!==it);touch('schedule')}:null});
+}
+function formRoutine(id){
+  const r=id?S.routines.items.find(z=>z.id===id):null;
+  openForm({title:r?x('Edit routine','แก้ไขกิจวัตร'):x('New routine','กิจวัตรใหม่'),
+    fields:[
+      {name:'title',label:x('What to do','ทำอะไร'),value:r?tr(r,'title'):'',placeholder:x('e.g. Workout 30 min','เช่น ออกกำลังกาย 30 นาที')},
+      {name:'time',label:x('Time (optional)','เวลา (ไม่ใส่ก็ได้)'),type:'time',value:r?r.time:''},
+      {name:'days',label:x('Which days','ทำวันไหนบ้าง'),type:'days',value:(r&&r.days&&r.days.length)?r.days:[0,1,2,3,4,5,6]}
+    ],
+    onSubmit(v){
+      const title=v.title.trim();
+      if(!title)return x('Write the routine first.','ใส่ชื่อกิจวัตรก่อน');
+      if(!v.days.length)return x('Pick at least one day.','เลือกอย่างน้อย 1 วัน');
+      const days=v.days.length===7?[]:v.days;
+      if(r){r.title=title;r.time=v.time||'';r.days=days;delete r.seed}
+      else S.routines.items.push({id:uid(),title:title,time:v.time||'',days:days});
+      touch('routines');
+    },
+    onDelete:r?()=>{S.routines.items=S.routines.items.filter(z=>z!==r);touch('routines')}:null});
+}
+function formGoal(id,term){
+  const g=id?S.goals.items.find(z=>z.id===id):null;
+  openForm({title:g?x('Edit plan','แก้ไขแผน'):x('New plan','เพิ่มแผน'),
+    fields:[
+      {name:'term',label:x('Which plan does it go in?','ใส่ในแผนไหน'),type:'chips',options:TERMS.map(t=>[t,termName(t)]),value:g?g.term:(term||'short')},
+      {name:'title',label:x('Name','ชื่อ'),value:g?tr(g,'title'):'',placeholder:x('e.g. Become a finance manager','เช่น เป็นผู้จัดการฝ่ายการเงิน')},
+      {name:'desc',label:x('Description','คำอธิบาย'),type:'textarea',rows:3,value:g?tr(g,'desc'):''},
+      {name:'target',label:x('Date to achieve it','วันที่ต้องการบรรลุ'),type:'date',value:g&&isKey(g.target)?g.target:''}
+    ],
+    onSubmit(v){
+      const title=v.title.trim();
+      if(!title)return x('Give the plan a name.','ตั้งชื่อแผนก่อน');
+      if(!isKey(v.target))return x('Pick the date you want to achieve it by.','เลือกวันที่ต้องการบรรลุ');
+      if(g){g.term=v.term;g.title=title;g.desc=v.desc.trim();g.target=v.target;delete g.seed}
+      else S.goals.items.push({id:uid(),term:v.term,title:title,desc:v.desc.trim(),target:v.target,subs:[]});
+      touch('goals');
+    },
+    onDelete:g?()=>{S.goals.items=S.goals.items.filter(z=>z!==g);touch('goals')}:null});
+}
+function pickAsset(){
+  const hint={cash:x('Bank, wallet','บัญชี กระเป๋าเงิน'),stock:x('Shares you own','หุ้นที่ถืออยู่'),fund:x('Mutual funds, ETFs','กองทุนรวม ETF'),gold:x('Gold','ทองคำ'),other:x('Crypto, property…','คริปโต อสังหาฯ…')};
+  openSheet('<h2 id="sheet-t">'+x('What are you adding?','จะเพิ่มอะไร')+'</h2><div class="pick">'+KINDS.map(k=>'<button type="button" class="pk" data-act="pickAsset" data-k="'+k+'"><b>'+esc(kindName(k))+'</b><small>'+esc(hint[k])+'</small></button>').join('')
+    +'</div><div class="actions" style="margin-top:14px"><span></span><button type="button" class="btn" data-act="closeSheet">'+x('Cancel','ยกเลิก')+'</button></div>','pick');
+}
+function formAsset(kind,id){
+  const a=id?S.money.assets.find(z=>z.id===id):null;kind=a?a.kind:kind;
+  const unit=kind==='stock'||kind==='fund',f=[];
+  if(kind==='stock')f.push({name:'sym',label:x('Ticker','ชื่อย่อหุ้น'),value:a?cleanSym(a.sym||a.name):'',placeholder:'PTT'});
+  else f.push({name:'name',label:x('Name','ชื่อ'),value:a?tr(a,'name'):'',placeholder:kind==='cash'?x('e.g. Savings account','เช่น บัญชีออมทรัพย์'):kind==='fund'?x('e.g. Thai equity fund','เช่น กองทุนหุ้นไทย'):''});
+  if(unit){
+    f.push({name:'qty',label:kind==='stock'?x('Shares','จำนวนหุ้น'):x('Units','จำนวนหน่วย'),type:'number',value:a?a.qty:''});
+    f.push({name:'cost',label:kind==='stock'?x('Average cost per share (฿)','ต้นทุนเฉลี่ยต่อหุ้น (฿)'):x('Average cost per unit (฿)','ต้นทุนเฉลี่ยต่อหน่วย (฿)'),type:'number',value:a?a.cost:''});
+    f.push({name:'price',label:kind==='stock'?x('Current price (฿)','ราคาปัจจุบัน (฿)'):x('Current price per unit (฿)','ราคาปัจจุบันต่อหน่วย (฿)'),type:'number',value:a?a.price:'',hint:x('Not sure? Leave it blank and it uses your cost. You can update prices later.','ไม่แน่ใจ เว้นว่างได้ จะใช้ต้นทุนแทน แล้วค่อยอัปเดตราคาภายหลัง')});
+  }else f.push({name:'value',label:kind==='cash'?x('Amount (฿)','จำนวนเงิน (฿)'):x('Value now (฿)','มูลค่าตอนนี้ (฿)'),type:'number',value:a?a.value:''});
+  openForm({title:(a?x('Edit ','แก้ไข '):x('Add ','เพิ่ม '))+kindName(kind),fields:f,
+    onSubmit(v){
+      const rec={kind:kind};
+      if(kind==='stock'){const s=cleanSym(v.sym);if(!s)return x('Enter the ticker.','ใส่ชื่อย่อหุ้น');rec.sym=s;rec.name=s}
+      else{const n=v.name.trim();if(!n)return x('Give it a name.','ตั้งชื่อก่อน');rec.name=n}
+      if(unit){
+        const q=pnum(v.qty),c=pnum(v.cost),p=String(v.price).trim()===''?c:pnum(v.price);
+        if(!(q>0))return x('Enter how many you hold.','ใส่จำนวนที่ถืออยู่');
+        if(!(c>=0))return x('Enter your average cost.','ใส่ต้นทุนเฉลี่ย');
+        if(!(p>=0))return x('Enter a valid price.','ใส่ราคาให้ถูกต้อง');
+        rec.qty=q;rec.cost=c;rec.price=p;
+      }else{const n=pnum(v.value);if(!(n>=0))return x('Enter an amount.','ใส่จำนวนเงิน');rec.value=n}
+      if(a){Object.assign(a,rec);delete a.seed}else S.money.assets.push(Object.assign({id:uid()},rec));
+      touch('money');
+    },
+    onDelete:a?()=>{S.money.assets=S.money.assets.filter(z=>z!==a);touch('money')}:null});
+}
+function formPrices(){
+  const as=S.money.assets.filter(isUnit);if(!as.length)return;
+  const bp=S.brief.prices||{};
+  openForm({title:x('Update prices','อัปเดตราคา'),
+    fields:as.map(a=>{
+      const sym=a.kind==='stock'?cleanSym(a.sym||a.name):'',b=sym&&bp[sym]&&num(bp[sym].price)?bp[sym]:null;
+      return{name:'p_'+a.id,label:(sym||tr(a,'name'))+' (฿)',type:'number',value:b?b.price:a.price,hint:b?x('Latest price in the daily brief','ราคาล่าสุดจากสรุปข่าวประจำวัน')+(isKey(b.date)?' ('+fShort(fromKey(b.date))+')':''):''};
+    }),
+    onSubmit(v){
+      for(let i=0;i<as.length;i++){const p=pnum(v['p_'+as[i].id]);if(!(p>=0))return x('Check the prices — one is not a number.','ตรวจสอบราคา มีช่องที่ไม่ใช่ตัวเลข')}
+      as.forEach(a=>{a.price=pnum(v['p_'+a.id])});S.money.priceAt=todayKey();touch('money');
+    }});
+}
+function formFg(id,term){
+  const g=id?S.fingoals.items.find(z=>z.id===id):null;
+  openForm({title:g?x('Edit goal','แก้ไขเป้าหมาย'):x('New financial goal','เป้าหมายการเงินใหม่'),
+    fields:[
+      {name:'term',label:x('Term','ระยะเวลา'),type:'chips',options:TERMS.map(t=>[t,termName(t)]),value:g?g.term:(term||'short')},
+      {name:'title',label:x('Goal name','ชื่อเป้าหมาย'),value:g?tr(g,'title'):'',placeholder:x('e.g. Emergency fund','เช่น เงินสำรองฉุกเฉิน')},
+      {name:'target',label:x('Target amount (฿)','จำนวนเงินเป้าหมาย (฿)'),type:'number',value:g?g.target:''},
+      {name:'date',label:x('Target date','วันที่ต้องการ'),type:'date',value:g&&isKey(g.date)?g.date:''},
+      {name:'ret',label:x('Expected return per year (%)','ผลตอบแทนที่คาดหวังต่อปี (%)'),type:'number',value:g?g.ret:'',hint:x('Use 0 if you just keep cash. Savings accounts are roughly 1–2%, stock funds more but not guaranteed.','ถ้าเก็บเป็นเงินสดใส่ 0 ได้ บัญชีออมทรัพย์ราว 1–2% กองทุนหุ้นอาจสูงกว่าแต่ไม่การันตี')},
+      {name:'saved',label:x('Saved so far (฿)','เก็บได้แล้ว (฿)'),type:'number',value:g?g.saved:''}
+    ],
+    onSubmit(v){
+      const title=v.title.trim(),t=pnum(v.target),r=String(v.ret).trim()===''?0:pnum(v.ret),s=String(v.saved).trim()===''?0:pnum(v.saved);
+      if(!title)return x('Name the goal first.','ตั้งชื่อเป้าหมายก่อน');
+      if(!(t>0))return x('Enter the target amount.','ใส่จำนวนเงินเป้าหมาย');
+      if(!isKey(v.date))return x('Pick the target date.','เลือกวันที่ต้องการ');
+      if(!(r>=0&&r<=60))return x('Return should be between 0 and 60%.','ผลตอบแทนควรอยู่ระหว่าง 0–60%');
+      if(!(s>=0))return x('Saved so far must be a number.','ยอดที่เก็บแล้วต้องเป็นตัวเลข');
+      const rec={term:v.term,title:title,target:t,date:v.date,ret:r,saved:s};
+      if(g){Object.assign(g,rec);delete g.seed}else S.fingoals.items.push(Object.assign({id:uid()},rec));
+      touch('fingoals');
+    },
+    onDelete:g?()=>{S.fingoals.items=S.fingoals.items.filter(z=>z!==g);touch('fingoals')}:null});
+}
+function formSaving(id){
+  const g=S.fingoals.items.find(z=>z.id===id);if(!g)return;
+  openForm({title:x('Add savings to ','เพิ่มเงินออมให้ ')+tr(g,'title'),
+    fields:[{name:'amt',label:x('Amount (฿)','จำนวนเงิน (฿)'),type:'number',big:true,value:''}],
+    note:x('Saved so far: ','เก็บได้แล้ว: ')+baht(g.saved),submit:x('Add','เพิ่ม'),
+    onSubmit(v){const n=pnum(v.amt);if(!(n>0))return x('Enter an amount above 0.','ใส่จำนวนเงินมากกว่า 0');g.saved=num(g.saved)+n;touch('fingoals')}});
+}
+function formTx(id){
+  const rec=id?findTxn(id):null,t=rec&&rec.it;
+  openForm({title:t?x('Edit entry','แก้ไขรายการ'):x('New entry','รายการใหม่'),
+    fields:[
+      {name:'type',label:x('Type','ประเภท'),type:'chips',options:[['out',x('Spent','รายจ่าย')],['in',x('Income','รายรับ')]],value:t?(t.type==='in'?'in':'out'):'out'},
+      {name:'amount',label:x('Amount (฿)','จำนวนเงิน (฿)'),type:'number',big:true,value:t?t.amount:''},
+      {name:'catOut',label:x('Category','หมวด'),type:'chips',options:OUT_CATS.map(c=>[c,catName(c)]),value:t&&t.type!=='in'?t.cat:'food',showIf:{name:'type',value:'out'}},
+      {name:'catIn',label:x('Category','หมวด'),type:'chips',options:IN_CATS.map(c=>[c,catName(c)]),value:t&&t.type==='in'?t.cat:'salary',showIf:{name:'type',value:'in'}},
+      {name:'date',label:x('Date','วันที่'),type:'date',value:t?t.date:todayKey()},
+      {name:'note',label:x('Note (optional)','โน้ต (ไม่ใส่ก็ได้)'),value:t?tr(t,'note'):'',placeholder:x('e.g. Lunch','เช่น มื้อกลางวัน')}
+    ],
+    onSubmit(v){
+      const amt=pnum(v.amount);
+      if(!(amt>0))return x('Enter an amount above 0.','ใส่จำนวนเงินมากกว่า 0');
+      if(!isKey(v.date))return x('Pick a date.','เลือกวันที่');
+      const r={type:v.type==='in'?'in':'out',amount:Math.round(amt*100)/100,cat:v.type==='in'?v.catIn:v.catOut,date:v.date,note:v.note.trim().slice(0,80)};
+      if(t){
+        Object.assign(t,r);delete t.seed;
+        const nd='txn-'+v.date.slice(0,7);
+        if(nd!==rec.doc){S[rec.doc].items=S[rec.doc].items.filter(z=>z!==t);ensureDoc(nd).items.push(t);touch(rec.doc);touch(nd)}else touch(rec.doc);
+      }else{const nd='txn-'+v.date.slice(0,7);ensureDoc(nd).items.push(Object.assign({id:uid(),src:'manual'},r));touch(nd)}
+      flowYm=v.date.slice(0,7);
+    },
+    onDelete:t?()=>{S[rec.doc].items=S[rec.doc].items.filter(z=>z!==t);touch(rec.doc)}:null});
+}
+function formDiary(k){
+  const e=diaryGet(k);if(!e)return;
+  openForm({title:fDay(fromKey(k)),fields:[{name:'text',label:x('What I did','สิ่งที่ทำ'),type:'textarea',rows:9,value:tr(e,'text','d_'+k)}],
+    onSubmit(v){diarySet(k,v.text);if(k===diaryKey&&view==='diary'){/* composer re-renders after close */}},
+    onDelete:()=>{diarySet(k,'')}});
+}
+
+/* settings */
+function settingsHtml(){
+  const s=S.settings;
+  const seg=(items,cur,a)=>'<div class="seg">'+items.map(i=>'<button type="button" data-act="'+a+'" data-v="'+i[0]+'" aria-pressed="'+(cur===i[0])+'">'+esc(i[1])+'</button>').join('')+'</div>';
+  let h='<h2 id="sheet-t">'+x('Settings','ตั้งค่า')+'</h2>';
+  h+='<div class="set-g"><span class="lbl">'+x('Language','ภาษา')+'</span>'+seg([['th','ไทย'],['en','English']],lang,'setLang')+'</div>';
+  h+='<div class="set-g"><span class="lbl">'+x('Appearance','การแสดงผล')+'</span>'+seg([['auto',x('Auto','อัตโนมัติ')],['light',x('Light','สว่าง')],['dark',x('Dark','มืด')]],s.theme,'setTheme')+'</div>';
+  h+='<div class="set-g"><span class="lbl">'+x('Colour by weekday','สีตามวัน')+'</span>'+seg([['on',x('On','เปิด')],['off',x('Off','ปิด')]],s.wk?'on':'off','setWk')+'<small>'+(s.wk?x('The accent colour (ticks, bars, today) follows the day of the week. Pick a colour for each day below.','สีเน้น (เครื่องหมายถูก แถบความคืบหน้า วันนี้) เปลี่ยนตามวัน เลือกสีของแต่ละวันได้ด้านล่าง'):x('Off: strictly black and white.','ปิด: ขาวดำล้วน'))+'</small></div>';
+  if(s.wk)h+='<div class="set-g">'+[1,2,3,4,5,6,0].map(d=>'<div class="dayc"><span>'+esc(wdName((d+6)%7,'long'))+'</span><div class="swatches" role="group">'+COLOR_ORDER.map(c=>'<button type="button" class="swb'+(c==='mono'?' mono':'')+'" '+(COLORS[c]?'style="background:'+COLORS[c]+'" ':'')+'data-act="setColor" data-d="'+d+'" data-v="'+c+'" aria-pressed="'+(colorOf(d)===c)+'" aria-label="'+esc(wdName((d+6)%7,'long')+': '+x(COLOR_NAME[c][0],COLOR_NAME[c][1]))+'"></button>').join('')+'</div></div>').join('')+'</div>';
+  h+=backupHtml();
+  if(hasSeed())h+='<div class="set-g"><span class="lbl">'+x('Sample data','ข้อมูลตัวอย่าง')+'</span><button type="button" class="btn danger'+(armedKey==='clr'?' armed':'')+'" data-act="clearSeeds">'+(armedKey==='clr'?x('Tap again to remove all samples','กดอีกครั้งเพื่อลบตัวอย่างทั้งหมด'):x('Remove all sample data','ลบข้อมูลตัวอย่างทั้งหมด'))+'</button></div>';
+  return h+'<div class="actions"><span></span><button type="button" class="btn primary" data-act="closeSheet">'+x('Done','เสร็จ')+'</button></div>';
+}
+function repaintSheet(){if(sheetKind==='settings'&&!$('#ov').hidden)$('#sheet').innerHTML=settingsHtml()}
+function setSetting(k,v){S.settings[k]=v;touch('settings');applyTheme();render();repaintSheet()}
+
+/* email / LINE import (paste → Claude reads → you confirm) */
+let prevItems=[],prevSel=new Set(),prevFrom='paste';
+const sampleErr=e=>{const c=e&&e.code;return c==='not_granted'?x('This page has not been allowed to use Claude.','ยังไม่ได้อนุญาตให้หน้านี้ใช้ Claude'):c==='rate_limited'?x('Too many requests. Try again in a moment.','ใช้งานถี่เกินไป ลองใหม่อีกครั้งในอีกสักครู่'):c==='invalid_json'?x('Could not read the result. Try again, or add the entry by hand.','อ่านผลลัพธ์ไม่ได้ ลองอีกครั้ง หรือเพิ่มรายการเอง'):x('Something went wrong. Try again.','เกิดข้อผิดพลาด ลองอีกครั้ง')};
+function cleanImport(res,src){
+  const arr=Array.isArray(res)?res:(res&&Array.isArray(res.items)?res.items:[]);
+  return arr.slice(0,40).map(r=>{
+    r=r||{};const type=r.type==='in'?'in':'out',amt=pnum(r.amount),cats=type==='in'?IN_CATS:OUT_CATS;
+    return{date:isKey(r.date)?r.date:todayKey(),type:type,amount:Math.round(amt*100)/100,cat:cats.indexOf(r.cat)>-1?r.cat:(type==='in'?'inother':'other'),note:String(r.note||'').slice(0,60),src:(r.src==='line'||r.src==='email')?r.src:src};
+  }).filter(r=>r.amount>0&&r.amount<1e9);
+}
+function importPrompt(text){
+  return'Extract money transactions from the text below. It is pasted from bank or e-wallet emails or LINE notifications, in Thai or English. Today is '+todayKey()+'.\n'
+   +'Reply with ONLY a JSON array. Each element: {"date":"YYYY-MM-DD","type":"in" or "out","amount":number in THB without commas,"cat":one of '+JSON.stringify(OUT_CATS.concat(IN_CATS))+',"note":"short merchant or description, max 40 characters"}.\n'
+   +'Rules: use type "out" for spending, transfers out and bill payments; "in" for money received. Skip OTP codes, ads, balances and anything that is not a completed money movement. Use categories food, transport, shopping, bills, health, fun, other for "out" and salary, bonus, invest, inother for "in". If the year is missing use the current year; Buddhist Era years (25xx) are converted by subtracting 543. If there is no date use today. If nothing qualifies reply [].\n\nTEXT:\n"""\n'+text+'\n"""';
+}
+function openImport(){
+  openSheet('<h2 id="sheet-t">'+x('Import from email / LINE','นำเข้าจากอีเมล / LINE')+'</h2><div class="field"><label for="imp-t">'+x('Paste a bank email or LINE notification','วางข้อความจากอีเมลธนาคารหรือการแจ้งเตือน LINE')+'</label><textarea class="inp" id="imp-t" rows="8" maxlength="6000" placeholder="'+x('e.g. You paid 245.00 THB to 7-Eleven on 9 Nov 2026…','เช่น ชำระเงิน 245.00 บาท ที่ 7-Eleven วันที่ 9 พ.ย. 2569…')+'"></textarea>'
+    +'<small>'+x('LINE Notify has shut down, so LINE cannot be read automatically. Copy the notification and paste it here. Claude reads it, and nothing is saved until you confirm.','LINE Notify ปิดบริการแล้ว จึงอ่าน LINE อัตโนมัติไม่ได้ ให้คัดลอกข้อความแจ้งเตือนมาวางที่นี่ Claude จะอ่านให้ และจะไม่บันทึกจนกว่าคุณจะยืนยัน')+'</small></div>'
+    +'<p class="err" id="imp-err" role="alert" hidden></p><div class="actions"><button type="button" class="btn" data-act="closeSheet">'+x('Cancel','ยกเลิก')+'</button><button type="button" class="btn primary" id="imp-go" data-act="runImport">'+x('Read it','อ่านข้อความ')+'</button></div>','import');
+  const t=$('#imp-t');if(t)t.focus({preventScroll:true});
+}
+async function runImport(){
+  const ta=$('#imp-t'),err=$('#imp-err'),btn=$('#imp-go');if(!ta||!btn)return;
+  const text=ta.value.trim();err.hidden=true;
+  if(!text){err.textContent=x('Paste some text first.','วางข้อความก่อน');err.hidden=false;return}
+  if(!sampleFn){err.textContent=x('Claude is not available on this page right now.','หน้านี้ยังใช้ Claude ไม่ได้ในตอนนี้');err.hidden=false;return}
+  btn.disabled=true;btn.textContent=x('Reading…','กำลังอ่าน…');
+  let list=null,msg='';
+  try{list=cleanImport(await sampleFn.json(importPrompt(text.slice(0,6000)),{cache:false}),'paste')}catch(e){msg=sampleErr(e)}
+  const b2=$('#imp-go');if(!b2)return; /* sheet was closed meanwhile */
+  b2.disabled=false;b2.textContent=x('Read it','อ่านข้อความ');
+  if(msg){err.textContent=msg;err.hidden=false;return}
+  if(!list.length){err.textContent=x('No money movements found in that text.','ไม่พบรายการเงินเข้า-ออกในข้อความนี้');err.hidden=false;return}
+  prevItems=list;prevSel=new Set(list.map((_,i)=>i));prevFrom='paste';paintPreview();
+}
+function paintPreview(){
+  const rows=prevItems.map((t,i)=>{
+    const on=prevSel.has(i),inn=t.type==='in';
+    return'<li>'+chkBtn(on,t.note||catName(t.cat),'data-act="togglePrev" data-i="'+i+'"')+'<span class="l"><b>'+esc(t.note||catName(t.cat))+'</b><small>'+esc(fShort(fromKey(t.date)))+SP+esc(catName(t.cat))+(t.src==='email'?SP+'Email':t.src==='line'?SP+'LINE':'')+'</small></span><span class="mono">'+(inn?'+':'−')+baht(t.amount)+'</span></li>';
+  }).join('');
+  $('#sheet').innerHTML='<h2 id="sheet-t">'+(prevFrom==='inbox'?x('New from email','รายการใหม่จากอีเมล'):x('Found in your text','พบในข้อความของคุณ'))+'</h2><p class="sub" style="margin-bottom:6px">'+x('Untick anything that is wrong. Nothing is saved until you tap Add.','เอาเครื่องหมายถูกออกถ้าไม่ถูกต้อง จะไม่บันทึกจนกว่าจะกดเพิ่ม')+'</p><ul class="prev">'+rows+'</ul>'
+    +'<div class="actions" style="margin-top:14px">'+(prevFrom==='inbox'?'<button type="button" class="btn" data-act="dismissInbox">'+x('Dismiss all','ไม่เอาทั้งหมด')+'</button>':'<button type="button" class="btn" data-act="closeSheet">'+x('Cancel','ยกเลิก')+'</button>')
+    +'<button type="button" class="btn primary" data-act="addPreview"'+(prevSel.size?'':' disabled')+'>'+x('Add ','เพิ่ม ')+prevSel.size+x(' selected',' รายการ')+'</button></div>';
+}
+function openPreview(list,from){
+  prevItems=list;prevSel=new Set(list.map((_,i)=>i));prevFrom=from;
+  openSheet('','preview');paintPreview();
+}
+
+/* ---------- actions ---------- */
+function toggleDone(id,key){
+  const it=S.schedule.items.find(z=>z.id===id);if(!it)return;
+  const ix=it.doneDates.indexOf(key);if(ix>-1)it.doneDates.splice(ix,1);else it.doneDates.push(key);
+  touch('schedule');render();
+}
+function act(a,ds){
+  switch(a){
+    case'tab':go(ds.v);break;
+    case'settings':pendingRestore=null;restoreNote='';openSheet(settingsHtml(),'settings');break;
+    case'exportData':exportData();break;
+    case'restoreData':pickRestore();break;
+    case'cancelRestore':pendingRestore=null;restoreNote='';repaintSheet();break;
+    case'doRestore':doRestore();break;
+    case'closeSheet':closeForm();break;
+    case'setLang':setSetting('lang',ds.v==='en'?'en':'th');break;
+    case'setTheme':setSetting('theme',ds.v);break;
+    case'setWk':setSetting('wk',ds.v==='on');break;
+    case'setColor':{S.settings.colors=S.settings.colors||{};S.settings.colors[ds.d]=ds.v;touch('settings');applyTheme();render();repaintSheet();break}
+    case'clearSeeds':arm('clr',()=>{clearSeeds();render();repaintSheet()});break;
+    case'retry':setSave('saving');Object.keys(dirty).forEach(n=>{if(dirty[n])flush(n)});break;
+    /* tasks */
+    case'toggleTask':toggleDone(ds.id,ds.k);break;
+    case'addTask':formTask(null,selDate);break;
+    case'editTask':formTask(ds.id);break;
+    case'selDay':selDate=ds.k;render();break;
+    case'calPrev':calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1,12);render();break;
+    case'calNext':calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1,12);render();break;
+    case'calToday':{const n=new Date();calMonth=new Date(n.getFullYear(),n.getMonth(),1,12);selDate=todayKey();render();break}
+    /* goals */
+    case'addGoal':formGoal(null,ds.term);break;
+    case'editGoal':formGoal(ds.id);break;
+    case'toggleSub':{const g=S.goals.items.find(z=>z.id===ds.g),s=g&&g.subs.find(z=>z.id===ds.id);if(!s)break;s.done=!s.done;touch('goals');render();break}
+    case'rmSub':{const g=S.goals.items.find(z=>z.id===ds.g);if(!g)break;g.subs=g.subs.filter(z=>z.id!==ds.id);touch('goals');render();break}
+    /* diary */
+    case'openDiary':formDiary(ds.k);break;
+    /* routine */
+    case'rtDay':rtDay=ds.k;render();break;
+    case'addRt':formRoutine();break;
+    case'editRt':formRoutine(ds.id);break;
+    case'toggleRt':{
+      const k=ds.k;if(!isKey(k)||k>todayKey())break;
+      const r=S.routines.items.find(z=>z.id===ds.id);if(!r)break;
+      const set=new Set(S.routines.log[k]||[]);if(set.has(r.id))set.delete(r.id);else set.add(r.id);
+      if(set.size)S.routines.log[k]=[...set];else delete S.routines.log[k];
+      touch('routines');render();break;
+    }
+    /* finance */
+    case'finTab':finTab=ds.v;render();break;
+    case'addAsset':pickAsset();break;
+    case'pickAsset':closeForm();formAsset(ds.k);break;
+    case'editAsset':formAsset(null,ds.id);break;
+    case'prices':formPrices();break;
+    case'addFg':formFg(null,ds.term);break;
+    case'editFg':formFg(ds.id);break;
+    case'addSaving':formSaving(ds.id);break;
+    case'flowPrev':case'flowNext':{const d=fromKey(flowYm+'-01');flowYm=dateKey(new Date(d.getFullYear(),d.getMonth()+(a==='flowNext'?1:-1),1,12)).slice(0,7);render();break}
+    case'addTx':formTx();break;
+    case'editTx':formTx(ds.id);break;
+    case'importTx':if(sampleFn)openImport();break;
+    case'runImport':runImport();break;
+    case'reviewInbox':openPreview(cleanImport(S.inbox.items,'email'),'inbox');break;
+    case'dismissInbox':S.inbox.items=[];touch('inbox');closeForm();render();break;
+    case'togglePrev':{const i=+ds.i;if(prevSel.has(i))prevSel.delete(i);else prevSel.add(i);paintPreview();const b=$('[data-act="togglePrev"][data-i="'+i+'"]');if(b)b.focus({preventScroll:true});break}
+    case'addPreview':{
+      const chosen=prevItems.filter((_,i)=>prevSel.has(i));
+      if(chosen.length){addTxns(chosen);flowYm=chosen[0].date.slice(0,7);finTab='flow'}
+      if(prevFrom==='inbox'){S.inbox.items=[];touch('inbox')}
+      closeForm();render();break;
+    }
+  }
+}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
+  act(el.dataset.act,el.dataset);
+});
+document.addEventListener('submit',e=>{
+  const f=e.target.closest('form[data-submit]');if(!f)return;
+  e.preventDefault();
+  const inp=f.elements.t,val=inp?inp.value.trim():'';if(!val)return;
+  if(f.dataset.submit==='quickAdd')S.schedule.items.push({id:uid(),title:val,date:todayKey(),time:'',end:'',note:'',repeat:'none',doneDates:[]}),touch('schedule');
+  else if(f.dataset.submit==='addSub'){const g=S.goals.items.find(z=>z.id===f.dataset.g);if(!g)return;g.subs.push({id:uid(),text:val,done:false});touch('goals')}
+  inp.value='';render();
+});
+document.addEventListener('input',e=>{
+  if(e.target.id!=='dtext')return;
+  diarySet(diaryKey,e.target.value);
+  clearTimeout(dTimer);
+  dTimer=setTimeout(()=>{const g=$('#dgrid');if(view==='diary'&&g){const all=diaryAll();g.innerHTML=diaryGrid(all);const c=$('#dcount');if(c)c.textContent=all.length}},900);
+});
+document.addEventListener('change',e=>{
+  if(e.target.id==='ddate'){const v=e.target.value;if(isKey(v)&&v<=todayKey()){diaryKey=v;render()}}
+});
+window.addEventListener('hashchange',()=>{const v=readHash();if(v!==view){view=v;render();window.scrollTo(0,0)}});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden)return;
+  if(Date.now()-newsAt>1800000)loadNews();
+  const nk=todayKey();
+  if(nk!==lastKey){
+    if(selDate===lastKey)selDate=nk;if(rtDay===lastKey)rtDay=nk;if(diaryKey===lastKey)diaryKey=nk;
+    lastKey=nk;applyTheme();render();
+  }
+});
+
+/* ---------- data ---------- */
+function onSnap(snap){
+  if(!snap.metadata.fromCache){confirmed=true;slow=false;clearTimeout(slowT)}
+  let changed=false;
+  snap.docs.forEach(d=>{
+    if(!isDoc(d.id)||dirty[d.id]||busy[d.id]||timers[d.id])return;
+    const nv=norm(d.id,d.data());
+    if(S[d.id]&&JSON.stringify(S[d.id])===JSON.stringify(nv))return; /* unchanged: keep the same objects so open forms stay valid */
+    S[d.id]=nv;changed=true;
+  });
+  const first=!loaded;loaded=true;
+  if(first||changed){applyTheme();render(true);repaintSheet()}
+}
+/* ---------- on-device storage: replaces the Claude database ---------- */
+const LS='hb1:',NEWS_KEY='hb1news';
+const localDb=(function(){
+  const subs=[];
+  const ids=()=>{const o=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(LS)===0)o.push(k.slice(LS.length))}}catch(e){}return o};
+  const readDoc=id=>{try{return JSON.parse(localStorage.getItem(LS+id))||{}}catch(e){return{}}};
+  const snap=()=>({docs:ids().filter(isDoc).map(id=>({id:id,data:()=>readDoc(id)})),metadata:{fromCache:false}});
+  window.addEventListener('storage',e=>{if(e.key&&e.key.indexOf(LS)===0){const s=snap();subs.forEach(cb=>cb(s))}});
+  return{
+    doc:id=>({set:d=>new Promise((ok,no)=>{try{localStorage.setItem(LS+id,JSON.stringify(d));ok()}catch(e){no(e)}})}),
+    onSnapshot:cb=>{subs.push(cb);setTimeout(()=>cb(snap()),0)}
+  };
+})();
+
+/* ---------- daily news: news.json is rebuilt each morning by a GitHub Action ---------- */
+let newsAt=0;
+function applyNews(j){if(!j||typeof j!=='object')return false;S.brief=norm('brief',j);return true}
+async function loadNews(){
+  try{
+    const r=await fetch('news.json',{cache:'no-store'});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    if(applyNews(j)){
+      try{localStorage.setItem(NEWS_KEY,JSON.stringify(j))}catch(e){}
+      newsAt=Date.now();
+      if(loaded)render(true);
+    }
+  }catch(e){}
+}
+
+/* ---------- backup / restore (data lives only on this phone) ---------- */
+let pendingRestore=null,restoreNote='';
+const EXPORTABLE=n=>isDoc(n)&&n!=='brief'&&n!=='inbox';
+function exportData(){
+  const out={app:'home-base',v:1,at:new Date().toISOString(),docs:{}};
+  Object.keys(S).forEach(n=>{if(EXPORTABLE(n))out.docs[n]=pruned(n)});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(out)],{type:'application/json'}));
+  a.download='home-base-backup-'+todayKey()+'.json';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
+  restoreNote=x('Backup file saved. Find it in your Files app under Downloads.','บันทึกไฟล์สำรองแล้ว ดูได้ในแอปไฟล์ ที่โฟลเดอร์ดาวน์โหลด');
+  repaintSheet();
+}
+function pickRestore(){
+  const i=document.createElement('input');
+  i.type='file';i.accept='application/json,.json';i.style.display='none';
+  i.addEventListener('change',()=>{
+    const f=i.files&&i.files[0];i.remove();
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=()=>{
+      let o=null;try{o=JSON.parse(String(r.result))}catch(e){}
+      const names=o&&o.app==='home-base'&&o.docs&&typeof o.docs==='object'?Object.keys(o.docs).filter(EXPORTABLE):[];
+      if(!names.length){pendingRestore=null;restoreNote=x('That file is not a Home Base backup.','ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Home Base')}
+      else{pendingRestore={docs:o.docs,names:names};restoreNote=''}
+      repaintSheet();
+    };
+    r.onerror=()=>{restoreNote=x('Could not read that file.','อ่านไฟล์ไม่สำเร็จ');repaintSheet()};
+    r.readAsText(f);
+  });
+  document.body.appendChild(i);i.click();
+}
+function doRestore(){
+  if(!pendingRestore)return;
+  const keep=pendingRestore.docs;
+  Object.keys(S).forEach(n=>{if(EXPORTABLE(n)&&!keep[n]){S[n]=norm(n,{});touch(n)}});
+  pendingRestore.names.forEach(n=>{S[n]=norm(n,keep[n]);touch(n)});
+  pendingRestore=null;restoreNote=x('Backup restored.','กู้คืนข้อมูลแล้ว');
+  applyTheme();render();repaintSheet();
+}
+function backupHtml(){
+  let h='<div class="set-g"><span class="lbl">'+x('Backup','สำรองข้อมูล')+'</span><small>'+x('Your data is stored only on this phone. Save a backup file now and then, in case you change phones or clear the browser data.','ข้อมูลเก็บอยู่ในมือถือเครื่องนี้เท่านั้น ควรบันทึกไฟล์สำรองไว้เป็นระยะ เผื่อเปลี่ยนเครื่องหรือล้างข้อมูลเบราว์เซอร์')+'</small>';
+  if(pendingRestore)h+='<div class="note warn" role="alert"><span>'+x('Replace all data on this phone with this backup ('+pendingRestore.names.length+' sections)?','แทนที่ข้อมูลทั้งหมดในมือถือเครื่องนี้ด้วยไฟล์สำรอง ('+pendingRestore.names.length+' ส่วน)?')+'</span></div>'
+    +'<div class="row-btns"><button type="button" class="btn" data-act="cancelRestore">'+x('Cancel','ยกเลิก')+'</button><button type="button" class="btn danger" data-act="doRestore">'+x('Replace my data','แทนที่ข้อมูล')+'</button></div>';
+  else h+='<div class="row-btns"><button type="button" class="btn" data-act="exportData">'+x('Save backup','บันทึกไฟล์สำรอง')+'</button><button type="button" class="btn" data-act="restoreData">'+x('Restore','กู้คืน')+'</button></div>';
+  if(restoreNote)h+='<small role="status">'+esc(restoreNote)+'</small>';
+  return h+'</div>';
+}
+
+async function boot(){
+  applyTheme();view=readHash();render();
+  userId='local';dbReady=true;col=localDb;
+  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+  try{const c=localStorage.getItem(NEWS_KEY);if(c)applyNews(JSON.parse(c))}catch(e){}
+  loadNews();
+  col.onSnapshot(onSnap);
+}
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(centerTab)}catch(e){}
+window.addEventListener('resize',centerTab);
+boot();
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+</script>
+</body>
+</html>

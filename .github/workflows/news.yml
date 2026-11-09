@@ -1,0 +1,26 @@
+name: Daily news
+
+on:
+  schedule:
+    - cron: '10 23 * * *'   # 06:10 in Bangkok (UTC+7)
+  workflow_dispatch:         # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Collect headlines
+        run: node scripts/fetch-news.mjs
+      - name: Save news.json
+        run: |
+          git config user.name "home-base-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add news.json
+          git diff --cached --quiet || (git commit -m "Update news" && git push)

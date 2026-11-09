@@ -1,0 +1,10 @@
+{
+  "note": "Stocks whose headlines are collected every morning. The app shows only the ones you hold in the Finance tab. Add or remove tickers here.",
+  "symbols": [
+    "ADVANC", "AOT", "AWC", "BBL", "BDMS", "BEM", "BGRIM", "BH", "BJC", "BTS",
+    "CBG", "COM7", "CPALL", "CPF", "CPN", "CRC", "DELTA", "EGCO", "GPSC", "GULF",
+    "HMPRO", "INTUCH", "IVL", "KBANK", "KCE", "KTB", "KTC", "LH", "MINT", "MTC",
+    "OR", "OSP", "PTT", "PTTEP", "PTTGC", "RATCH", "SAWAD", "SCBX", "SCC", "SCGP",
+    "TIDLOR", "TOP", "TRUE", "TTB", "TU", "WHA"
+  ]
+}
