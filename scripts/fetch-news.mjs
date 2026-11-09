@@ -46,11 +46,15 @@ async function fetchItems(q) {
   } finally { clearTimeout(to); }
 }
 
-export function pick(lists, max, maxAgeDays, perSource) {
+const SOCIAL = /^(facebook|youtube|tiktok|instagram|twitter|x\.com|pantip)/i;
+
+export function pick(lists, max, maxAgeDays, perSource, need) {
   const seen = new Set(), bySrc = {}, out = [], cutoff = Date.now() - maxAgeDays * 864e5;
   lists.flat().sort((a, b) => b.t - a.t).forEach(it => {
     const k = it.title.toLowerCase().replace(/\s+/g, ' ');
     if (seen.has(k) || (it.t && it.t < cutoff)) return;
+    if (SOCIAL.test(it.source) || it.title.startsWith('#')) return; /* social posts and hashtag spam are not news */
+    if (need && !need.test(it.title)) return;
     if (perSource && (bySrc[it.source] || 0) >= perSource) return;
     seen.add(k); bySrc[it.source] = (bySrc[it.source] || 0) + 1; out.push(it);
   });
@@ -70,7 +74,7 @@ async function main() {
 
   const stocks = [];
   for (const sym of wl.symbols) {
-    const items = pick([await safe('"' + sym + '" หุ้น when:3d')], 3, 4, 2);
+    const items = pick([await safe('"' + sym + '" หุ้น when:3d')], 3, 4, 2, new RegExp('(^|[^A-Za-z0-9])' + sym + '([^A-Za-z0-9]|$)', 'i')); /* the ticker must appear in the headline */
     if (items.length) stocks.push({ sym, items });
     if (!FIXTURE) await sleep(500);
   }
