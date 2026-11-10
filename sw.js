@@ -1,5 +1,5 @@
 /* Home Base service worker: opens offline, and picks up new versions whenever you are online. */
-const V = 'hb-v2', FONTS = 'hb-fonts-v1';
+const V = 'hb-v3', FONTS = 'hb-fonts-v1';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -34,7 +34,7 @@ self.addEventListener('fetch', e => {
     if (u.pathname.endsWith('/news.json')) return; /* the app keeps its own offline copy of the news */
     /* same-origin files: network first (so updates show up), cached copy when offline or slow */
     e.respondWith(
-      timeout(fetch(r), 4000)
+      timeout(fetch(r, { cache: 'no-cache' }), 4000) /* GitHub Pages lets browsers reuse a file for 10 minutes; no-cache makes every open ask whether it changed */
         .then(res => {
           if (res && res.ok) { const copy = res.clone(); caches.open(V).then(c => c.put(r, copy)); }
           return res;

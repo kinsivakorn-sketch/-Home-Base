@@ -1777,7 +1777,24 @@ boot();
 })();
 </script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+if('serviceWorker' in navigator){
+  var hadSW=!!navigator.serviceWorker.controller;
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      /* look for a new version every time the app is brought back to the front */
+      document.addEventListener('visibilitychange',function(){if(!document.hidden)reg.update().catch(function(){})});
+    }).catch(function(){});
+  });
+  /* a new version just took over: reload once so it shows, but never while a sheet is open or something is being typed */
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    if(!hadSW)return;
+    setTimeout(function(){
+      var a=document.activeElement,ov=document.getElementById('ov');
+      if((ov&&!ov.hidden)||(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return;
+      location.reload();
+    },1200);
+  });
+}
 </script>
 </body>
 </html>
