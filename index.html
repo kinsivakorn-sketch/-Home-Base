@@ -238,8 +238,8 @@ main{padding-top:18px;display:grid;gap:26px;align-content:start}
 
 /* routine */
 .wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
-.wk button{border:1px solid transparent;border-radius:12px;background:none;padding:8px 0 6px;display:grid;justify-items:center;gap:5px}
-.wk button[aria-pressed="true"]{border-color:var(--ink)}
+.wk>div{border:1px solid transparent;border-radius:12px;background:none;padding:8px 0 6px;display:grid;justify-items:center;gap:5px}
+.wk .today{border-color:var(--ink)}
 .wk .wl{font:500 11px var(--label);color:var(--muted)}
 .wk .today .wl{color:var(--ink);font-weight:600}
 .ring{position:relative;width:34px;height:34px}
@@ -249,6 +249,7 @@ main{padding-top:18px;display:grid;gap:26px;align-content:start}
 .rg th{font:500 11px var(--label);color:var(--muted);text-align:center;padding:0 0 6px;font-weight:500}
 .rg th.today{color:var(--ink);font-weight:600}
 .rg td{padding:3px 0;text-align:center;border-top:1px solid var(--line)}
+.rg .rt-n{border:0;background:none;color:inherit;font:inherit;padding:8px 0;margin:-8px 0;max-width:100%;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;width:100%;min-height:36px}
 .rg td.n{text-align:left;font-size:13px;padding-right:8px;max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:38%}
 .dot{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:none;padding:0;display:inline-grid;place-items:center;color:var(--accent-ink)}
 .dot.on{background:var(--accent);border-color:var(--accent)}
@@ -442,7 +443,7 @@ BASE.forEach(n=>{S[n]=norm(n,{})});
 let col=null,userId=null,dbReady=false,loaded=false,confirmed=false,slow=false,loadError=false,sampleFn=null;
 const VIEW_IDS=['brief','today','sched','goals','diary','routine','fin'];
 let view='brief',saveState='idle',slowT=null,lastKey=todayKey();
-let selDate=todayKey(),calMonth=new Date(),rtDay=todayKey(),finTab='port',flowYm=todayKey().slice(0,7),diaryKey=todayKey(),dTimer=null;
+let selDate=todayKey(),calMonth=new Date(),finTab='port',flowYm=todayKey().slice(0,7),diaryKey=todayKey(),dTimer=null;
 calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth(),1,12);
 const HOST_THEME=document.documentElement.getAttribute('data-theme');
 
@@ -796,12 +797,12 @@ function ringSvg(p){
   return'<svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--line)" stroke-width="3"/>'+(p>0?'<circle cx="18" cy="18" r="15" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="'+(C*p).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 18 18)"/>':'')+'</svg>';
 }
 function vRoutine(){
-  const ws=weekStart(),tk=todayKey(),sel=fromKey(rtDay);
+  const ws=weekStart(),tk=todayKey();
   let strip='',wd=0,wt=0;
   for(let i=0;i<7;i++){
     const d=addDays(ws,i),key=dateKey(d),st=rtStat(d);
     if(key<=tk){wd+=st.done;wt+=st.total}
-    strip+='<button class="'+(key===tk?'today':'')+'" data-act="rtDay" data-k="'+key+'" aria-pressed="'+(key===rtDay)+'" aria-label="'+esc(fDay(d))+(st.total?', '+st.done+'/'+st.total:'')+'"><span class="wl">'+esc(wdName(i,'short'))+'</span><span class="ring">'+ringSvg(st.pct)+'<span>'+d.getDate()+'</span></span></button>';
+    strip+='<div class="'+(key===tk?'today':'')+'" role="img" aria-label="'+esc(fDay(d))+(st.total?', '+st.done+'/'+st.total:'')+'"><span class="wl">'+esc(wdName(i,'short'))+'</span><span class="ring">'+ringSvg(st.pct)+'<span>'+d.getDate()+'</span></span></div>';
   }
   const tst=rtStat(new Date());
   let h='<div class="g12"><div class="wk" role="group" aria-label="'+x('Week','สัปดาห์นี้')+'">'+strip+'</div>'
@@ -809,16 +810,6 @@ function vRoutine(){
     +'<div class="stat"><span class="sn">'+(wt?Math.round(wd/wt*100):0)+'%</span><span class="sl">'+x('This week','สัปดาห์นี้')+'</span></div>'
     +'<div class="stat"><span class="sn">'+tst.done+'/'+tst.total+'</span><span class="sl">'+x('Today','วันนี้')+'</span></div></div>'
     +'<p class="sub">'+x('A day counts toward the streak when you finish 80% or more.','นับเป็นวันต่อเนื่องเมื่อทำได้ตั้งแต่ 80% ขึ้นไป')+'</p></div>';
-  const due=rtDue(sel.getDay()).slice().sort(timeCmp),done=rtDoneSet(rtDay),future=rtDay>tk;
-  h+='<section class="sec"><div class="sec-h"><h2>'+(rtDay===tk?esc(x('Today','วันนี้'))+SP+esc(fShort(sel)):esc(fDay(sel)))+'</h2><button class="btn sm" data-act="addRt">'+PLUS+x('Add','เพิ่ม')+'</button></div>';
-  if(!S.routines.items.length)h+=empty(x('No routines yet. Add the habits you want to repeat.','ยังไม่มีกิจวัตร เพิ่มสิ่งที่อยากทำซ้ำทุกวัน'),x('Add a routine','เพิ่มกิจวัตร'),'addRt');
-  else if(!due.length)h+=empty(x('No routines on this day.','วันนี้ไม่มีกิจวัตร'));
-  else h+='<ul class="list">'+due.map(r=>{
-    const on=done.has(r.id),t=tr(r,'title');
-    return'<li class="task'+(on?' is-done':'')+'" data-hold="rt|'+esc(r.id)+'">'+chkBtn(on,t,'data-act="toggleRt" data-id="'+esc(r.id)+'" data-k="'+rtDay+'" data-fk="rt-'+esc(r.id)+'"',future)
-      +'<button class="task-main" data-act="editRt" data-id="'+esc(r.id)+'"><span class="task-t">'+esc(t)+'</span>'+(r.time?'<span class="task-m mono">'+esc(r.time)+'</span>':'')+'</button></li>';
-  }).join('')+'</ul>';
-  h+='</section>';
   if(S.routines.items.length){
     let th='',days=[];
     for(let i=0;i<7;i++){const d=addDays(ws,i);days.push(d);th+='<th class="'+(dateKey(d)===tk?'today':'')+'" scope="col">'+esc(wdName(i,'short'))+'</th>'}
@@ -830,10 +821,11 @@ function vRoutine(){
         const on=rtDoneSet(key).has(r.id);
         tds+='<td><button class="dot due'+(on?' on':'')+'" role="checkbox" aria-checked="'+on+'" aria-label="'+esc(tr(r,'title')+', '+fDay(d))+'" data-act="toggleRt" data-id="'+esc(r.id)+'" data-k="'+key+'"'+(key>tk?' disabled':'')+'>'+(on?CHECK.replace('width="16" height="16"','width="14" height="14"'):'')+'</button></td>';
       });
-      return'<tr><td class="n">'+esc(tr(r,'title'))+'</td>'+tds+'</tr>';
+      return'<tr data-hold="rt|'+esc(r.id)+'"><td class="n"><button type="button" class="rt-n" data-act="editRt" data-id="'+esc(r.id)+'">'+esc(tr(r,'title'))+'</button></td>'+tds+'</tr>';
     }).join('');
-    h+='<section class="sec"><div class="sec-h"><h2>'+x('This week','ภาพรวมสัปดาห์นี้')+'</h2></div><table class="rg" style="margin-top:10px"><thead><tr><th scope="col"></th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></section>';
+    h+='<section class="sec"><div class="sec-h"><h2>'+x('This week','ภาพรวมสัปดาห์นี้')+'</h2><button class="btn sm" data-act="addRt">'+PLUS+x('Add','เพิ่ม')+'</button></div><table class="rg" style="margin-top:10px"><thead><tr><th scope="col"></th>'+th+'</tr></thead><tbody>'+rows+'</tbody></table></section>';
   }
+  else h+='<section class="sec"><div class="sec-h"><h2>'+x('This week','ภาพรวมสัปดาห์นี้')+'</h2></div>'+empty(x('No routines yet. Add the habits you want to repeat.','ยังไม่มีกิจวัตร เพิ่มสิ่งที่อยากทำซ้ำทุกวัน'),x('Add a routine','เพิ่มกิจวัตร'),'addRt')+'</section>';
   return h;
 }
 
@@ -1588,7 +1580,6 @@ function act(a,ds){
     /* diary */
     case'openDiary':formDiary(ds.k);break;
     /* routine */
-    case'rtDay':rtDay=ds.k;render();break;
     case'addRt':formRoutine();break;
     case'editRt':formRoutine(ds.id);break;
     case'toggleRt':{
@@ -1661,7 +1652,7 @@ document.addEventListener('visibilitychange',()=>{
   if(Date.now()-newsAt>1800000)loadNews();
   const nk=todayKey();
   if(nk!==lastKey){
-    if(selDate===lastKey)selDate=nk;if(rtDay===lastKey)rtDay=nk;if(diaryKey===lastKey)diaryKey=nk;
+    if(selDate===lastKey)selDate=nk;if(diaryKey===lastKey)diaryKey=nk;
     lastKey=nk;applyTheme();render();
   }
 });
