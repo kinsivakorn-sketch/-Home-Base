@@ -1,5 +1,5 @@
 /* Home Base service worker: opens offline, and picks up new versions whenever you are online. */
-const V = 'hb-v1', FONTS = 'hb-fonts-v1';
+const V = 'hb-v2', FONTS = 'hb-fonts-v1';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -9,6 +9,18 @@ self.addEventListener('activate', e => {
   e.waitUntil(caches.keys()
     .then(ks => Promise.all(ks.filter(k => k.indexOf('hb-') === 0 && k !== V && k !== FONTS).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
+});
+
+/* Tapping a reminder opens the app (or brings it to the front) on the Today sheet. */
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const view = (e.notification.data && e.notification.data.view) || 'today';
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) {
+      if ('focus' in c) { c.postMessage({ type: 'hb-go', view }); return c.focus(); }
+    }
+    return self.clients.openWindow('./#' + view);
+  }));
 });
 
 const timeout = (p, ms) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error('timeout')), ms))]);

@@ -21,7 +21,7 @@
    The only colour is a single accent that follows the weekday (or stays black/white when switched off). */
 :root{
   --bg:#FFFFFF;--surface-2:#F4F4F4;--ink:#0A0A0A;--muted:#6B6B6B;--line:#E3E3E3;
-  --accent:#0A0A0A;--accent-ink:#FFFFFF;--scrim:rgba(0,0,0,.45);
+  --accent:#0A0A0A;--accent-ink:#FFFFFF;--scrim:rgba(0,0,0,.45);--star:#C47F00;
   --font:'IBM Plex Sans Thai','Noto Sans Thai',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --label:var(--mono);
@@ -33,9 +33,9 @@
 }
 :root:lang(th){--label:var(--font)}
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);color-scheme:dark}
+  :root:not([data-theme="light"]){--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);--star:#F5B83D;color-scheme:dark}
 }
-:root[data-theme="dark"]{--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);color-scheme:dark}
+:root[data-theme="dark"]{--bg:#0B0B0B;--surface-2:#171717;--ink:#F4F4F4;--muted:#9B9B9B;--line:#2B2B2B;--accent:#F4F4F4;--accent-ink:#0B0B0B;--scrim:rgba(0,0,0,.65);--star:#F5B83D;color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -143,6 +143,28 @@ main{padding-top:18px;display:grid;gap:26px;align-content:start}
 .task-m{font-size:12.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .task.is-done{opacity:.55}
 .task.is-done .task-t{color:var(--muted);text-decoration:line-through;font-weight:400}
+/* important tasks: gold star plus a thin gold bar in the margin (so it never relies on colour alone) */
+.task{position:relative}
+.task.is-star::before{content:"";position:absolute;left:-10px;top:12px;bottom:12px;width:3px;border-radius:3px;background:var(--star)}
+.task.is-star .task-t{font-weight:600}
+.star{flex:none;width:40px;height:40px;margin:-8px -10px -8px 0;border:0;background:none;color:var(--muted);display:grid;place-items:center;border-radius:10px;padding:0}
+.star svg{display:block;fill:none}
+.star:hover{background:var(--surface-2)}
+.star[aria-pressed="true"]{color:var(--star)}
+.star[aria-pressed="true"] svg{fill:currentColor}
+/* Today: type a task, pick a time, press Enter */
+.qa{display:grid;gap:8px;padding:12px 0}
+.qa-row{display:flex;gap:8px}
+.qa-row .inp{min-width:0;flex:1}
+.qa-row .inp[type=time]{flex:none;width:122px;padding:10px 8px}
+.qa .err{margin:0}
+.qa-hint{font-size:12.5px;color:var(--muted)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sec-h .r2{display:flex;align-items:center;gap:12px}
+.pk[aria-pressed="true"]{border-color:var(--ink);background:var(--surface-2)}
+/* celebration when a task is ticked off */
+.fx{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden}
+.fx>*{position:absolute;left:0;top:0;will-change:transform,opacity;line-height:1;user-select:none}
 
 /* calendar */
 .cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -350,6 +372,8 @@ const CHECK='<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke=
 const PEN='<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16l-4 1 1-4z"/></svg>';
 const PLUS='<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>';
 const XIC='<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>';
+const STAR='<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4l2.6 5.5 6 .8-4.4 4.2 1.1 6L12 17.1 6.7 19.9l1.1-6L3.4 9.7l6-.8z"/></svg>';
+const FUNNEL='<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5h14l-5.3 6.4v4.6l-3.4 1.7v-6.3z"/></svg>';
 const CHEV=d=>'<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(d<0?'M12.5 4.5L7 10l5.5 5.5':'M7.5 4.5L13 10l-5.5 5.5')+'"/></svg>';
 const SP='<span class="sp" aria-hidden="true"></span>';
 const empty=(msg,btn,act,data)=>'<div class="empty"><p>'+msg+'</p>'+(btn?'<button class="btn sm" data-act="'+act+'" '+(data||'')+'>'+btn+'</button>':'')+'</div>';
@@ -364,7 +388,7 @@ const MONTHLY=/^(diary|txn)-\d{4}-\d{2}$/;
 const isDoc=n=>BASE.indexOf(n)>-1||MONTHLY.test(n);
 const baseOf=n=>n.replace(/-\d{4}-\d{2}$/,'');
 const DEF={
-  settings:()=>({lang:'th',theme:'auto',wk:true,colors:{}}),
+  settings:()=>({lang:'th',theme:'auto',wk:true,colors:{},notify:false}),
   brief:()=>({date:'',updatedAt:'',market:[],stocks:[],prices:{}}),
   goals:()=>({items:[]}),
   schedule:()=>({items:[]}),
@@ -593,23 +617,39 @@ function vBrief(){
 
 /* 2 Today */
 function taskRow(i,key,o){
-  o=o||{};const done=isDone(i,key),t=tr(i,'title'),note=tr(i,'note'),meta=[];
+  o=o||{};const done=isDone(i,key),t=tr(i,'title'),note=tr(i,'note'),meta=[],star=!!i.star;
   if(i.time)meta.push('<span class="mono">'+esc(i.time)+(i.end?'–'+esc(i.end):'')+'</span>');
   if(o.over&&!done)meta.push('<span class="pill ink">'+x('Overdue','เลยกำหนด')+' '+esc(fShort(fromKey(i.date)))+'</span>');
   if(!isOneOff(i))meta.push('<span class="pill">'+esc((REPEATS().find(r=>r[0]===i.repeat)||['',''])[1])+'</span>');
   if(note)meta.push('<span>'+esc(note)+'</span>');
-  return'<li class="task'+(done?' is-done':'')+'">'+chkBtn(done,t,'data-act="toggleTask" data-id="'+esc(i.id)+'" data-k="'+key+'" data-fk="tk-'+esc(i.id)+'"')
-    +'<button class="task-main" data-act="editTask" data-id="'+esc(i.id)+'"><span class="task-t">'+esc(t)+'</span>'+(meta.length?'<span class="task-m">'+meta.join('')+'</span>':'')+'</button></li>';
+  return'<li class="task'+(done?' is-done':'')+(star?' is-star':'')+'">'+chkBtn(done,t,'data-act="toggleTask" data-id="'+esc(i.id)+'" data-k="'+key+'" data-fk="tk-'+esc(i.id)+'"')
+    +'<button class="task-main" data-act="editTask" data-id="'+esc(i.id)+'"><span class="task-t">'+esc(t)+'</span>'+(meta.length?'<span class="task-m">'+meta.join('')+'</span>':'')+'</button>'
+    +'<button class="star" data-act="toggleStar" data-id="'+esc(i.id)+'" data-fk="st-'+esc(i.id)+'" aria-pressed="'+star+'" aria-label="'+x('Important','สำคัญ')+'">'+STAR+'</button></li>';
 }
+const FILTERS=()=>[['all',x('All','ทั้งหมด')],['open',x('Not done','ยังไม่เสร็จ')],['done',x('Done','เสร็จแล้ว')],['star',x('Important','สำคัญ')]];
+let todayFilter='all';
 function vToday(){
-  const rows=todayList(),k=todayKey(),total=rows.length,done=rows.filter(r=>r.done).length,p=total?done/total*100:0;
-  let h='<div class="g12"><div class="stats"><div class="stat"><span class="sn">'+total+'</span><span class="sl">'+x('To do today','ต้องทำวันนี้')+'</span></div>'
+  const all=todayList(),k=todayKey(),total=all.length,done=all.filter(r=>r.done).length,open=total-done,p=total?done/total*100:0;
+  const fl=todayFilter,rows=all.filter(r=>fl==='open'?!r.done:fl==='done'?r.done:fl==='star'?!!r.i.star:true);
+  const fname=(FILTERS().find(f=>f[0]===fl)||['',''])[1];
+  let h='<div class="g12"><div class="stats"><div class="stat"><span class="sn">'+open+'</span><span class="sl">'+x('Not done','ยังไม่เสร็จ')+'</span></div>'
     +'<div class="stat"><span class="sn">'+done+'</span><span class="sl">'+x('Done','เสร็จแล้ว')+'</span></div></div>'
     +'<div class="bar" role="progressbar" aria-label="'+x('Progress','ความคืบหน้า')+'" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(p)+'"><i style="width:'+p+'%"></i></div></div>';
-  h+='<section class="sec"><div class="sec-h"><h2>'+x('Tasks','งานวันนี้')+'</h2><button class="link-btn" data-act="tab" data-v="sched">'+x('Open Scheduled','เปิดกำหนดการ')+'</button></div>'
-    +'<form class="add-inline" style="padding:12px 0" data-submit="quickAdd"><input class="inp" name="t" aria-label="'+x('New task for today','งานใหม่วันนี้')+'" placeholder="'+x('Add a task for today…','เพิ่มงานของวันนี้…')+'" maxlength="120" autocomplete="off" data-fk="qa"><button class="btn primary" type="submit" aria-label="'+x('Add','เพิ่ม')+'">'+PLUS+'</button></form>';
-  h+=rows.length?'<ul class="list">'+rows.map(r=>taskRow(r.i,k,{over:r.over})).join('')+'</ul>':empty(x('Nothing planned for today. Add a task above, or plan ahead in Scheduled.','วันนี้ยังไม่มีงาน เพิ่มด้านบน หรือวางแผนล่วงหน้าที่หน้ากำหนดการ'));
+  h+='<section class="sec"><div class="sec-h"><h2>'+x('Tasks','งานวันนี้')+'</h2><div class="r2"><button class="btn sm '+(fl==='all'?'quiet':'primary')+'" data-act="openFilter" data-fk="flt" aria-haspopup="dialog">'+FUNNEL+(fl==='all'?x('Filter','กรอง'):esc(fname))+'</button>'
+    +'<button class="link-btn" data-act="tab" data-v="sched">'+x('Open Scheduled','เปิดกำหนดการ')+'</button></div></div>'
+    +'<form class="qa" data-submit="quickAdd" novalidate><div class="qa-row"><input class="inp" name="t" aria-label="'+x('New task for today','งานใหม่วันนี้')+'" placeholder="'+x('Type a task, then press Enter','พิมพ์งาน แล้วกด Enter')+'" maxlength="120" autocomplete="off" enterkeyhint="done" data-fk="qa">'
+    +'<input class="inp" type="time" name="tm" aria-label="'+x('Time (required)','เวลา (ต้องใส่)')+'" data-fk="qt"></div>'
+    +'<p class="err" id="qa-err" role="alert" hidden></p><p class="qa-hint">'+x('Every task needs a time. Pick a time and it is added.','งานต้องมีเวลาเสมอ เลือกเวลาแล้วระบบจะเพิ่มให้')+'</p>'
+    +'<button class="vh" type="submit" tabindex="-1" aria-hidden="true"></button></form>';
+  if(rows.length)h+='<ul class="list">'+rows.map(r=>taskRow(r.i,k,{over:r.over})).join('')+'</ul>';
+  else if(all.length&&fl!=='all')h+=empty(x('No tasks match this filter.','ไม่มีงานที่ตรงกับตัวกรองนี้'),x('Show all','แสดงทั้งหมด'),'setFilter','data-v="all"');
+  else h+=empty(x('Nothing planned for today. Add a task above, or plan ahead in Scheduled.','วันนี้ยังไม่มีงาน เพิ่มด้านบน หรือวางแผนล่วงหน้าที่หน้ากำหนดการ'));
   return h+'</section>';
+}
+function openFilter(){
+  const all=todayList(),cnt={all:all.length,open:all.filter(r=>!r.done).length,done:all.filter(r=>r.done).length,star:all.filter(r=>r.i.star).length};
+  openSheet('<h2 id="sheet-t">'+x('Filter tasks','กรองงาน')+'</h2><div class="pick">'+FILTERS().map(f=>'<button type="button" class="pk" data-act="setFilter" data-v="'+f[0]+'" aria-pressed="'+(todayFilter===f[0])+'"><b>'+esc(f[1])+'</b><small>'+cnt[f[0]]+x(' tasks',' งาน')+'</small></button>').join('')
+    +'</div><div class="actions" style="margin-top:14px"><span></span><button type="button" class="btn" data-act="closeSheet">'+x('Cancel','ยกเลิก')+'</button></div>','pick');
 }
 
 /* 3 Scheduled */
@@ -948,6 +988,7 @@ function formTask(id,date){
       {name:'time',label:x('Start time (optional)','เวลาเริ่ม (ไม่ใส่ก็ได้)'),type:'time',value:it?it.time:''},
       {name:'end',label:x('End time (optional)','เวลาจบ (ไม่ใส่ก็ได้)'),type:'time',value:it?it.end:''},
       {name:'repeat',label:x('Repeat','ทำซ้ำ'),type:'select',options:REPEATS(),value:it?(it.repeat||'none'):'none'},
+      {name:'star',label:x('Priority','ความสำคัญ'),type:'chips',options:[['0',x('Normal','ปกติ')],['1',x('Important (star)','สำคัญ (ติดดาว)')]],value:it&&it.star?'1':'0'},
       {name:'note',label:x('Note','โน้ต'),type:'textarea',rows:2,value:it?tr(it,'note'):''}
     ],
     note:it&&!isOneOff(it)?x('Editing or deleting changes every repeat of this task.','การแก้ไขหรือลบจะมีผลกับทุกครั้งที่ทำซ้ำ'):'',
@@ -956,7 +997,7 @@ function formTask(id,date){
       if(!title)return x('Write what needs doing first.','ใส่ชื่องานก่อน');
       if(!isKey(v.date))return x('Pick a date.','เลือกวันที่');
       if(v.time&&v.end&&v.end<=v.time)return x('The end time must be after the start time.','เวลาจบต้องหลังเวลาเริ่ม');
-      const rec={title:title,date:v.date,time:v.time||'',end:v.time?(v.end||''):'',repeat:v.repeat||'none',note:v.note.trim()};
+      const rec={title:title,date:v.date,time:v.time||'',end:v.time?(v.end||''):'',repeat:v.repeat||'none',note:v.note.trim(),star:v.star==='1'};
       if(it){Object.assign(it,rec);delete it.seed}
       else S.schedule.items.push(Object.assign({id:uid(),doneDates:[]},rec));
       selDate=v.date;calMonth=new Date(fromKey(v.date).getFullYear(),fromKey(v.date).getMonth(),1,12);
@@ -1119,6 +1160,7 @@ function settingsHtml(){
   h+='<div class="set-g"><span class="lbl">'+x('Appearance','การแสดงผล')+'</span>'+seg([['auto',x('Auto','อัตโนมัติ')],['light',x('Light','สว่าง')],['dark',x('Dark','มืด')]],s.theme,'setTheme')+'</div>';
   h+='<div class="set-g"><span class="lbl">'+x('Colour by weekday','สีตามวัน')+'</span>'+seg([['on',x('On','เปิด')],['off',x('Off','ปิด')]],s.wk?'on':'off','setWk')+'<small>'+(s.wk?x('The accent colour (ticks, bars, today) follows the day of the week. Pick a colour for each day below.','สีเน้น (เครื่องหมายถูก แถบความคืบหน้า วันนี้) เปลี่ยนตามวัน เลือกสีของแต่ละวันได้ด้านล่าง'):x('Off: strictly black and white.','ปิด: ขาวดำล้วน'))+'</small></div>';
   if(s.wk)h+='<div class="set-g">'+[1,2,3,4,5,6,0].map(d=>'<div class="dayc"><span>'+esc(wdName((d+6)%7,'long'))+'</span><div class="swatches" role="group">'+COLOR_ORDER.map(c=>'<button type="button" class="swb'+(c==='mono'?' mono':'')+'" '+(COLORS[c]?'style="background:'+COLORS[c]+'" ':'')+'data-act="setColor" data-d="'+d+'" data-v="'+c+'" aria-pressed="'+(colorOf(d)===c)+'" aria-label="'+esc(wdName((d+6)%7,'long')+': '+x(COLOR_NAME[c][0],COLOR_NAME[c][1]))+'"></button>').join('')+'</div></div>').join('')+'</div>';
+  h+=notifHtml(seg);
   h+=backupHtml();
   if(hasSeed())h+='<div class="set-g"><span class="lbl">'+x('Sample data','ข้อมูลตัวอย่าง')+'</span><button type="button" class="btn danger'+(armedKey==='clr'?' armed':'')+'" data-act="clearSeeds">'+(armedKey==='clr'?x('Tap again to remove all samples','กดอีกครั้งเพื่อลบตัวอย่างทั้งหมด'):x('Remove all sample data','ลบข้อมูลตัวอย่างทั้งหมด'))+'</button></div>';
   return h+'<div class="actions"><span></span><button type="button" class="btn primary" data-act="closeSheet">'+x('Done','เสร็จ')+'</button></div>';
@@ -1175,11 +1217,138 @@ function openPreview(list,from){
   openSheet('','preview');paintPreview();
 }
 
+/* ---------- reminders ---------- */
+/* A web app cannot wake itself once it is fully closed (Chrome stopped work on scheduled notifications), so reminders are
+   checked every 15 seconds while the app is open or in the background, and anything missed in the last hour is shown
+   the next time the app is opened. */
+const NS_KEY='hb1notif',DEF_REMIND='09:00',CATCHUP=60*60*1000;
+const notifPerm=()=>('Notification' in window)?Notification.permission:'unsupported';
+const notifOn=()=>!!S.settings.notify&&notifPerm()==='granted';
+let nState=(function(){try{const o=JSON.parse(localStorage.getItem(NS_KEY));if(o&&typeof o==='object')return{last:+o.last||0,fired:(o.fired&&typeof o.fired==='object')?o.fired:{}}}catch(e){}return{last:0,fired:{}}})();
+const saveN=()=>{try{localStorage.setItem(NS_KEY,JSON.stringify(nState))}catch(e){}};
+const atTime=(key,hm)=>{const p=key.split('-').map(Number),t=String(hm||DEF_REMIND).split(':').map(Number);return new Date(p[0],p[1]-1,p[2],t[0]||0,t[1]||0,0,0)};
+const aheadOk=it=>isOneOff(it)||it.repeat==='weekly'||it.repeat==='monthly'; /* a day-before notice every single day would only be noise */
+function remindEvents(t0,t1){
+  const out=[],a=dateKey(new Date(t0)),b=dateKey(new Date(t1)),last=dateKey(addDays(fromKey(b),1));
+  for(let d=fromKey(a);dateKey(d)<=last;d=addDays(d,1)){
+    const k=dateKey(d);
+    S.schedule.items.forEach(it=>{
+      if(!occursOn(it,k))return;
+      const hm=it.time||DEF_REMIND,title=(it.star?'★ ':'')+tr(it,'title'),at=atTime(k,hm);
+      if(k<=b&&at>t0&&at<=t1&&!isDone(it,k))out.push({id:it.id+'|now|'+k,at:+at,title:title,body:it.time?x('It is time. ','ถึงเวลาแล้ว ')+it.time:x('Due today','ถึงกำหนดวันนี้'),tag:'t-'+it.id+'-'+k});
+      if(aheadOk(it)){const ah=atTime(dateKey(addDays(d,-1)),hm);if(ah>t0&&ah<=t1)out.push({id:it.id+'|ahead|'+k,at:+ah,title:title,body:it.time?x('Tomorrow at ','พรุ่งนี้ เวลา ')+it.time:x('Due tomorrow','ถึงกำหนดพรุ่งนี้'),tag:'a-'+it.id+'-'+k})}
+    });
+    if(k<=b)S.routines.items.forEach(r=>{
+      if(!r.time||(r.days&&r.days.length&&r.days.indexOf(d.getDay())<0))return;
+      const at=atTime(k,r.time);
+      if(at>t0&&at<=t1&&!rtDoneSet(k).has(r.id))out.push({id:r.id+'|rt|'+k,at:+at,title:tr(r,'title'),body:x('Routine time ','ถึงเวลากิจวัตร ')+r.time,tag:'r-'+r.id+'-'+k});
+    });
+  }
+  return out.sort((p,q)=>p.at-q.at);
+}
+async function showN(ev){
+  const o={body:ev.body,tag:ev.tag,icon:'icons/icon-192.png',data:{view:'today'}};
+  try{
+    const reg=await Promise.race([navigator.serviceWorker.ready,new Promise((_,no)=>setTimeout(()=>no(new Error('sw')),3000))]);
+    await reg.showNotification(ev.title,o);return true;
+  }catch(e){try{new Notification(ev.title,o);return true}catch(e2){return false}}
+}
+function checkReminders(){
+  if(!loaded)return;
+  const now=Date.now();
+  if(!notifOn()){nState.last=now;saveN();return} /* keep the clock fresh so switching on later does not replay old items */
+  const t0=Math.max(nState.last||now,now-CATCHUP);
+  nState.last=now;
+  const evs=remindEvents(t0,now).filter(e=>!nState.fired[e.id]);
+  evs.forEach(e=>{nState.fired[e.id]=now});
+  Object.keys(nState.fired).forEach(k=>{if(now-nState.fired[k]>3*864e5)delete nState.fired[k]});
+  saveN();
+  evs.slice(0,4).forEach(showN);
+  if(evs.length>4)showN({title:x('Reminders','การแจ้งเตือน'),body:x('and '+(evs.length-4)+' more','และอีก '+(evs.length-4)+' รายการ'),tag:'hb-more'});
+}
+let notifNote='';
+async function setNotify(on){
+  notifNote='';
+  if(!on){S.settings.notify=false;touch('settings');repaintSheet();return}
+  const p0=notifPerm();
+  if(p0==='unsupported')notifNote='unsupported';
+  else{
+    let p=p0;
+    if(p==='default'){try{p=await Notification.requestPermission()}catch(e){p=notifPerm()}}
+    if(p==='granted'){S.settings.notify=true;touch('settings');nState.last=Date.now();saveN()}
+    else notifNote=p==='denied'?'denied':'asked';
+  }
+  repaintSheet();
+}
+function notifHtml(seg){
+  const p=notifPerm(),on=notifOn();let msg;
+  if(p==='unsupported'||notifNote==='unsupported')msg=x('This browser does not support notifications.','เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือน');
+  else if(p==='denied'||notifNote==='denied')msg=x('Notifications are blocked for this site. Open the site settings in Chrome, allow Notifications, then come back and switch this on.','การแจ้งเตือนถูกบล็อกไว้ ไปที่การตั้งค่าเว็บไซต์ใน Chrome แล้วอนุญาตการแจ้งเตือน จากนั้นกลับมาเปิดอีกครั้ง');
+  else if(notifNote==='asked')msg=x('Permission was not given. Switch on again and tap Allow.','ยังไม่ได้อนุญาต เปิดอีกครั้งแล้วกดอนุญาต');
+  else if(notifNote==='failed')msg=x('Could not show a notification. Check the Notifications permission for this site.','แสดงแจ้งเตือนไม่ได้ ตรวจสอบสิทธิ์การแจ้งเตือนของเว็บนี้');
+  else if(on)msg=x('You will be notified when a task, routine or scheduled item is due, and one day before scheduled items.','จะแจ้งเตือนเมื่อถึงเวลาของงาน กิจวัตร และกำหนดการ และเตือนล่วงหน้า 1 วันสำหรับกำหนดการ');
+  else msg=x('Get a notification when it is time for a task, routine or scheduled item.','รับแจ้งเตือนเมื่อถึงเวลาของงาน กิจวัตร และกำหนดการ');
+  return'<div class="set-g"><span class="lbl">'+x('Notifications','การแจ้งเตือน')+'</span>'+seg([['on',x('On','เปิด')],['off',x('Off','ปิด')]],on?'on':'off','setNotify')+'<small role="status">'+msg+'</small>'
+    +(on?'<div><button type="button" class="btn sm" data-act="notifTest">'+x('Send a test','ส่งแจ้งเตือนทดสอบ')+'</button></div>':'')
+    +'<small>'+x('Limit: a web app cannot wake itself once it is fully closed. Reminders arrive on time while the app is open or recently used. After it was closed, anything you missed in the last hour shows up when you open it again.','ข้อจำกัด: เว็บแอปปลุกตัวเองไม่ได้เมื่อปิดแอปสนิท แจ้งเตือนจึงตรงเวลาตอนเปิดแอปไว้หรือเพิ่งใช้งาน ถ้าปิดแอปไปแล้ว จะเห็นงานที่พลาดไม่เกิน 1 ชั่วโมงเมื่อเปิดแอปอีกครั้ง')+'</small></div>';
+}
+
+/* ---------- celebration when a task is ticked off ---------- */
+const FX_COLORS=['#FF4D4F','#FFB020','#FFE14D','#34D399','#38BDF8','#A78BFA','#F472B6'];
+const FX_MONEY=['💵','🪙','💰','💵','🪙','💸'];
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function celebrate(){
+  const old=$$('.fx');while(old.length>1)old.shift().remove();
+  const reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const host=document.createElement('div');host.className='fx';host.setAttribute('aria-hidden','true');document.body.appendChild(host);
+  const W=window.innerWidth,H=window.innerHeight;
+  const add=(html,css,frames,opt)=>{const el=document.createElement('span');el.textContent=html;el.style.cssText=css;host.appendChild(el);if(el.animate)el.animate(frames,opt)};
+  /* the flexed arm pops up in the middle */
+  add('💪','font-size:96px;left:50%;top:36%;opacity:0',
+    reduce?[{opacity:0,transform:'translate(-50%,-50%)'},{opacity:1,transform:'translate(-50%,-50%)',offset:.2},{opacity:1,transform:'translate(-50%,-50%)',offset:.7},{opacity:0,transform:'translate(-50%,-50%)'}]
+    :[{opacity:0,transform:'translate(-50%,-50%) scale(.2) rotate(-18deg)'},{opacity:1,transform:'translate(-50%,-50%) scale(1.25) rotate(6deg)',offset:.3},{opacity:1,transform:'translate(-50%,-50%) scale(1) rotate(0deg)',offset:.55},{opacity:1,transform:'translate(-50%,-56%) scale(1)',offset:.8},{opacity:0,transform:'translate(-50%,-70%) scale(.9)'}],
+    {duration:reduce?1100:1700,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
+  if(!reduce){
+    /* fireworks: three bursts of dots */
+    for(let b=0;b<3;b++){
+      const cx=rnd(W*.18,W*.82),cy=rnd(H*.14,H*.5),n=16;
+      for(let i=0;i<n;i++){
+        const ang=i/n*Math.PI*2+rnd(-.15,.15),dist=rnd(55,115),s=rnd(5,8),dx=Math.cos(ang)*dist,dy=Math.sin(ang)*dist;
+        add('','width:'+s.toFixed(1)+'px;height:'+s.toFixed(1)+'px;border-radius:50%;opacity:0;background:'+FX_COLORS[(b*3+i)%FX_COLORS.length]+';left:'+cx.toFixed(0)+'px;top:'+cy.toFixed(0)+'px',
+          [{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+dx.toFixed(0)+'px,'+dy.toFixed(0)+'px) scale(1)',opacity:1,offset:.6},{transform:'translate('+(dx*1.15).toFixed(0)+'px,'+(dy*1.15+26).toFixed(0)+'px) scale(.3)',opacity:0}],
+          {duration:rnd(800,1100),delay:b*220,easing:'cubic-bezier(.1,.7,.3,1)',fill:'forwards'});
+      }
+    }
+    /* paper money and coins drift down */
+    for(let i=0;i<16;i++){
+      const sway=rnd(-60,60),rot=rnd(-240,240);
+      add(FX_MONEY[i%FX_MONEY.length],'font-size:'+rnd(26,40).toFixed(0)+'px;left:'+rnd(0,Math.max(0,W-40)).toFixed(0)+'px;top:-50px;opacity:0',
+        [{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+sway.toFixed(0)+'px,'+(H*.55).toFixed(0)+'px) rotate('+(rot/2).toFixed(0)+'deg)',opacity:1,offset:.6},{transform:'translate('+(sway*1.4).toFixed(0)+'px,'+(H+40)+'px) rotate('+rot.toFixed(0)+'deg)',opacity:.9}],
+        {duration:rnd(1500,2300),delay:rnd(0,500),easing:'cubic-bezier(.3,.1,.6,1)',fill:'forwards'});
+    }
+  }
+  setTimeout(()=>host.remove(),2900);
+}
+
 /* ---------- actions ---------- */
 function toggleDone(id,key){
   const it=S.schedule.items.find(z=>z.id===id);if(!it)return;
-  const ix=it.doneDates.indexOf(key);if(ix>-1)it.doneDates.splice(ix,1);else it.doneDates.push(key);
+  const ix=it.doneDates.indexOf(key);let ticked=false;
+  if(ix>-1)it.doneDates.splice(ix,1);else{it.doneDates.push(key);ticked=true}
   touch('schedule');render();
+  if(ticked)celebrate();
+}
+function quickAdd(f,inp,val){
+  const tm=f.elements.tm,err=$('#qa-err');
+  if(!val){inp.focus();return}
+  if(!tm||!/^\d{2}:\d{2}$/.test(tm.value)){
+    if(err){err.textContent=x('Pick a time for this task first.','เลือกเวลาของงานนี้ก่อน');err.hidden=false}
+    if(tm){tm.focus();try{if(tm.showPicker)tm.showPicker()}catch(e){}}
+    return;
+  }
+  S.schedule.items.push({id:uid(),title:val,date:todayKey(),time:tm.value,end:'',note:'',repeat:'none',doneDates:[],star:false});
+  touch('schedule');inp.value='';tm.value='';render();
+  const t2=$('form.qa input[name=t]');if(t2)t2.focus({preventScroll:true}); /* ready for the next task */
 }
 function act(a,ds){
   switch(a){
@@ -1198,6 +1367,11 @@ function act(a,ds){
     case'retry':setSave('saving');Object.keys(dirty).forEach(n=>{if(dirty[n])flush(n)});break;
     /* tasks */
     case'toggleTask':toggleDone(ds.id,ds.k);break;
+    case'toggleStar':{const it=S.schedule.items.find(z=>z.id===ds.id);if(!it)break;it.star=!it.star;touch('schedule');render();break}
+    case'openFilter':openFilter();break;
+    case'setFilter':todayFilter=FILTERS().some(f=>f[0]===ds.v)?ds.v:'all';closeForm();render();break;
+    case'setNotify':setNotify(ds.v==='on');break;
+    case'notifTest':showN({title:x('Home Base test','ทดสอบ Home Base'),body:x('Notifications are working.','แจ้งเตือนใช้งานได้'),tag:'hb-test'}).then(ok=>{notifNote=ok?'':'failed';repaintSheet()});break;
     case'addTask':formTask(null,selDate);break;
     case'editTask':formTask(ds.id);break;
     case'selDay':selDate=ds.k;render();break;
@@ -1254,9 +1428,10 @@ document.addEventListener('click',e=>{
 document.addEventListener('submit',e=>{
   const f=e.target.closest('form[data-submit]');if(!f)return;
   e.preventDefault();
-  const inp=f.elements.t,val=inp?inp.value.trim():'';if(!val)return;
-  if(f.dataset.submit==='quickAdd')S.schedule.items.push({id:uid(),title:val,date:todayKey(),time:'',end:'',note:'',repeat:'none',doneDates:[]}),touch('schedule');
-  else if(f.dataset.submit==='addSub'){const g=S.goals.items.find(z=>z.id===f.dataset.g);if(!g)return;g.subs.push({id:uid(),text:val,done:false});touch('goals')}
+  const inp=f.elements.t,val=inp?inp.value.trim():'';
+  if(f.dataset.submit==='quickAdd'){quickAdd(f,inp,val);return}
+  if(!val)return;
+  if(f.dataset.submit==='addSub'){const g=S.goals.items.find(z=>z.id===f.dataset.g);if(!g)return;g.subs.push({id:uid(),text:val,done:false});touch('goals')}
   inp.value='';render();
 });
 document.addEventListener('input',e=>{
@@ -1266,11 +1441,19 @@ document.addEventListener('input',e=>{
   dTimer=setTimeout(()=>{const g=$('#dgrid');if(view==='diary'&&g){const all=diaryAll();g.innerHTML=diaryGrid(all);const c=$('#dcount');if(c)c.textContent=all.length}},900);
 });
 document.addEventListener('change',e=>{
+  if(e.target.name==='tm'&&e.target.form&&e.target.form.dataset.submit==='quickAdd'){
+    /* picking a time finishes the add: with a title typed it is added, otherwise jump to the title box */
+    const f=e.target.form,t=f.elements.t;
+    if(!e.target.value)return;
+    if(t.value.trim())f.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));else t.focus();
+    return;
+  }
   if(e.target.id==='ddate'){const v=e.target.value;if(isKey(v)&&v<=todayKey()){diaryKey=v;render()}}
 });
 window.addEventListener('hashchange',()=>{const v=readHash();if(v!==view){view=v;render();window.scrollTo(0,0)}});
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden)return;
+  checkReminders();
   if(Date.now()-newsAt>1800000)loadNews();
   const nk=todayKey();
   if(nk!==lastKey){
@@ -1379,6 +1562,10 @@ async function boot(){
   try{const c=localStorage.getItem(NEWS_KEY);if(c)applyNews(JSON.parse(c))}catch(e){}
   loadNews();
   col.onSnapshot(onSnap);
+  setInterval(checkReminders,15000);
+  window.addEventListener('focus',checkReminders);
+  window.addEventListener('pageshow',checkReminders);
+  try{navigator.serviceWorker.addEventListener('message',e=>{const d=e.data;if(d&&d.type==='hb-go'&&VIEW_IDS.indexOf(d.view)>-1)go(d.view)})}catch(e){}
 }
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(centerTab)}catch(e){}
 window.addEventListener('resize',centerTab);
