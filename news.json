@@ -1,16 +1,7 @@
 {
- "date": "2026-11-10",
- "updatedAt": "2026-11-09T23:45:25.762Z",
+ "date": "2026-11-11",
+ "updatedAt": "2026-11-10T23:42:26.649Z",
  "market": [
-  {
-   "source": "ข่าวหุ้นธุรกิจออนไลน์",
-   "date": "2026-11-10",
-   "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE10OGxBMWdrT2pzUFVPQ2JzRmhmUDFudkFXZGVjUFhOUUY0V29XUFA1LWRtYTRVSzdQd214Y25aZmxlcU5lRTdwVTBqU0tPdw?oc=5",
-   "th": {
-    "title": "หุ้นที่พาดัชนีกลับ 1,500 จุด",
-    "summary": ""
-   }
-  },
   {
    "source": "LINE TODAY",
    "date": "2026-11-10",
@@ -21,56 +12,65 @@
    }
   },
   {
-   "source": "posttoday",
-   "date": "2026-11-10",
-   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFAxRW9HU2pTZk9qU3ZXWHpweGo3OTRHcjNqeHp2NXFNQUMxN3hoQkF2TXVoQThJLXVrNlNnbnlQck5STTczbjBONXZkNzZRbm44R2FsQkFja2JkS1dDZkxISw?oc=5",
-   "th": {
-    "title": "ตลาดหุ้นสหรัฐปิดพุ่ง รับราคาน้ำมันร่วงคลายกังวลเงินเฟ้อ",
-    "summary": ""
-   }
-  },
-  {
-   "source": "สำนักข่าวอินโฟเควสท์",
-   "date": "2026-11-09",
-   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBGbFZQOHJJeFJNVE9Kc3BhODRjeHc4dllrTVNabFNlcmpuOXhPRkJwbURPZXItdDhTREROR0lwaXlUcU1KVDFFaTE3TzJRR3Vn?oc=5",
-   "th": {
-    "title": "ภาวะตลาดหุ้นอินเดีย: ดัชนี Sensex บวกกว่า 100 จุด ก่อนปิดทำการพรุ่งนี้ : อินโฟเควสท์",
-    "summary": ""
-   }
-  },
-  {
    "source": "LINE TODAY",
-   "date": "2026-11-09",
-   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE8ycGQ1ZVJSNUpNS0Q4T1hmWW5qVEpUWFRtcERlalFleDdEOXJuYVV1ajh1WjZJb2xWTU5acnlwX3hFbW5leHRsYVhqUHBNem9zamxSV3JR?oc=5",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNdl94MzlLS0pDeW0xc1ZZS3ZTbEFXQjZjaC1pOWlGSGFYSHFFYTVnekMzQkN0RWRuTzF4UER3RW5FYmRmdHoxU045SE55dXpva3l4eHo1cHZiaExsM2ZoNG41VkY1NjFnZW1mWFJYTEthYndteTExX2JpSXZNVk1KSA?oc=5",
    "th": {
-    "title": "“โรบอทเทรด” กินวอลุ่มตลาด 29% แรงขาย STPI กดราคาหุ้นปิดลบ 8% | ข่าวหุ้นธุรกิจ",
+    "title": "“โรบอทเทรด” กินวอลุ่มตลาด 53% แรงซื้อ DELTA ดันราคาหุ้นปิดบวก 6% | ข่าวหุ้นธุรกิจ",
     "summary": ""
    }
   },
   {
    "source": "ผู้จัดการออนไลน์",
-   "date": "2026-11-09",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5qYU9aV1hyVmhyZFdZS2RyU2Z5MWJHZEdhYVlJai10NjhIR0YyeDFUZVAtdFFlZ3ZhWHljUktNUnBHem5NYkNKUU1FZTl0ckZZbWNtOWp3NW5fbHUwY1FLRG1Td2U?oc=5",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9rUXhwYjlTUTRweV9nZXdoQ0daWjhJZXk5dUNxX1VSWWJNZkRacnhqRVpvZmExdlJ5VjFzQkxFWGRpR2p2Y1hpamljbWZmSEtDSExTc3ZESFVWMzJnWVlJbFZKcDY?oc=5",
    "th": {
-    "title": "หุ้นไทยรีบาวด์ 7 จุด DELTA นำทัพหนุนตลาด ต่างชาติขายต่อ 2.5 พันล้าน",
+    "title": "หุ้นไทยพุ่ง 23 จุด! DELTA นำทัพดัน SET จ่อ 1,500 จุด รับอานิสงส์หุ้นเทคโลกฟื้น-ปลดล็อก Data Center",
+    "summary": ""
+   }
+  },
+  {
+   "source": "ข่าวหุ้นธุรกิจออนไลน์",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE8zLTRNVEpfM0RwRGNQMjhVaFN1elNJbVdwSkY4MEFhcnc5Zm5CQnd5bzI3WXR2cVBjblBBbEV5bVFhZm5sMjh4VHlRMGFuZ1k?oc=5",
+   "th": {
+    "title": "SET ปิดบวก 23 จุด แรงซื้อ DELTA-GULF หนุน พ่วงขานรับ ครม.ไฟเขียวเกณฑ์ Data Center",
     "summary": ""
    }
   },
   {
    "source": "TNN Thailand",
-   "date": "2026-11-09",
-   "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1TUlc3LUhOdGVSYmJ4OGYxUTRZRmotUkZwcGdsWXdaRC1sVjB4WUM0NEM1MmVEdGNfRXVlbldOaWtvSXBuTXQ4eVJHbWN5VFo0VVAxNEhDS2tJd3A1S1oxVmxR?oc=5",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA2b0Z1NWtKWXU2dkpyUExQUlpqTU0wcGdzZEpMVnRZYUFkN3VnZ1ZLOEhlbWpUTjdCZnJJQ1Y0ckdicFN4Q1dqdGs3MWxRc2hJRXlKdHFaQ01OeEY1NF9tRFV6Yw?oc=5",
    "th": {
-    "title": "หุ้นไทยวันนี้ 9 พฤศจิกายน 2569 ปิดบวก 7.37 จุด รีบาวด์ตามหุ้นเทคฯ โลก",
+    "title": "หุ้นไทยวันนี้ 10 พฤศจิกายน 2569 ปิดพุ่ง 23.24 จุด DELTA บวกแรง 6%",
     "summary": ""
    }
   },
   {
    "source": "The Bangkok Insight",
-   "date": "2026-11-09",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFA2cERZMEx0RVBkWU41a2VlNWEzek4zOFRrU0Z2cWFXUFpCVmI5c2pWLW9JaTFxLUp4ZmpWT3NROUlKajRIMVFRVndwcDlLVEF3Tmh2SllObGh5SFRMTHFLV2RYZ09BZGZsdGV2QXIyc1d4WDBuemc?oc=5",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9SYUFCaHM3dWNTY0xrMmdKR2Y2V0sydC03ZFRCZDlHSlVKTzdGUk01RFdncjVNSGdEdExsbFY5bzVaWFoxSUtfaTBSQVp0M21OcWxldGFWcF91cTRNS0gxYmFvQ01QTzRUN2w5X2NxOGZqd1BreGc?oc=5",
    "th": {
-    "title": "หุ้นไทยวันนี้ 9 พ.ย. ปิดบวก 7.37 จุด รีบาวด์ตามหุ้นโลก ต่างชาติเทขาย",
+    "title": "หุ้นไทยวันนี้ 10 พ.ย. ปิดพุ่งแรง 23.24 จุด ลุ้นพรุ่งนี้ยืนเหนือ 1,500 จุด",
+    "summary": ""
+   }
+  },
+  {
+   "source": "สำนักข่าวอินโฟเควสท์",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1uM3lQWG5VcjYzcXRoRnpFZW9PaHlkQkxGUjdaVzE3LV9nSXRNYlh6Tm4tTkxKc0V0MUZ4RjBIRk9OVno1WHAxclp2THdXUXQ3?oc=5",
+   "th": {
+    "title": "ภาวะตลาดหุ้นไทย:ปิดพุ่ง 23.24 จุดกลับเข้าใกล้ 1,500 จุด ขานรับ ครม.ไฟเขียวเกณฑ์ Data Center-DELTA ทะยานแรง : อินโฟเควสท์",
+    "summary": ""
+   }
+  },
+  {
+   "source": "bangkokbiznews",
+   "date": "2026-11-10",
+   "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBydWtScmItZXNnOHlvdVY4VVMtQ0pfYnFYbVlrTXkxVmN1c3g5SHBRNHNHTzFlVFlSOXhPVmpoQXVGR0F2NXA1VmFTWHNaSnJIcjE5WDF1NWZTMHJFVFVmSDZR?oc=5",
+   "th": {
+    "title": "หุ้นไทยปิดพุ่ง 23.24 จุด โบรกเกอร์ชี้เงินไหลเข้าอิเล็กทรอนิกส์-โรงไฟฟ้า รับน้ำมันขาลง",
     "summary": ""
    }
   }
@@ -81,28 +81,28 @@
    "items": [
     {
      "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1tbDJiNTVmYmtRT3c2aFVNVHU0S29qWnJHQ0w5aHRhbkdIZ0h4V0pvYjV4alZMa29BeUhqZGd3MzNZbk5kYzIxOEo4RzctZmh1bjNVVXVB?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFAtbzNER0o0QlVFbndqNWRRLWVmSFZ6bWt4enpHUk05d293MGUyeEpEeHNWQVhqMmd2ck5EMS1mVWE0aDhKdWI1RnhXQ0Q4MWtxMVcyd0RB?oc=5",
      "th": {
-      "title": "สรุปกระดานรายใหญ่วันนี้ ADVANC มูลค่าสูงสุด 14.19 ล้านบาท | ข่าวหุ้นธุรกิจ",
+      "title": "สรุปกระดานรายใหญ่วันนี้ ADVANC มูลค่าสูงสุด 23.62 ล้านบาท | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
     {
-     "source": "Thunhoon",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9LM0YtZHNjYzBFSFpVSnl0ek1LcktLd2V2eVVKNFVuRFRGMWJycjRFRUF6a0ZsaldBdFYxZnVILVdkN1E0cTRJODhfTUg?oc=5",
+     "source": "สำนักข่าวอินโฟเควสท์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE8wS0kzNjJ4c0JNUi0weFlmVDFmSGxWUEhNR09iYXBzdm5rLURsMnFrSXotRnFPV2ZsX0pxTkJPUWtJcU5nSGhtY2ZHUWdoX2xO?oc=5",
      "th": {
-      "title": "ADVANCเปิดแผน3-5ปี มุ่งขยาย5G-บรอดแบรนด์",
+      "title": "BIG LOT: วันนี้ ADVANC มูลค่าสูงสุด 23.62 ลบ.ราคาเฉลี่ย 337.4 บ./หุ้น : อินโฟเควสท์",
       "summary": ""
      }
     },
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE52Znc5WUtrUEl1V2R6T0ptRlcybjduTFduVUNxYVR1bXZHY0NjRnhkV2l4eEZVdDZNdk1SdXJoeGItdGVEem5KR3pLdkdyUlVhTG5QRy1R?oc=5",
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBCQXdxa3NZUlJfTUxPRzhCLWEtdmJiU1JheE5MM3V2NTdOUzRTUzMwOENlVjA1eVl6S3UtTm9YRUFwOVROQVlTQ1RWenRVQzg?oc=5",
      "th": {
-      "title": "โบรกชี้ GULF กำไร Q3 โต 28% แตะ 9.3 พันล้าน รับโรงไฟฟ้า-ADVANC หนุน แนะซื้อเป้า 79 บ. | ข่าวหุ้นธุรกิจ",
+      "title": "สรุปกระดานรายใหญ่วันนี้ ADVANC มูลค่าสูงสุด 23.62 ล้านบาท",
       "summary": ""
      }
     }
@@ -113,7 +113,7 @@
    "items": [
     {
      "source": "Thunhoon",
-     "date": "2026-11-09",
+     "date": "2026-11-11",
      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5Jb1g3b0JnTDVLWDdiWFpxQUFCQ2dhbVBWUUZ6bXpzV2tsVVBILVRYaGFmY1plRDlnU0JOSTQyVUU3V2RGT180QVd1MnZnUGhkZDRqYw?oc=5",
      "th": {
       "title": "STECON–WHA–AOT น่าสน Data Center จ่อเข้า ครม. พรุ่งนี้ ไฮซีซัน ลุ้นท่องเที่ยวพีก!",
@@ -121,20 +121,20 @@
      }
     },
     {
-     "source": "efin.finance",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE11R0VTLXZldmp2SkVFT3FOVGZQb0NWMTVXREU4Y19GVy12R3VxZktnb1FTbTc4VDFxblo0T1dkTmUzZzkxajY1NWNZLTFhTkdMQVJrZXlfeHpyVTdiLXR2SFdB?oc=5",
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5PelhWbGZVQkdoRTFsTWw4RmFOT3FmV0k0OHVWSkNHSDNvbl9Ja0VHMGVlYVBkUmNkc0hkZXVjcUp6dVNhcjJjcjZsVnNWUVJoTmhPZkFn?oc=5",
      "th": {
-      "title": "AOT ประสาน THAI เปิด 4 แนวทาง เร่งเคลียร์ปัญหาสินค้าตกค้างที่สุวรรณภูมิ",
+      "title": "‘พิพัฒน์’ สั่ง ทอท. ประสานบินไทยแก้สินค้าตกค้าง ดันระบบ AOT Cargo Clearhouse | The Bangkok Insight",
       "summary": ""
      }
     },
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5PelhWbGZVQkdoRTFsTWw4RmFOT3FmV0k0OHVWSkNHSDNvbl9Ja0VHMGVlYVBkUmNkc0hkZXVjcUp6dVNhcjJjcjZsVnNWUVJoTmhPZkFn?oc=5",
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE9iTE54OGYtanAtbjJCMU43VWF5SXlyblJ2VXQzSWl3MVVrYlh2QWtNcUFUVTk2c1g3RjdJdlR1MjFtQ0FvWmpaR3RB?oc=5",
      "th": {
-      "title": "‘พิพัฒน์’ สั่ง ทอท. ประสานบินไทยแก้สินค้าตกค้าง ดันระบบ AOT Cargo Clearhouse | The Bangkok Insight",
+      "title": "สแกน AOT–OR 2 หุ้นเด่น! LHSEC เจาะพื้นฐาน–จุดเข้าเก็บ",
       "summary": ""
      }
     }
@@ -158,6 +158,15 @@
    "sym": "BBL",
    "items": [
     {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE4teUpGMVNRRm43VTYzck5ULS13WnF5SGxmbUhHcjNhZWluLU0zZnpHTFk4NHBQRTllWkQ4WWlPTV9GR3hUajZudVdGWk4?oc=5",
+     "th": {
+      "title": "BBLลุ้นสินเชื่อQ4เกินเป้า หุ่นยนต์โอกาสใหม่ดันศก.",
+      "summary": ""
+     }
+    },
+    {
      "source": "LINE TODAY",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1JZDMtUUMxajJpX1IyLVJQTThVSUhqUUtaZHpNZjM1VEVQYWl1MDhJNkw1Ylh6Z25yN2tfbjdVMFVmd2ZnTFNvajFBWlBOTW5Pd1RnbkVjU0JqVDdRcWFiV0VCX2c3Q1hra2xVaTlYT3J4NnF1X0F2dloxaFFVUQ?oc=5",
@@ -172,29 +181,52 @@
    "sym": "BDMS",
    "items": [
     {
-     "source": "pptvhd36.com",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9VLTZDQnNjbkxpSUtmdDFxZ2VWRGZTM2RXbnhMemRGSWdpNUNpbEJDd1pCWEJGOG42TnVqLVlmNTMzeHNubjNFWWtQcWZRVEZRRmRDQw?oc=5",
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE00cmlqUkFiUzM4bnVJeml3cnRIUjdYeU5QQW5aa1I1UjQySnV5VU1wbmF2OUFQbGotY0x1Ry02TzJTdW1ydGlmZHh5X1dmSmFnMUN2NUp3?oc=5",
      "th": {
-      "title": "BDMS เผย WellEra เมกะโปรเจกต์ 2.9 หมื่นล้าน เปิดสเปก Capella Residences Bangkok | จับข่าวคุย",
-      "summary": ""
-     }
-    },
-    {
-     "source": "thestandard.co",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5XaGJVQWt2S0xKdTJHLTNqdkRIYkNnTzNrZy13YWZFemt4cUJlSlR5UTFFVzN1dThCdFZRUUxQamtyZ2dvYnZ2X3h2Nnd2bVczTV80cTh6b1RBalVaX1l2bXNPZm1EbmtqTHpORFdKNElvMkJLS3ZJUkR3?oc=5",
-     "th": {
-      "title": "BDMS x Capella เปิดตัว ‘Capella Residences Bangkok’ เมื่อ Longevity กลายเป็นส่วนหนึ่งของการอยู่อาศัย",
+      "title": "BDMS ลุย WellEra มูลค่า 2.9 หมื่นล้าน เปิดตัว Capella Residences ปักหมุดเสร็จปี 73 | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
     {
      "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1nNHR0TlRMcXNOd0hMa2JSTHRtSGxoSk9iNW40MXFyZWRralg3TGt3LXpMOXljOE5PWXBZVXhjR2FqQTF1LWhhRE9CT1plWFppaUwwWFBR?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9peGVWWjZ0ZUtfeXdHRjR5UG1OUXBOTURsYzcxU1dmQjQ2eVBranhRNy1ReHZWY2trM1FEdklMSmwxWmNoS3lTSEhQR1h2d0ZGTmZSejl3?oc=5",
      "th": {
-      "title": "BDMS ครึ่งปีหลังผลงานฟื้นชัด กูรูชี้เป้าราคา 20.40บ.",
+      "title": "Pi Daily Strategy : หุ้น Growth ถูกกดดันจากเงินเฟ้อ นักลงทุนเริ่มพักเงินในสินทรัพย์ปลอดภัย ตลาดหุ้นไทยอาจได้แรงหนุนจากการหมุนกลุ่ม Growth มาเป็น Value Stock หุ้นแนะนำ KBANK BDMS - มิติหุ้น | ชี้ชัดทุกการลงทุน",
+      "summary": ""
+     }
+    },
+    {
+     "source": "Share2Trade",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMipgVBVV95cUxObGFQbmRkQURyVjRwendQbnBjNjZHcFhTTzd5eDkzNEpsRkxTUkI2cHRnaDBoNXdHbWZWclR2WEU2T1B0d0VsZ1RCYjQ4WEgtUE5Cemo3S1psT3RtQmFTOHhvWTBBTVpKX0JGUlVLVWMxLVlxamtFNnB5eGxteDZFbEhCVXpENGc1RFdzSXpsMDZiM2ppMkZ2dzBaVUxYdnJHVFN3eGdMUHpNR3FKaXR2R083YnVhZE9BTnRsdVJxN2dUSW44bi1MWnNYTFRTZGp0aFVVMy1HY1hOQlZzb1FRMW54Y0E2VlJiY3JGWG1iaU5LUGtKVmlXeEdwNDRDSXhuZlMzSmhsRkFTMzhPOEtHR2VFRWRPbGY1dTRDWWVGU0NCSVN4Vzk3RTdIWlB0Z0pxSWxuWTd6b2hydnJld2FUbmk1bldrYzYxVDQtTVJVYTZoUkRZQlZNTHV0NG9za2xfbTVsd0J0YVN3MkVmdld2ZEk2LXJfZ3ZuQk9RYUl3eG05ZF81UzI3YUlKaE9helFyVUV3eVBlNjFWaDJ5cW1yM0M4cnBRRHFscjluS0lHc004NjBneW1uMUZkSkVZVE9XazdIRVNveXZ2UTd2dkhuY1NqVVNpZ1k0TWlCTy1KSUxnVWdORzZvOHVuRGNGdDRmcXkySm9pUnp3MFBBUGdtdC1YbWw0dXc5Tm01TVhkVGdsU0VRVDY4cjI3OXJnVHpDMWR2OEpvNmRxeXlUZVdUb2loLUItb3hiYmxYMTBkZFBjZDBPd3pfa0tQc3JKQzRFOHNFVHRaSzNfWWx5YmRIcFptQk55LVdEMDJ2dUFOV2FILUhHbGhqYjZFTnV0ODBGYzZCR3Naa0kwd3JtcW9sb2h3by1WcW5RU1NFNzBCUVYwZUYxOVE?oc=5",
+     "th": {
+      "title": "“โกลเบล็ก” มอง SET สัปดาห์นี้ Sideway Down ชู ADVANC-TRUE-BDMS-BH หุ้น Defensive เด่นสู้ตลาดผันผวน",
+      "summary": ""
+     }
+    }
+   ]
+  },
+  {
+   "sym": "BEM",
+   "items": [
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE4xQlh3RC1QczR3dHBsNzBManVMcDNqWHI4Q1NsMTBJb1Bmb0JuMTBnQnlXc0Y5OGxRWEFBSlRSU2NxTmhFMUtFUjQzS0lGMFRJZEhQUFpR?oc=5",
+     "th": {
+      "title": "BEM ร่วมสืบสานประเพณีทอดกฐินสามัคคี ประจำปี 2569",
+      "summary": ""
+     }
+    },
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBzVFYxbFQyX2RSbm8wOXNXbG80ZkZIWElid2h1ODBFLUs2bDFKSnNHaElGSUtJX2M0aWktckt4dDFhWERpUjY2elZ3dWl3Y3lPWDRfRDJR?oc=5",
+     "th": {
+      "title": "BEM ลุ้นกำไร Q3 นิวไฮ 1.1 พันล้าน รับคุมต้นทุนซ่อมบำรุง โบรกแนะ “ซื้อ” เป้า 8.80 บาท | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     }
@@ -205,10 +237,42 @@
    "items": [
     {
      "source": "Thunhoon",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBlWmpZUG1ESENsWE8yQ0lMSzBvT2NaQVEwRzhCRFdTU2Jtd25nV2p3aWtoMWg4NDU0Sm9Ldk9VMk9iNjQ5Rll6UUU2RTNuOWduZ0lV?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE92bmY4Ym9jMWlUWGV6Zy03QmUxNTZTak1zcGItN203WF9nd05tRGN4WWNrUDhUamFuOW5TTU9zMnE1M3ZjbGp5Sm5tcW8tcWJQWTFJMzltb05qVDZsNTFJ?oc=5",
      "th": {
-      "title": "BGRIM โอกาสครั้งใหญ่ พลังงานลง-ป้อนไฟดาต้า",
+      "title": "หุ้นไทยพักเที่ยงพุ่งใกล้ 1,500 จุด ซื้อ DELTA-GULF-BGRIM หนุน",
+      "summary": ""
+     }
+    },
+    {
+     "source": "bangkokbiznews",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5qeDUwbURZNnNoOFBwRkVXLV9XZldqZkxuVTN1NVBYYUtGQ3YwMDZ1VmdLdllmQzRvaExzdmM3aV9oMEpKVGJDaGR1MzlJXzJ4LTAwYXFHOWd5THJkYTRKSElR?oc=5",
+     "th": {
+      "title": "หุ้นโรงไฟฟ้าพุ่งยกแผง BGRIM นำกลุ่ม 5% โบรกชี้พลังงานลด บาทแข็ง จับตา Data Center หนุน",
+      "summary": ""
+     }
+    },
+    {
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9NVk53VDR1T3lNemZCMmR5QktGQ01ZNHpUaTEtczViYmtFaVRjb3pmTUJKMVZHcTBqU3lGeGFqVkplak5DNFhDWE53dw?oc=5",
+     "th": {
+      "title": "ASPS ชี้ต่างชาติสลับซื้อ “ค้าปลีก-รพ.” แนะเก็บ CPALL-CPN-BGRIM",
+      "summary": ""
+     }
+    }
+   ]
+  },
+  {
+   "sym": "BH",
+   "items": [
+    {
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5CZ1lyUjBhZ21wVUJaaTFPbGZnbHRqRWdPNkhPaDV4Z0E5M3pyeFZ4MXRoNnBucTNFWVRVWDdaejA2LV9CbDFXTUVBcw?oc=5",
+     "th": {
+      "title": "GBS แนะเก็บ 4 หุ้นเด่น ADVANC-TRUE-BDMS-BH หลบผันผวน",
       "summary": ""
      }
     }
@@ -246,29 +310,43 @@
    "sym": "CPALL",
    "items": [
     {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE03X0JGMGQyT2V0MnBCYU9hSXVNd0pwcklvOXBpWnF1b0ZVU0d6SmZ6LWNYUGFVbTRsUzJqTFgyS2UzTUFILS1JdVQxRQ?oc=5",
+     "source": "สำนักข่าวอินโฟเควสท์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBFWDE2cTJuQ0duc3dKR3JMMmJVdlNlUDhyRjZuLTZvWTY2YzBHQUNVcjhyd1pRenFIYWE1NFZxb1pDSllmS0Q3SHREZ2dkd0ww?oc=5",
      "th": {
-      "title": "ASPS แนะสะสมหุ้น Non-Tech ชู GULF-MTC-CPALL เด่น",
+      "title": "ภาวะตลาดอนุพันธ์: ดีดขึ้นรับแรงหนุนหุ้นใหญ่-DELTA-GULF-CPALL จับตาเงินเฟ้อสหรัฐ : อินโฟเควสท์",
       "summary": ""
      }
     },
     {
      "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNX045akYwMDJ0SlZlMUdHczFBdU94bS0zaVZVbU1uOU50Rk11WTAtYTd0UlZCa3hHNFRoMkRvR0xYLV9XSzRsYktXUlRvSUg2b2VkZWhzTmstd1JIWG5XY1NSRTNaVWJuTGpxSTkwTWNvajFIdTlBZERPS2tZajBhVw?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5UcUFSS1NvOEU0RjhsME5xZEgxN2pJSVRadDBkV1EwZlF2ZlB6a3RNWUJwdm1odFYyaWpvaUo4bURVdnluR3JWVEJDQTM5WUZQa0hIS0p3?oc=5",
      "th": {
-      "title": "เอเซีย พลัส เตือนเงินเฟ้อพุ่ง 3.90% กดดันหุ้นไทย ฟันด์โฟลว์ ชู GULF-MTC-CPALL รับตลาดผันผวน",
+      "title": "สรุปกระดานรายใหญ่เช้านี้ CPALL มูลค่าสูงสุด 8.79 ล้านบาท | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
     {
-     "source": "ประชาชาติธุรกิจ",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5zTTh4MVJ6MVlvdjRuajhWa1RvR0U3cUIxcFdKbXBSY1NuSlV1SGd3Q3ZsQjhmYjRGSW5ZbzhtMU1fckFoVmhiU2JFSkppS2M3dzVRVEJaMlpyLXM?oc=5",
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9iMzdsc2t5Mm1HbC1vOFUzZ012S1BOLWJiX3ozMGxSNGs1M2h5QjhqUU96TnJ6UVlMWjNnTFZZUWIwTXZsSnNCZ2U2dS1oSVE?oc=5",
      "th": {
-      "title": "เงินเฟ้อสูง-เทคฯ ร่วง กดหุ้นไทย ต่างชาติสวนเก็บ Non-Tech ชู GULF-MTC-CPALL",
+      "title": "สรุปกระดานรายใหญ่เช้านี้ CPALL มูลค่าสูงสุด 8.79 ล้านบาท",
+      "summary": ""
+     }
+    }
+   ]
+  },
+  {
+   "sym": "CPF",
+   "items": [
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5HeDdlMUJYVmdLVWt5V2xKZ1o4b2Vhcm45UFhOMktzSFNCX2lYelN6OHVQOUx0Rl9FMEt3bTFybFJ3WjMza0tIS1ZWemhhc1ZCWDAwSjJn?oc=5",
+     "th": {
+      "title": "CPF-เกษตรภัณฑ์ สานต่อเดิน-วิ่งการกุศลปีที่ 12 มอบ 8 แสนหนุน 2 สถาบันการแพทย์ | The Bangkok Insight",
       "summary": ""
      }
     }
@@ -279,6 +357,15 @@
    "items": [
     {
      "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9wNjZWWjZldWhNaXIzeWNLN3NLMkppRUJCN25WRE9LZzdOcnQ3Y2p2RElMcGFoUm5vNXFIWWhfWm52eVZsanlLSGZGWWpydXNXV2VvTEZ3?oc=5",
+     "th": {
+      "title": "ASPS ชี้ต่างชาติสลับซื้อ “ค้าปลีก-รพ.” แนะเก็บ CPALL-CPN-BGRIM | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    },
+    {
+     "source": "LINE TODAY",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA0eDVKUllvaE1fZ1BzbXVBVU9EZHhGVUNlT2sxYTBOM3ZxdnlNVlo2WE1SZG5JdEtvV0pTSG5FWHlpUF8xdmFCbFJRNVdKejdrcThvaHpB?oc=5",
      "th": {
@@ -287,20 +374,11 @@
      }
     },
     {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5jTG5nM0JNUkZMNGxhazVlaTdsUm5UUlFRekhWNVEtYVE3cE5sRElhNnR4M1BmYUZmdkdBV2pNLUNFYXV0SXEzM1ljOA?oc=5",
+     "source": "มิติหุ้น",
+     "date": "2026-11-08",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE51Q3lwY1ZRTlpydkJ6RHg3NFlydWlzUFo2UGlJRTE0dEc1X045Y0NxMlcwZFJvZ19ScW5XN2toY2oxYjh3RHhWRGcwSk1XNFBZZ2xkMzlB?oc=5",
      "th": {
-      "title": "CPN ปักธงปี 70 ลุย 2 เมกะโปรเจกต์ใหญ่ ปั้น The Central-CenTRal cENtrAL เสริมแกร่งธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1pSXJITUg3bm1mOTBaZUdPN0Jld25xWEZZUktHZVVfRlp0SGp2V29IQnFReU1McGtuZzdQTEtOT05DYmQ2bmx1VGxlWng2UExlcEhaZDBR?oc=5",
-     "th": {
-      "title": "CPN กำไรปกติ Q3 แตะ 4.93 พันล้าน โต 18% สูงกว่าคาด โบรกชูเป้า 80 บาท | ข่าวหุ้นธุรกิจ",
+      "title": "( มิติหุ้น-หุ้นเจาะ ) CPN ผงาดรับคลื่น Sport Economy เปิดขุมทรัพย์ 2.38 แสนล้าน - มิติหุ้น | ชี้ชัดทุกการลงทุน",
       "summary": ""
      }
     }
@@ -309,6 +387,15 @@
   {
    "sym": "CRC",
    "items": [
+    {
+     "source": "Thunhoon",
+     "date": "2026-11-11",
+     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9TMHNUNm0ycDNodFVzSEJGZ3dmN1dtTzBSbFhrTWc1SGtUS2xfSVJaRXkxUk4xMWtlTnRxeEZyRE5uVElralF1WF9MWFVkdGhrczdnU2xLdUVNUS1remc?oc=5",
+     "th": {
+      "title": "CRC โบรกคาดกำไร Q3/69 โต จับตา Q4 เด้งต่อ รับเทศกาล- SSSG แกร่ง",
+      "summary": ""
+     }
+    },
     {
      "source": "มิติหุ้น",
      "date": "2026-11-08",
@@ -324,29 +411,43 @@
    "sym": "DELTA",
    "items": [
     {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9UNTBMMl9qM3B3MzV5LTBPbzVLa3AzYmEtby1pSGpKbnh0b1pEeWozb0ZSbHJVcENNclBpODVFMUludTZEZzBiVkJhbmc1dE1yTlVKcGR3?oc=5",
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE0yTk9vLUhoU2NsMnRybWNaSXF6WjRlczJnUEtGMmFHTVBlTFhXUjRmY3VGRm9ucTg4TmlQOWkyOWhjSjZ3VFlaWTBoWQ?oc=5",
      "th": {
-      "title": "( มิติหุ้น-หุ้นเจาะ ) DELTA รับคลื่น AI–Data Center ส.อ.ท.ชี้ลงทุนทะลุ 2 ล้านล้าน - มิติหุ้น | ชี้ชัดทุกการลงทุน",
+      "title": "“โรบอทเทรด” กินวอลุ่มตลาด 53% แรงซื้อ DELTA ดันราคาหุ้นปิดบวก 6%",
       "summary": ""
      }
     },
     {
-     "source": "ผู้จัดการออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5qYU9aV1hyVmhyZFdZS2RyU2Z5MWJHZEdhYVlJai10NjhIR0YyeDFUZVAtdFFlZ3ZhWHljUktNUnBHem5NYkNKUU1FZTl0ckZZbWNtOWp3NW5fbHUwY1FLRG1Td2U?oc=5",
+     "source": "สำนักข่าวอินโฟเควสท์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBFWDE2cTJuQ0duc3dKR3JMMmJVdlNlUDhyRjZuLTZvWTY2YzBHQUNVcjhyd1pRenFIYWE1NFZxb1pDSllmS0Q3SHREZ2dkd0ww?oc=5",
      "th": {
-      "title": "หุ้นไทยรีบาวด์ 7 จุด DELTA นำทัพหนุนตลาด ต่างชาติขายต่อ 2.5 พันล้าน",
+      "title": "ภาวะตลาดอนุพันธ์: ดีดขึ้นรับแรงหนุนหุ้นใหญ่-DELTA-GULF-CPALL จับตาเงินเฟ้อสหรัฐ : อินโฟเควสท์",
       "summary": ""
      }
     },
     {
-     "source": "Hoonsmart",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBuTlRMWjE4RjNENlF6QUp0SGlESG1IZDlrUFExRW5mZUFtamxaS1FCYU5WRmpFS1hGTDhuZ21DSU5aLTFfNlJpVmM3MTY5UQ?oc=5",
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9ZZURvbXhFME4tOXhFVVlMNUNsMS1vRmVmeWxPeHp3UVpOQjNRS2I4aGwtR1JHbl9QUkE0VGVHa2dTOGo4TmNVNmRrSndFUnVxd094aUd3?oc=5",
      "th": {
-      "title": "หุ้นปิดบวก 7.37 จุด DELTA-ปิโตรฯ-แบงก์หนุน ต่างชาติขาย 2,501 ล้านบ.",
+      "title": "SET ปิดบวก 23 จุด แรงซื้อ DELTA-GULF หนุน พ่วงขานรับ ครม.ไฟเขียวเกณฑ์ Data Center | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    }
+   ]
+  },
+  {
+   "sym": "EGCO",
+   "items": [
+    {
+     "source": "สำนักข่าวอินโฟเควสท์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE4tTWwzNzRvSlFWQ1AtTXJJMUROcWRBbEE0bzRJbklPUkhFTFVtZnQ2eDVuenZSTk9BRFFoMVI1TzV1YmhSTG9FY1ZGcmZjYlFn?oc=5",
+     "th": {
+      "title": "TPIPP เผยบ.ร่วมทุน EGCO เซ็น PPA โซลาร์ฟาร์ม กฟผ. 6 โครงการ รวม 280.5 เมกะวัตต์ : อินโฟเควสท์",
       "summary": ""
      }
     }
@@ -356,29 +457,29 @@
    "sym": "GPSC",
    "items": [
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE13TTA3UzJMcEcwcGg1b0d6cGhmTFNOYkZPV1RUZTdrZ1REWUVxNVR3cVJ3ODdKRnM2QWYwQXZZZ3hsUGJ2YXZOeER4RFMzOGZRSEM5Xzln?oc=5",
-     "th": {
-      "title": "GPSC เล็งประมูลโรงไฟฟ้าใหม่ 5,400 MW รับแผน PDP 2026 “ฟินันเซีย ไซรัส” ชูเป้า 63 บาท | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5tR0xkZVJjczJKZVV6WV9vRy1TRDk0WUxyZ3BRejZsYW4yZEZXTEpncElZWF80Q1U5ZzdsMmIwdmJid0tIVW5UbTR3TXJXU1VrdnBmbmpB?oc=5",
-     "th": {
-      "title": "บล.กรุงศรี เชียร์ซื้อ GPSC เป้า 61 บาท ลุ้นต่อสัญญา Glow IPP-ขยายกำลังผลิต 5.4GW | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
      "source": "efin.finance",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB1WXQtaExteEZ1cGhBNl9PZ2ZxYTlQTDQtbEpweFh5c2NqU2hkSU94ZXFUekN5RklEMHN2T3FSTEd2XzR2WUtUb2ZDZnR4WXhkQlNXY3pscHVnanVMUzRWMlNn?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9Md3ZMU2VKV3h4VTVtNlJ6LWs1c0VPTG5ZaEd1S0NDZjBiaVRZNThtSHZmckJhYU5rX0FMTHlIVmpuYV9rUkN2LUpnMFJfSU4zZWtKOHpNWmhTQVpMRzRGX1d3?oc=5",
      "th": {
-      "title": "บล.ลิเบอเรเตอร์ : GPSC แนะนำ “ซื้อ” ราคาเหมาะสม 61.00 บาท",
+      "title": "บล.เคจีไอ : GPSC แนะนำ “ซื้อ” ราคาเป้าหมาย 60.00 บาท",
+      "summary": ""
+     }
+    },
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBSUjliWFBUUWdiaFNOZHhRMGs3aUcyZHktMWc2d0Z2NlBsdWVZdkFLR3VsZDFEaV93a1J2M2tvQUZhdzE5VXlNYWQ2MV9NRTJqRzllaWJR?oc=5",
+     "th": {
+      "title": "GPSC ดาต้าเซ็นเตอร์หนุน ดันผลงานโตต่อเนื่อง",
+      "summary": ""
+     }
+    },
+    {
+     "source": "Hoonsmart",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE1saGNwS25jcU1keGR6bEJTZ3ROd0JiUV9mSU0wTFdhajllcTh0aWQxYzhablJzTDdCUmdHOWF5TXpSNGhqWjBPT3JFdUotZw?oc=5",
+     "th": {
+      "title": "\"กรุงศรี\" คาด SET ฟื้นตัว น้ำมันร่วงแรง หุ้นเด่น GULF-GPSC-DELTA",
       "summary": ""
      }
     }
@@ -388,29 +489,43 @@
    "sym": "GULF",
    "items": [
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBFU09mTDZPU21sVy1BdU9iZDVCM1l1cXAwbzRqeGJ6a1RZb0hFZkU0NDBqUk15b2R1MGNXVFdCT2VsVExEeEZjLVJPYkVEaVUwb0lTZFBB?oc=5",
+     "source": "สำนักข่าวอินโฟเควสท์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBFWDE2cTJuQ0duc3dKR3JMMmJVdlNlUDhyRjZuLTZvWTY2YzBHQUNVcjhyd1pRenFIYWE1NFZxb1pDSllmS0Q3SHREZ2dkd0ww?oc=5",
      "th": {
-      "title": "GULF ลุ้นไฟเขียว “ไดเร็คพีพีเอ“ ไฟฟ้าก๊าซ พ่วงสายส่งเอกชน ฟาก “หยวนต้า” ดีดเป้า 91 บาท",
-      "summary": ""
-     }
-    },
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFAzUGpQY3VHaXkzYTJCdlhPU05rYmRBX2NfYm1JMHRvbWtYczVPNUUtYjhVVHljZjc0bFZSOGhuaEhqZ1hxQlhHaEdQQURwOXhoNlBfSGJB?oc=5",
-     "th": {
-      "title": "GULF เตรียมที่ดิน 8 หมื่นไร่ รองรับโรงไฟฟ้า-ดาต้าเซ็นเตอร์ “หยวนต้า” ชูเป้า 91 บาท",
+      "title": "ภาวะตลาดอนุพันธ์: ดีดขึ้นรับแรงหนุนหุ้นใหญ่-DELTA-GULF-CPALL จับตาเงินเฟ้อสหรัฐ : อินโฟเควสท์",
       "summary": ""
      }
     },
     {
      "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1OT0FqbEtVTXRzcVdZclZJLWJuWmpPQ1dISlJiWHo4cVRtQTJrYUFmSmFxY1hpMGZVOEMzZGpETVpQU2d0RzdWaGhyMA?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE8zLTRNVEpfM0RwRGNQMjhVaFN1elNJbVdwSkY4MEFhcnc5Zm5CQnd5bzI3WXR2cVBjblBBbEV5bVFhZm5sMjh4VHlRMGFuZ1k?oc=5",
      "th": {
-      "title": "CGSI อัพกำไร GULF ปี 69-71 ชูโรงไฟฟ้า-LNG-ดาต้าเซ็นเตอร์ แนะซื้อเป้า 75 บาท",
+      "title": "SET ปิดบวก 23 จุด แรงซื้อ DELTA-GULF หนุน พ่วงขานรับ ครม.ไฟเขียวเกณฑ์ Data Center",
+      "summary": ""
+     }
+    },
+    {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFB5aFVWZ0pFZWRIMXl4WkZlVlV2SWpxcFQzVXNNQ3YxOG9RZkNUeUMwYnludFJhbVl4T1JPZWh5WDVJZ2xhWDFCU1ljLVlHWlJHVGJFbi1JNjdPeGN3dnpxdEpZQnU?oc=5",
+     "th": {
+      "title": "หุ้นไทยวันนี้พุ่งแรง 23.24 จุด ซื้อ DELTA-WHA-GULF",
+      "summary": ""
+     }
+    }
+   ]
+  },
+  {
+   "sym": "HMPRO",
+   "items": [
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5IeVpiZ1g5RjZTRlctZm00ZURaZWdhZjFSVng5RlN6M3d0QnJLZDVpWHh2Y3JmUlY3QnVUODRfb3RnbzI2eTJoUVNmV0pkWlg0WHg1a2NB?oc=5",
+     "th": {
+      "title": "HMPRO ครบรอบ 30 ปี ชูเครือข่าย 130 สาขา ปักธงสินค้ารักษ์โลก 20% ปี 73 | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     }
@@ -420,29 +535,29 @@
    "sym": "IVL",
    "items": [
     {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5uOV81eHdncU0wUFVselJMbXJMTGpUZWVkNnNTQ2gwc1ZORU9ZdlZ1b0NRRDRhRVR6ZVlfc2k5aUFBeHA1Z1VqRHNLN2ZvTy1SWHFlRmN3?oc=5",
+     "th": {
+      "title": "CLSA ชี้ IVL สเปรด PET ฟื้นหนุนกำไร Q4 เดินหน้าลดหนี้ ชูเป้า 32 บาท อัพไซด์ 42% | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    },
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9wREh0OEI0Mk1Yd3pJTkczX3VwQWpwOWwwU0RwaFpfMXJpNzJENGJJc2pJdGpDRHBkODlQVThVQ1poTlZVV2JvWlllcmVLaHBuNlYtaTdB?oc=5",
+     "th": {
+      "title": "KKPS ชี้ IVL ฐานะการเงินแกร่ง หนี้ลด-ธุรกิจ PET จ่อฟื้น ชูเป้า 31.10 บาท | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    },
+    {
      "source": "มิติหุ้น",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9HVjJlME9QMlVqYlY3T3JQdEU0SGxQd1RKMmdnaDhpTFFURElCTUl4ZEtjcWx3d29ORmFmM3BHWlZ1VnM2WHg2UlNlaGhjeGZVbVJybWtn?oc=5",
      "th": {
       "title": "IVL จับมือแบรนด์แฟชั่นดัง ลุยธุรกิจรีไซเคิลสิ่งทอ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "Thansettakij",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE82b0o4S01qUnFHNW1sNEhHX3VCSV9qYWRzQlg1QkV6VEVDYlJxbXpSTlJ3X2Y2eGdfN2JLNUNLdkF0azRpeVFtcVNvb19lU292QnFTUlZGcnMtWlBndFZjcWM4a29kZw?oc=5",
-     "th": {
-      "title": "IVL โชว์ EBITDA 9 เดือนแรกโต 63% ย้ำเป้าปี 71 เพิ่มเป็น 2 เท่า",
-      "summary": ""
-     }
-    },
-    {
-     "source": "Thunhoon",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE5kU3JkWnJVemVuWG0ydWtEZHZSMVpVcUs4T0FwMDAtYzRhamh5WUxrYmszclE5YnlTTzhqOGRWSThQLVItNFE?oc=5",
-     "th": {
-      "title": "IVL กำไร Q3 วูบ 63.6% แต่หุ้นบวก ASPS ชี้จังหวะลงทุน ซื้อหรือรอ?",
       "summary": ""
      }
     }
@@ -452,29 +567,29 @@
    "sym": "KBANK",
    "items": [
     {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9PNnF1RlkwUEpjb3VyMVpzQjFzc1JBRUt5ZWROanlVeElha3I4WFdDd3g2aUt2a2ZGMVZYdlRFV3k5dktzVVNOcWdFa0FtY3k4T2VoTEhvblNTVlFtYkE?oc=5",
+     "th": {
+      "title": "CGSI ส่องหุ้นแบงก์ปี 70 คาดสินเชื่อโต 3.4% ปันผลสูง 5.5% ชู KBANK-SCB",
+      "summary": ""
+     }
+    },
+    {
      "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBBOE1XU3YxT1pteW5hWWpsRG9lWnhNXzYzNWNidHI0dHJlZDBnNFczZmtXTUpxNnJRUVluNFNXQkNhQlRSR3d1N2d1cHdMVEp5WjVtSi1B?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPaWRYeTZpUE56czdHR3FEdDJyNHNhY3VqemNlRVEzb1FTMGk0QjA4WElMMVJsYmtkQnR1LXVBaWo1bzRhdk5oQklQclBOT0VVRjIyenRUVVFsdXVBcXJTbFVaX2ExTkpuWllwVkU2RHlwblJpQkpfQk13cjBGeEE2MA?oc=5",
      "th": {
-      "title": "KBANK ชี้บาทแข็งค่าจำกัด จับตาธนาคารกลางฯ ขึ้นดอกเบี้ย | ข่าวหุ้นธุรกิจ",
+      "title": "CGSI ชูแบงก์ไทยแกร่ง ปันผลสูง 5.8% เคาะ KBANK-SCB หุ้นเด่น | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
     {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA5VnJPRGRPNUpTQ2FtT25HR3ZOcEtaYnkwTmVJVVNCTjBrZ1dJWXhPaElrdFhVRW1jaUhLSTZBSEZvUEFHWUhCMFVSM2l4RDAwcmRfUk1n?oc=5",
+     "source": "วารสารการเงินธนาคาร",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5QSWxsMmNFRjNLTXJ5LWVjQm5ubzlkeXVwNHFXZldoV1d2Q0g3REVUUkF0WEVMVHRteVpuQ1oyUXFzWWtPUXFhVnlHN0tmdVppbkE2eQ?oc=5",
      "th": {
-      "title": "KBANK ตอกย้ำความสำเร็จ AFTERKLASS Fin-Kareer Sandbox",
-      "summary": ""
-     }
-    },
-    {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5kWTFlc0pJQjdic241aFlraEtPejY4UjNMdkN4MUZ0ZVBBUm1oaWV4d1ZTUC1FY3pKSnFvN0JHMG95bGQzQ2xPVXg0WQ?oc=5",
-     "th": {
-      "title": "CGSI มอง SET แกว่งกรอบ 1,450–1,480 จุด ชู KBANK-GULF หุ้นเด่น",
+      "title": "CGSI มองหุ้นแบงก์ไทยปันผลสูง 5.5-5.8% ปี 70-71 ชู KBANK-SCB Top Picks",
       "summary": ""
      }
     }
@@ -483,6 +598,15 @@
   {
    "sym": "KCE",
    "items": [
+    {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFA5Y0cyd3lCMUJUT2JpbndXWWExdjlkelJ4VUdUX0RFa2ZfZ1lPREdqT2p5VzRPb3J2QjdZQmtsMTdyVzBFZ042WHp6RTlqUHIxMlpmY3luVEd6d2FWVVE?oc=5",
+     "th": {
+      "title": "KCE ราคาหุ้นดีดขึ้น โบรกคาดกำไร Q4/69 โต มอง GPM ฟื้น",
+      "summary": ""
+     }
+    },
     {
      "source": "ข่าวหุ้นธุรกิจออนไลน์",
      "date": "2026-11-09",
@@ -508,19 +632,19 @@
    "items": [
     {
      "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5PY04yUlpIZFF3clp5MVpYSEtGR2ZNZWtsckVjTjlGS2JJZ18ydjVRQmc1SGdtX1l0NlBkcUM2UFMzcnoyNHFCb2JqSWZnVl9oYjBVSU53?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1aaVQ2TldwdUs3N2ttWDh2d194T3ZSZS1KMjZWR1ZHNmZNQ3F2Y0Q3MzRxZEZsdXdzc1V1b2Z5dVdLSnpjejVRZlpUazhzazRIUXpOOVVR?oc=5",
      "th": {
-      "title": "BAM ผนึก KTB ตั้ง JV AMC รุกดูดหนี้เสีย 1 แสนล้าน/ปี | ข่าวหุ้นธุรกิจ",
+      "title": "KTB จับมือ ป.ป.ช. เชื่อมข้อมูลเงินผ่าน FIS ยกระดับเกมปราบทุจริต | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
     {
      "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1MSTVMSTMybEgwTlN4Z0RBM3RQQXc1eFpmbkoxS19wWmQ0R2NPNUoyYTFUd2FrcjI4QUZPd2tEaTF4eXp3QThlMHU2X2FqNDlocDBxN05n?oc=5",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBxVWVlb1J0QzczUkNOZXRKZXhBV3RzOFJZTlFVTzFqOUJ5UjFOczc4VXFZSlBkY3AzVTJYdVFTUHRrX0VVdWRsa1R3S3hhV0JPZ3pwUi1n?oc=5",
      "th": {
-      "title": "KKPS เชียร์ซื้อ KTB เป้า 47 บาท ชูดีล BAM ตั้ง JVAMC ลุยซื้อหนี้หมื่นล้านปี 70 | ข่าวหุ้นธุรกิจ",
+      "title": "“ดอลลาร์” อ่อนค่าแตะ 101.7 จุด ทองฟื้น 4,140 เหรียญ KTB แนะจับตาทิศทางเฟด | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     },
@@ -539,20 +663,29 @@
    "sym": "KTC",
    "items": [
     {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE16RW8xN09fMk5GV3c3Q0xCX1NCSDI0bF9WbTVEN0JlazJCOVBhR3VWM2YxTEdUelFSVXdZTWpRam5Peklvc2t1ZFZvb0pUNjlRbFBRZXZR?oc=5",
+     "th": {
+      "title": "KTC Marks HomePro’s 30th Anniversary with Rewards Campaign",
+      "summary": ""
+     }
+    },
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA4U3pLLThDNTIwdmI4bnlGQ1lxY283Njd6U2pnTFNhbGlrOGRIU1RMTXdRRnV4bFI5al9tdzRhaU9TLTU0dFRNZ0VKdVdncHFqVHZGQVV3?oc=5",
+     "th": {
+      "title": "KTC ร่วมฉลอง 30 ปี HomePro มอบสิทธิพิเศษช่วยสมาชิกบริหารค่าใช้จ่ายเรื่องบ้าน",
+      "summary": ""
+     }
+    },
+    {
      "source": "LINE TODAY",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5OREx2SlptV0dMQUQ2UjJodkZXT0ZWWFRWRzRlYnQtellnd3ZTTzBaMklpU2ViN1k2UUN6YXprelJJektXOERlSnN2aFpKVmtfOGRhRUJR?oc=5",
      "th": {
       "title": "KTC โชว์สมาชิก SME โต 90% ยอดรับชำระเพิ่ม 142% รุกโซลูชันชำระเงินดิจิทัล | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "สำนักข่าวอินโฟเควสท์",
-     "date": "2026-11-08",
-     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5WYjBTbHp6Ui1GN0VrcXlPdldoOHJFRVEwa01DaXNtTGZveGlLY2o5MG51NzNVTWRBeHI4VmtnSVFqd3NJNUxoVEhNOFdsTUZF?oc=5",
-     "th": {
-      "title": "KTC ปักหมุดปี 70 กำไรโตต่อเนื่อง ยอดใช้จ่ายผ่านบัตรเครดิตพุ่ง 8-10% พอร์ตสินเชื่อเพิ่ม 1-2%จ่อขายประกันออนไลน์ Q4/69",
       "summary": ""
      }
     }
@@ -592,21 +725,21 @@
       "title": "สัปดาห์นี้ KS ประเมินตลาดหุ้นไทยซื้อขายในกรอบ 1450-1515 จุดชู MTC-MINT เด่น",
       "summary": ""
      }
-    },
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-08",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5nVW1wYmtpR2VTbGpJR1pkbDdUR3lYVFhDTlJlUlQycWFZaG5GU1RONDdhRDB2VGp0RmVrekxKcUxrYTJuTU1hNWh1d3c2WGg1WGoya1l4MEYxT2Y1S0FJT2plMEo?oc=5",
-     "th": {
-      "title": "โพสต์ทั้งหมด | MINT กำไรปกติพุ่งหมื่นล. โบรกเคาะซื้อเป้า 28.50 บ.",
-      "summary": ""
-     }
     }
    ]
   },
   {
    "sym": "MTC",
    "items": [
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE8wV1o0azZ0MGIwb1QzX2NnVWx0a0hmZ3hYT082VVN4Si1VOE9CcWdXUmN4SmpycHJPVUJlUWtVVWRkUUNTaUtfenRENXQzRnplVUdwR1l3?oc=5",
+     "th": {
+      "title": "MTC สินเชื่อพุ่ง-ต้นทุนลด หนุนกำไร Q3 โต 13% แตะ 1.94 พันล้านบาท | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    },
     {
      "source": "ข่าวหุ้นธุรกิจออนไลน์",
      "date": "2026-11-09",
@@ -617,20 +750,11 @@
      }
     },
     {
-     "source": "LINE TODAY",
+     "source": "วารสารการเงินธนาคาร",
      "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNX045akYwMDJ0SlZlMUdHczFBdU94bS0zaVZVbU1uOU50Rk11WTAtYTd0UlZCa3hHNFRoMkRvR0xYLV9XSzRsYktXUlRvSUg2b2VkZWhzTmstd1JIWG5XY1NSRTNaVWJuTGpxSTkwTWNvajFIdTlBZERPS2tZajBhVw?oc=5",
+     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE44V2tIb2l1YzdIakxLakV2a0R4NDZsaWRrQjBrS2V3NndjMGtnUTdfellXU09rbS1WUC1rZFhrRUk2SDBtYnRJRkdZYUNvWDc4am5seQ?oc=5",
      "th": {
       "title": "เอเซีย พลัส เตือนเงินเฟ้อพุ่ง 3.90% กดดันหุ้นไทย ฟันด์โฟลว์ ชู GULF-MTC-CPALL รับตลาดผันผวน",
-      "summary": ""
-     }
-    },
-    {
-     "source": "ประชาชาติธุรกิจ",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5zTTh4MVJ6MVlvdjRuajhWa1RvR0U3cUIxcFdKbXBSY1NuSlV1SGd3Q3ZsQjhmYjRGSW5ZbzhtMU1fckFoVmhiU2JFSkppS2M3dzVRVEJaMlpyLXM?oc=5",
-     "th": {
-      "title": "เงินเฟ้อสูง-เทคฯ ร่วง กดหุ้นไทย ต่างชาติสวนเก็บ Non-Tech ชู GULF-MTC-CPALL",
       "summary": ""
      }
     }
@@ -640,11 +764,20 @@
    "sym": "OR",
    "items": [
     {
-     "source": "Thaipost.net",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1DYkU0MEhHdzNubWJPTGNUcHlKa0htdTY0NmRTdk5Mb01JYWtSallkeFZ2MUFjNnJibHNlMkdkZ3ZLVnNVbENrOHZ2VEhkWUVOYmtZd29LamdaUQ?oc=5",
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1FdlBNbHNaS3d4SHJobl9PUmk1QU5nczdpWlQ3NUhKekg2cnNISTJIdGhwck1KdjdkbEY5U1lyUVBUUFhEMmlrZlNxTFpYV0hjUDgzRGVB?oc=5",
      "th": {
-      "title": "ORยกเครื่องโครงข่ายคลังน้ำมันอีสาน ชู Green Logistic ลดต้นทุนสร้างการเติบโตอย่างยั่งยืน",
+      "title": "ASL เชียร์ซื้อ OR เป้า 15.90 บ. ลุ้นกำไรปี 70 โต 18% รับค่าการตลาดน้ำมันฟื้น | ข่าวหุ้นธุรกิจ",
+      "summary": ""
+     }
+    },
+    {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE9iTE54OGYtanAtbjJCMU43VWF5SXlyblJ2VXQzSWl3MVVrYlh2QWtNcUFUVTk2c1g3RjdJdlR1MjFtQ0FvWmpaR3RB?oc=5",
+     "th": {
+      "title": "สแกน AOT–OR 2 หุ้นเด่น! LHSEC เจาะพื้นฐาน–จุดเข้าเก็บ",
       "summary": ""
      }
     },
@@ -656,15 +789,6 @@
       "title": "OR กำไรไตรมาส 3 พุ่ง 5.1 พันล้าน โตแรงกว่า 100% รับธุรกิจน้ำมันฟื้น-คุมต้นทุน",
       "summary": ""
      }
-    },
-    {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBBZ2dkeWNTcTlTdWFTb1I0cFE4QktEVXlleWJYRzYtdTJ0Y0x1dXpsQ2xhRVFCUmNydXhsZlg3UTlWdjBHS25hYUY5cjJrZw?oc=5",
-     "th": {
-      "title": "OR น้ำมันข้น..กาแฟขม.!",
-      "summary": ""
-     }
     }
    ]
   },
@@ -672,20 +796,20 @@
    "sym": "PTT",
    "items": [
     {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5ZaXd1SzRFYnFzeU5WSy00dEJzZFMtWUR5Si1LLVdrMW9oNnR3NWk0blpOY0lCTno5QURsOUstODltSGVJMF9jNWpPdlF2Y1lNTXFqRTRn?oc=5",
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFB3UEJCWnNGNmlSSnVVeHJvWWcwWVVTOWVFdXRnUlhieWRzS0hqejgwaUtxR1p0cHVzWGpuNGlZRnhBY3dYLWNNNA?oc=5",
      "th": {
-      "title": "กลุ่ม PTT ชูแนวคิด “จากรากฐานที่มั่นคง สู่อนาคตที่ยั่งยืน” พร้อมร่วมขับเคลื่อนความยั่งยืนให้เกิดขึ้นจริง ในงาน Sustainability Expo 2026 - มิติหุ้น | ชี้ชัดทุกการลงทุน",
+      "title": "PTT รุกขยายธุรกิจ LNG ระดับโลก ลุยดักจับคาร์บอน หนุนเป้า Net Zero ปี 2593",
       "summary": ""
      }
     },
     {
-     "source": "Thunhoon",
-     "date": "2026-11-07",
-     "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE5lSmJ2VHR6ckhRdVpXb0s3RDk4dVNIZGt2YmQxX0lXbW03SVFaODU0RmIxa1YzVjFaNk1OTUVnM3ZRSV92YWc?oc=5",
+     "source": "มิติหุ้น",
+     "date": "2026-11-09",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5OS3JwRnB6YUs3R1Q3TnM3T0VlRUxaTUFjTEdqT2FiMDdKRF9SdEFPb1RzY09hc3plSGVvcThaQUlZcjI3MWpYWEIxXzA0Qlo1VjVkdEZ3?oc=5",
      "th": {
-      "title": "4 โบรกส่อง PTT ลุ้นกำไร Q3 โตแรง! จับตาพุ่งสูง 103% รัฐดันปันผลเพิ่ม",
+      "title": "PTT ชูแนวคิด “จากรากฐานที่มั่นคง สู่อนาคตที่ยั่งยืน” ในงาน Sustainability Expo 2026",
       "summary": ""
      }
     }
@@ -695,34 +819,20 @@
    "sym": "PTTEP",
    "items": [
     {
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1FNk96WUhkOS1wbVhERUxwMWVJZktzYjE1X1Y5X2hWcV9hTk9RajJTNDh0TlhKNFE0UjVrMXluRlZkS2RPSkt2Ym9vcw?oc=5",
+     "th": {
+      "title": "เปิด 5 หุ้นต่างชาติขายสุทธิผ่าน NVDR พบ PTTEP สูงสุด 424 ล้านบาท",
+      "summary": ""
+     }
+    },
+    {
      "source": "LINE TODAY",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9vVkkxWElRY3VPd2ZnamN4NXRYLThReV9nMEFLS3V2QzZzeG80YmZlOHI2Umx5dmx0WHZtR1VuYWlTRXVhRzJPYUFBY05uZTF5VjJ4aVdn?oc=5",
      "th": {
       "title": "KKPS เชียร์ซื้อ PTTEP เป้า 155 บาท รับรัฐลดนำเข้า LNG ลุ้นขยายแหล่งก๊าซ G1-G2 | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "Thunhoon",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE42eEYtT3dMTy1LUmh6UEhsRUF1azVwbktRY0tDYzA2VlBPRUs0bTA3UnFmMlB0Tml5ajcwN0FLb2NtRVJFUmFOZEJ0Yw?oc=5",
-     "th": {
-      "title": "PTTEPจ่อเซ็นสัมปทาน Q4ไร้ด้อยค่าก้อนโต",
-      "summary": ""
-     }
-    }
-   ]
-  },
-  {
-   "sym": "PTTGC",
-   "items": [
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-07",
-     "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1aeGM3SG5Fdko1QUtpOTBtcHNELTlKY1VsTWM0b3dnVTRpeGpqTlFoWTl1QVZtd3NkZEpfWGYxWDhuVGRUYlZGMl9VV1oxZmZJTGRyQVgwLW5aeFo3UGZweXVGX3cxM0JTdFVLYkg0Q0xQNnhh?oc=5",
-     "th": {
-      "title": "เปิดโผ SET50 “เด่น-ดิ่ง” รอบ 10 เดือน! PTTGC-TFG นำโด่งพุ่งเกิน 100% | ข่าวหุ้นธุรกิจ",
       "summary": ""
      }
     }
@@ -746,20 +856,20 @@
    "sym": "SAWAD",
    "items": [
     {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE4xZU56OVRrdTNMYzVrcWh0RjFRNzdDR2kzekdaaDVmbGFGbnRyeWFKM0lqUFFJNjVEYTQtM1VJaDFQUk9NOFNKWQ?oc=5",
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBiODRiWGdSVVUzRmw4aEpiSDlaakRoNVlHaE1ERWtxT0FnbWcwb0Y3SWRGckZGMWtLYjFoX3I0Z3B5NjFleHdTVw?oc=5",
      "th": {
-      "title": "SAWAD-SCAP คว้าการรับรองจาก CAC ชูธรรมาภิบาล-ต่อต้านคอร์รัปชัน",
+      "title": "SAWAD จับตากำไร Q3–Q4 จ่อทำนิวไฮ บัวหลวงชี้หุ้นยังถูก เชียร์เก็บ!",
       "summary": ""
      }
     },
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-07",
-     "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE94UFNuVjBvMXFISXNQWFhTN0FBcWZDTkZCeDJDaEl5bENyRWpuWmthTkV3VmltcHAybGd3ZW4zQVVYT0Y5WlhncjZIN0FQSkJoT01lNkNjUXM1V2d5OFgtZm1INVg2U1VPMEpsVUNJUHFtaHh4?oc=5",
+     "source": "RYT9",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1GVWRLc0FjYUhFeWl3YkNCOThJcHprTnAyM1BNcktUTzM2ampTX2F6S3ltQl9mZm9zVmREdEZOa3lqMEtqajNNZG51UQ?oc=5",
      "th": {
-      "title": "CGSI มอง SET แกว่งกรอบ 1,480-1,510 จุด ชู SAWAD-ITC หุ้นเด่น | ข่าวหุ้นธุรกิจ",
+      "title": "SAWAD - SCAP ได้รับการรับรองสมาชิก CAC ตอกย้ำความมุ่งมั่นดำเนินธุรกิจโปร่งใส ยึดหลักธรรมาภิบาล",
       "summary": ""
      }
     }
@@ -768,6 +878,15 @@
   {
    "sym": "SCC",
    "items": [
+    {
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBCNlE3a19OWV9xOGw5cDNST0Q0SUFMT050V3BPaWFtS0cxU1d4WTg1NEl1T3hmOGM2NnIxLVpqVHhULXF4bURmVkFNcF9UUkJmb2x3X3FsUG1teHRtMXVWZzNxMVc?oc=5",
+     "th": {
+      "title": "โพสต์ทั้งหมด | เปิด 5 อันดับหุ้นต่างชาติขายสุทธิผ่าน NVDR จัดหนัก SCC สูงสุด 1.28 พันล้าน",
+      "summary": ""
+     }
+    },
     {
      "source": "LINE TODAY",
      "date": "2026-11-09",
@@ -785,13 +904,18 @@
       "title": "สรุปกระดานรายใหญ่วันนี้ SCC มูลค่าสูงสุด 23.70 ล้านบาท",
       "summary": ""
      }
-    },
+    }
+   ]
+  },
+  {
+   "sym": "SCGP",
+   "items": [
     {
-     "source": "Share2Trade",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMigAZBVV95cUxOVDNoOGJmN2dsYTY3YTlkc3NUMllGT21ISDlMSm5hT3dRd055eUJqbUJqVjJ6RlVlUGloUFBfdEJtRk9GRk1pUkNyN3oxbXU5M3hJSGxLejd0bndSRDV0NE9mQ0VEakZ2XzhmSDhHUVpPcEpwc3FEdnVyQXdYWkszZFFUYzFNZUhCN0h4ZVdOQVNOOFJ4UTB4cURzUGI2NmVNRlNDQTV0Q3hVazlEcHZWVlduRnRSOWlheTFGZnY1c1JMQVQ5SDc2UnVJTGJra0djLW81Ym1BVmY4STlXS2xYT3dOTjZQemdIMVBIaXZ1QmhBOHJYcWM1bE9qc2NHUmNhSURPbF92b2ZIRjJOam8yaFdQMmNfV2dxdXVfUkdPZ2xZNlNDdFlYYWtqZkdnczA2bHFOZDlYZnFzUzFnV2pSZGJjN0M0QUlPTm9IZ2VLOXBib3hqYlhGS0lTVEhQc0xZM1pCc3BQZEdXRy13YWJTZ1FvbnBYNFp4SmJPTmNpaTBrbjdhVmNNRlZTTnIyNVZucW4xWkxJbnU5QTZpdXltYjRvbFJTOWFLLVVQaFlVaXg3MUVuby1DNVV0TWhZdjg4RkpVZ2lVaUEyUGxETmFKUVl4MHlHNUJFSm44WVVkTWMtaTdpWTVFaUw3ZEpXem94d1I3UGl2WXEwXzJrU2NTS0NaRmo0cDFZcVFmYmVTdk9oMUx6dk5hQ2I0Yk9fa18yWUZ6ZEhwalpfdWphbVpjaEotUExMSnpWdE1kT3lnVWVpSHpKRlJuZkxsR3RSTFVOYUZiTkVHUmFacXd3MnQ2X3hKbzlxM2ptU3VlRXR0a3ZtRlhHSGFMSzVVbHhVSjBmZzlhYnFEeE9oaVNtUTg1MldjMDl2TGs5Z2x1OXkza0NZYVZ0LVRjOFFjbk1jMm16Qnd0WS1ucjNpQ01tYW1mZVRFVEpPZXRhUHcwTU9XUmpOS3lGTGlVZVZBNzJTZVBnTldlNWlSRTlZbkpZZ3ZLUldzMHBUWVNlbFhWdHN1QUc?oc=5",
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1ia3VlRDZBU0I1ZlAxOWVJQnJseGRERzZNU1lJSXpXNmNGSENVcTc4RnNkWkQzVFQyLUxxSjNuZ0ZpOG5sOE9EWVY0TQ?oc=5",
      "th": {
-      "title": "TOP-SCC ขึ้นแท่นหุ้นเด่น! โบรกฯ ชู TOP ปันผลจูงใจ ฟาก SCC มีลุ้นแจกปันผลเพิ่ม",
+      "title": "SCGP เตรียมขายหุ้นกู้ 5 พันล้าน ชูดอกเบี้ย 2.50% เปิดจอง 1 ธ.ค.นี้",
       "summary": ""
      }
     }
@@ -801,29 +925,29 @@
    "sym": "TIDLOR",
    "items": [
     {
+     "source": "Thunhoon",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9LSU1pZndGMWFBelRpcUlnTVdMNmV6c2c4LXpfam5uYnRuMlB3LWhEOThsZ3VQaWZnU19UV0M1N3EyTHp0VFQzbTNGWnVJU0U?oc=5",
+     "th": {
+      "title": "โบรกชี้ น้ำมันร่วงคลายกังวล เคาะ TIDLOR-AAV เด่น",
+      "summary": ""
+     }
+    },
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBidkVQLVVNRHdzWFh1cmNVUG1USnN0ZkpCY01GVFFJODVvZWVGZlhVMElvd0tDaUNVYTRnekpqZnZGLTdfb3VmTEdSLTdyTFAtVmVERW1B?oc=5",
+     "th": {
+      "title": "TIDLOR Q4 กำไรโตแกร่ง รายได้ดอกเบี้ยขขยายตัว",
+      "summary": ""
+     }
+    },
+    {
      "source": "มิติหุ้น",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE12VmRSQVhPQWNBTTZyQ1diejBWbUZSTUdBdHJvMzR3ZDRsUUV2TUYwYjFQMVhCYThJWS1JUjVwVjF5TUdTbGJ6QjM0SlpLWElPREVjX3d3?oc=5",
      "th": {
       "title": "TIDLOR ผลงาน 9 เดือนทะยาน 19% สินเชื่อ–ประกันโตแรงหนุน",
-      "summary": ""
-     }
-    },
-    {
-     "source": "LINE TODAY",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5oZjdaZHR5Z1U3NVdRN2c3bUVMX2J2dHpmREc1YkZBc0ZBZThRQzZCOWR2U3hkTjJZa3VCeWh3cFJUZTV5OHhmdmloV2ZVb0hMV1VrWlVB?oc=5",
-     "th": {
-      "title": "Citi เชียร์ซื้อ TIDLOR เป้า 24 บ. หลังกำไร Q3 โต 6% แตะ 1.49 พันลบ. รับสินเชื่อ-NIM เพิ่ม | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "ผู้จัดการออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE41VEpNUDBrUmFLcDQxbHZYSXlYaFZsSFAycE9KdmFIYW9zNXVvcGpQdXNYckFDQ2dzR0NmLUVGaVhJWkZ1SGREZ0k4WlpubWRvVUtEVHhDSWFQeUw1c0V3QkVPMlk?oc=5",
-     "th": {
-      "title": "TIDLOR สินเชื่อ–ประกันเติบโต หนุนรายได้ 9 เดือนโต 7.3%",
       "summary": ""
      }
     }
@@ -833,11 +957,20 @@
    "sym": "TOP",
    "items": [
     {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE40Um1PZzJuYnc2VExMSGhsZERxMFNTMVEwVnJWYTd2Q2M0Zk5oRUFTVTZQY0dPajRPaEJIT2RQbmZNZy0zQjhyY0RWVjR4WG85M1lHaWZ3?oc=5",
+     "source": "วารสารการเงินธนาคาร",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5QSWxsMmNFRjNLTXJ5LWVjQm5ubzlkeXVwNHFXZldoV1d2Q0g3REVUUkF0WEVMVHRteVpuQ1oyUXFzWWtPUXFhVnlHN0tmdVppbkE2eQ?oc=5",
      "th": {
-      "title": "TU ติด Top 100 บริษัทขนาดใหญ่ที่สุดในเอเชียตะวันออกเฉียงใต้",
+      "title": "CGSI มองหุ้นแบงก์ไทยปันผลสูง 5.5-5.8% ปี 70-71 ชู KBANK-SCB Top Picks",
+      "summary": ""
+     }
+    },
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE54dGZ1cXpZOUY2UFdGUm1OMGN4T3d2ampXZHA3dFZ4cXlHZTlFQWZ5Z1ZkYWsyMEZTLWFRejRUUFFiQllLX3NrR3BDMnRPRVVod3dkUXJ3?oc=5",
+     "th": {
+      "title": "TOP รายงานสถานการณ์ราคาน้ำมัน",
       "summary": ""
      }
     },
@@ -849,15 +982,6 @@
       "title": "TOP-SCC ขึ้นแท่นหุ้นเด่น! โบรกฯ ชู TOP ปันผลจูงใจ ฟาก SCC มีลุ้นแจกปันผลเพิ่ม",
       "summary": ""
      }
-    },
-    {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9pcmN6QTBsVEk1RTNGYUQ3eGJrRGZoc2lQYjVjS0hJckdZQlJJbEc5TnFueHZHREZzWkkwcEItVTRjWlJ6VzdXQzFuSlFEdTczOHZvUHRn?oc=5",
-     "th": {
-      "title": "TOP รายงานสถานการณ์ราคาน้ำมัน",
-      "summary": ""
-     }
     }
    ]
   },
@@ -865,20 +989,29 @@
    "sym": "TRUE",
    "items": [
     {
-     "source": "มิติหุ้น",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9iQlJXYXlMdWxReHhsTkxaLXVpRlM1QXJuUjZEeTRsTk5hUjdzUFJvbDh1NHBCWTMydVFKWDhtWndnYmdpM05HM2dYVFN2Z3k4RDh3RlRn?oc=5",
+     "source": "LINE TODAY",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1lS1pSOXhBSm1zTklfcXhSSXpPbDZjQlpXenMxR0V5QVBMN0ZUaTFEa2M0SjgtRnA0X1RZaXFJY3BsbHlDeFRYVzhmTjY0WXBFRm1WT1pCazFHSFZxejRBV19mV05tOUdSVVJveVJWdDJ4MVBYZWVqZQ?oc=5",
      "th": {
-      "title": "ADD ครึ่งปีหลังฟอร์มเด่น ผนึก AIS–TRUE ปั้นรายได้ใหม่",
+      "title": "TRUE กำไรโต 324% แต่นักลงทุนต้องดูอะไรบ้าง ในงบไตรมาส 3 | The Bangkok Insight",
       "summary": ""
      }
     },
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-08",
-     "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1Id1YyaXZNX2hrWVdxbHItOHhQT3E3RTA5cExZc202cmlrZXY0Y0NqSUQxTVdKNEdzSEZLZGZ3U1F1S0FhOXU1YWJiTzl4QnRqc3RHaVNpVGg0d0dnVFNmTTVXemNMS3RxdHc?oc=5",
+     "source": "Share2Trade",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMipgVBVV95cUxObGFQbmRkQURyVjRwendQbnBjNjZHcFhTTzd5eDkzNEpsRkxTUkI2cHRnaDBoNXdHbWZWclR2WEU2T1B0d0VsZ1RCYjQ4WEgtUE5Cemo3S1psT3RtQmFTOHhvWTBBTVpKX0JGUlVLVWMxLVlxamtFNnB5eGxteDZFbEhCVXpENGc1RFdzSXpsMDZiM2ppMkZ2dzBaVUxYdnJHVFN3eGdMUHpNR3FKaXR2R083YnVhZE9BTnRsdVJxN2dUSW44bi1MWnNYTFRTZGp0aFVVMy1HY1hOQlZzb1FRMW54Y0E2VlJiY3JGWG1iaU5LUGtKVmlXeEdwNDRDSXhuZlMzSmhsRkFTMzhPOEtHR2VFRWRPbGY1dTRDWWVGU0NCSVN4Vzk3RTdIWlB0Z0pxSWxuWTd6b2hydnJld2FUbmk1bldrYzYxVDQtTVJVYTZoUkRZQlZNTHV0NG9za2xfbTVsd0J0YVN3MkVmdld2ZEk2LXJfZ3ZuQk9RYUl3eG05ZF81UzI3YUlKaE9helFyVUV3eVBlNjFWaDJ5cW1yM0M4cnBRRHFscjluS0lHc004NjBneW1uMUZkSkVZVE9XazdIRVNveXZ2UTd2dkhuY1NqVVNpZ1k0TWlCTy1KSUxnVWdORzZvOHVuRGNGdDRmcXkySm9pUnp3MFBBUGdtdC1YbWw0dXc5Tm01TVhkVGdsU0VRVDY4cjI3OXJnVHpDMWR2OEpvNmRxeXlUZVdUb2loLUItb3hiYmxYMTBkZFBjZDBPd3pfa0tQc3JKQzRFOHNFVHRaSzNfWWx5YmRIcFptQk55LVdEMDJ2dUFOV2FILUhHbGhqYjZFTnV0ODBGYzZCR3Naa0kwd3JtcW9sb2h3by1WcW5RU1NFNzBCUVYwZUYxOVE?oc=5",
      "th": {
-      "title": "TRUE กำไรโต 324% แต่นักลงทุนต้องดูอะไรบ้าง ในงบไตรมาส 3 | The Bangkok Insight",
+      "title": "“โกลเบล็ก” มอง SET สัปดาห์นี้ Sideway Down ชู ADVANC-TRUE-BDMS-BH หุ้น Defensive เด่นสู้ตลาดผันผวน",
+      "summary": ""
+     }
+    },
+    {
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5CZ1lyUjBhZ21wVUJaaTFPbGZnbHRqRWdPNkhPaDV4Z0E5M3pyeFZ4MXRoNnBucTNFWVRVWDdaejA2LV9CbDFXTUVBcw?oc=5",
+     "th": {
+      "title": "GBS แนะเก็บ 4 หุ้นเด่น ADVANC-TRUE-BDMS-BH หลบผันผวน",
       "summary": ""
      }
     }
@@ -888,29 +1021,29 @@
    "sym": "TTB",
    "items": [
     {
+     "source": "Head Topics",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9rTDdqOEEzSVo0OGF2RGFfS2JsZ0FqT1ZQMEFtazk2UVRlNUdaa183ZVdRc2dSemtMZjZzdVFFZXNBWGtsSUFnVDZWSlFFV3J5Y2FId2hyY043RS1KRzExOXpGZWdxMDVETlZEcW9n?oc=5",
+     "th": {
+      "title": "ttb ชี้ AI ซัพพลายเชนพยุงเศรษฐกิจไทย หากฟองสบู่แตก หุ้นไทยจ่อดิ่งหนัก ฉุด GDP โตต่ำกว่า 2%",
+      "summary": ""
+     }
+    },
+    {
+     "source": "มิติหุ้น",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1Ob3VSbmQyLVdMZ3F3aVVEcXpmbmtQUV9jRDdkclcyc2gxODlVeU1VVlZubjNENlFhcUVfU0dkb2tKYVhjdXpuUXRTaDM4UFpqZnNzekdn?oc=5",
+     "th": {
+      "title": "ttb คาดเงินบาทเช้านี้ 33.43 บาท/ดอลลาร์จากราคาปิด 33.54 บาท/ดอลลาร์",
+      "summary": ""
+     }
+    },
+    {
      "source": "LINE TODAY",
      "date": "2026-11-09",
      "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1SUzdsbWFMdzVfdzF5VTdnTUVEdkN6UThqUGZpUkRlX2hVb1B6VkJLckwwU180SjlGaDBNMzU1VWUxeVVqazRSV1NTSXNMMzJtNlVKd3NB?oc=5",
      "th": {
       "title": "TTB เปิดการ์ดไซเบอร์ ส่งทีมเกาะติดภัยคุกคาม 24 ชม. | ข่าวหุ้นธุรกิจ",
-      "summary": ""
-     }
-    },
-    {
-     "source": "efin.finance",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9tLVlKdFg1V2tydERfVkxuQlpqWmNEU0k2Wks1LXZocFE1bmFEdVhEZW5UWHdlZzNmTWdZMlY0dUh2VjhKbVhVT2RGNnk5clVKSU5CeTFoRnVnd2hyc0hpUGtR?oc=5",
-     "th": {
-      "title": "ttb analytics คาดจีดีพีปี 70 โต 3% จับตากนง. ขึ้นดอกเบี้ย 1.75% ชู Reinvent Thailand ดันโต 4% ใน 5 ปี",
-      "summary": ""
-     }
-    },
-    {
-     "source": "ข่าวหุ้นธุรกิจออนไลน์",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9GNjdrMWRlc0RJT2M0S1pJSGdUazJ0d2QyS3pNN3JoLVJxRTJjeDdRLVZfcmhBd2xmQ045YTBlN1k1bHV4ckktcG91NA?oc=5",
-     "th": {
-      "title": "TTB ซุ่มดีลยักษ์ ผนึกแบรนด์แต่งบ้านระดับโลก",
       "summary": ""
      }
     }
@@ -919,6 +1052,15 @@
   {
    "sym": "TU",
    "items": [
+    {
+     "source": "ข่าวหุ้นธุรกิจออนไลน์",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFB0Z294OTZWdmVmbEVMVjJIOFdQT1oxanVSclFaZ1o2RXRDYXFReXZ4dy0tVWtmTnJmdF9id2I1cXpzUVBaWVNsUGNUTQ?oc=5",
+     "th": {
+      "title": "CGSI คาด SET ฟื้นต่อ รับหุ้นโลกบวก-น้ำมันร่วง ชู KBANK-TU หุ้นเด่น",
+      "summary": ""
+     }
+    },
     {
      "source": "มิติหุ้น",
      "date": "2026-11-09",
@@ -934,29 +1076,29 @@
    "sym": "WHA",
    "items": [
     {
-     "source": "Thunhoon",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5Jb1g3b0JnTDVLWDdiWFpxQUFCQ2dhbVBWUUZ6bXpzV2tsVVBILVRYaGFmY1plRDlnU0JOSTQyVUU3V2RGT180QVd1MnZnUGhkZDRqYw?oc=5",
+     "source": "Head Topics",
+     "date": "2026-11-11",
+     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1GUTZuZmVqMU1id2o5X1FWMnVKdk81WU5iRVJLU1ZIa3ZFempkSHBZVkwxRWFRaVRCZkF2eWo5MGRIRUh3ZERyX2VmXzIxem5ISkJxbXZmaWVGRGhxaVB1WjkydUdfTGdtZWtEVkZ3?oc=5",
      "th": {
-      "title": "STECON–WHA–AOT น่าสน Data Center จ่อเข้า ครม. พรุ่งนี้ ไฮซีซัน ลุ้นท่องเที่ยวพีก!",
+      "title": "กำกับดูแล Data Center ในไทย กระทบหุ้นนิคมอุตสาหกรรม AMATA และ WHA",
       "summary": ""
      }
     },
     {
-     "source": "efin.finance",
-     "date": "2026-11-09",
-     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxORVQzLTJtb3V0SjU3cVk3MVVtMHVDa0NMWGNpUEROR2VmcmVQc0dCSTJ6bDk0d3A4RXNYSXhlME5FQnBacTlDUTRocmVvUDZITG5id0U1WTRSSWdiUllHcEJOZFFYS29LbDl1VjNTSFNKdmRGdDdyYzdhOGxNMzdFVDNzVUR1TFBONERCWHYyWVRFWVk2bExMRkhCMGtwSEFXNkE?oc=5",
+     "source": "Head Topics",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE85Z1JiUXlTS2FhTjhLcWcwQk11U0J4M2FhVlhjYmlNclNSbzVsWm1uYVVnMV94RTFNelNYRUNxbVNoNVFjTjFfM1FnUzBOOFJmY2Vnbk82djdTaGg2TWlfSXhQdEVGaGdNQUp5NUhn?oc=5",
      "th": {
-      "title": "WHA-AMATA ราคาวิ่งแรงปีนี้บวก 48-55% รับอานิสงส์เป้าหมาย Data Center โบรกฯ ส่วนใหญ่เชียร์ “ซื้อ” กำไรดี-มีอัปไซด์",
+      "title": "รัฐชัดเกณฑ์ Data Center หนุน WHA เปิดโต๊ะเจรจาต่างชาติต่อ 4-5 GW - หุ้นไทย | หุ้น ข่าว",
       "summary": ""
      }
     },
     {
-     "source": "LINE TODAY",
-     "date": "2026-11-08",
-     "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5zLXVBeFZ4YllXZGtaNjNJM09jM1g5MVBQSGNTNFZsUHJSOUJnUm4zeWJHcW5Ba09tNEFDb0xxWW1wNEJsMzlaVVVBbjNlZkdrYWIyay1XR0JVZXhqaTliRlpQd20?oc=5",
+     "source": "Thansettakij",
+     "date": "2026-11-10",
+     "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1VbXM5Q295WGxpRzFtQmN3SHVrM3VuaEc0VHMzSWUtbkdGYWVIbDVMNDhxY0NwZjNWb0YxYXY5aVdOdC1CMWdxWXZ1MGllcU9ONzlSNHY4QWtySTliMk9zbG9iSXpjZw?oc=5",
      "th": {
-      "title": "โพสต์ทั้งหมด | ไตรมาส 4 ฟอร์มดีสุดของ WHA ลุ้นดาต้าเซ็นเตอร์ชัดหนุนโต",
+      "title": "รัฐชัดเกณฑ์ Data Center หนุน WHA เปิดโต๊ะเจรจาต่างชาติต่อ 4-5 GW",
       "summary": ""
      }
     }
