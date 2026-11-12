@@ -154,11 +154,38 @@ main{padding-top:18px;display:grid;gap:26px;align-content:start}
 .star[aria-pressed="true"] svg{fill:currentColor}
 /* Today: type a task, pick a time, press Enter */
 .qa{display:grid;gap:8px;padding:12px 0}
-.qa-row{display:flex;gap:8px}
-.qa-row .inp{min-width:0;flex:1}
-.qa-row .inp[type=time]{flex:none;width:122px;padding:10px 8px}
-.qa .err{margin:0}
-.qa-hint{font-size:12.5px;color:var(--muted)}
+/* time wheel: the one way to pick a time, everywhere in the app */
+.tw-ov{z-index:55}
+.tw{max-width:420px}
+.tw:focus{outline:0}
+.tw-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.tw-eb{font:500 11.5px/1.4 var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+:root:lang(th) .tw-eb{letter-spacing:0;text-transform:none;font-size:13px}
+.mdl .tw-h h2{margin:2px 0 0;font-size:20px;overflow-wrap:anywhere}
+.tw-wheel{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);align-items:center;height:192px;background:var(--surface-2);border-radius:18px;overflow:hidden}
+.tw-col{height:192px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;overscroll-behavior:contain;touch-action:pan-y}
+.tw-col::-webkit-scrollbar{display:none}
+.tw-col::before,.tw-col::after{content:"";display:block;height:64px}
+.tw-col:focus-visible{outline:2px solid var(--ink);outline-offset:-4px;border-radius:18px}
+.tw-i{height:64px;display:grid;place-items:center;scroll-snap-align:center;font:600 40px/1 var(--font);font-variant-numeric:tabular-nums;color:color-mix(in srgb,var(--ink) 24%,var(--bg));cursor:pointer;user-select:none;-webkit-user-select:none}
+.tw-i.sel{color:var(--ink)}
+.tw-sep{font:600 40px/64px var(--font);text-align:center}
+.tw-act{display:grid;gap:8px;margin-top:14px}
+.tf{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left}
+.tf .tv{font:500 16px var(--mono)}
+.tf .none{color:var(--muted)}
+#hbtn{margin-right:8px}
+/* Today: previous days (read only) */
+.hstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.hday{display:grid;justify-items:center;gap:2px;padding:8px 0;min-height:68px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
+.hday .hw{font:500 11px/1.2 var(--label);text-transform:uppercase;letter-spacing:.04em}
+:root:lang(th) .hday .hw{text-transform:none;letter-spacing:0;font-size:12px}
+.hday b{font:600 18px/1.2 var(--font)}
+.hday .hf{font-size:11px;color:var(--muted)}
+.hday[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.hday[aria-pressed="true"] .hf{color:inherit;opacity:.8}
+.hchk{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;color:var(--accent-ink)}
+.hchk.on{background:var(--accent);border-color:var(--accent)}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sec-h .r2{display:flex;align-items:center;gap:12px}
 .pk[aria-pressed="true"]{border-color:var(--ink);background:var(--surface-2)}
@@ -344,7 +371,7 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
 <div class="wrap">
   <header class="top">
     <div><p class="eyebrow" id="eyebrow"></p><h1 id="ptitle"></h1></div>
-    <div class="top-r"><span class="status" id="status" role="status" aria-live="polite"></span>
+    <div class="top-r"><button type="button" class="btn sm quiet" id="hbtn" data-act="histOpen" hidden></button><span class="status" id="status" role="status" aria-live="polite"></span>
       <button class="icon" data-act="settings" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     </div>
   </header>
@@ -353,6 +380,7 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
 </div>
 <nav class="xl" id="xl" aria-label="Sheets"></nav>
 <div class="ov" id="ov" hidden><div class="mdl" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t"></div></div>
+<div class="ov tw-ov" id="tw" hidden><div class="mdl tw" id="twsheet" role="dialog" aria-modal="true" aria-labelledby="tw-t" tabindex="-1"></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script>
@@ -402,6 +430,8 @@ const XIC='<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="c
 const STAR='<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4l2.6 5.5 6 .8-4.4 4.2 1.1 6L12 17.1 6.7 19.9l1.1-6L3.4 9.7l6-.8z"/></svg>';
 const FUNNEL='<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5h14l-5.3 6.4v4.6l-3.4 1.7v-6.3z"/></svg>';
 const CHEV=d=>'<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(d<0?'M12.5 4.5L7 10l5.5 5.5':'M7.5 4.5L13 10l-5.5 5.5')+'"/></svg>';
+const CLOCK='<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 1.5"/></svg>';
+const HIST='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>';
 const SP='<span class="sp" aria-hidden="true"></span>';
 const empty=(msg,btn,act,data)=>'<div class="empty"><p>'+msg+'</p>'+(btn?'<button class="btn sm" data-act="'+act+'" '+(data||'')+'>'+btn+'</button>':'')+'</div>';
 
@@ -657,8 +687,9 @@ function rtTodayRow(r,done,key){
     +'<button class="task-main" data-act="editRt" data-id="'+esc(r.id)+'"><span class="task-t">'+esc(t)+'</span><span class="task-m">'+(r.time?'<span class="mono">'+esc(r.time)+'</span>':'')+'<span class="pill">'+x('Routine','กิจวัตร')+'</span></span></button></li>';
 }
 const FILTERS=()=>[['all',x('All','ทั้งหมด')],['open',x('Not done','ยังไม่เสร็จ')],['done',x('Done','เสร็จแล้ว')],['star',x('Important','สำคัญ')]];
-let todayFilter='all';
+let todayFilter='all',histOn=false,histKey='',histEnd='';
 function vToday(){
+  if(histOn)return vHist();
   const all=todayList(),k=todayKey(),total=all.length,done=all.filter(r=>r.done).length,open=total-done,p=total?done/total*100:0;
   const fl=todayFilter,rows=all.filter(r=>fl==='open'?!r.done:fl==='done'?r.done:fl==='star'?(r.kind==='task'&&!!r.i.star):true);
   const fname=(FILTERS().find(f=>f[0]===fl)||['',''])[1];
@@ -667,9 +698,7 @@ function vToday(){
     +'<div class="bar" role="progressbar" aria-label="'+x('Progress','ความคืบหน้า')+'" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(p)+'"><i style="width:'+p+'%"></i></div></div>';
   h+='<section class="sec"><div class="sec-h"><h2>'+x('Tasks','งานวันนี้')+'</h2><div class="r2"><button class="btn sm '+(fl==='all'?'quiet':'primary')+'" data-act="openFilter" data-fk="flt" aria-haspopup="dialog">'+FUNNEL+(fl==='all'?x('Filter','กรอง'):esc(fname))+'</button>'
     +'<button class="link-btn" data-act="tab" data-v="sched">'+x('Open Scheduled','เปิดกำหนดการ')+'</button></div></div>'
-    +'<form class="qa" data-submit="quickAdd" novalidate><div class="qa-row"><input class="inp" name="t" aria-label="'+x('New task for today','งานใหม่วันนี้')+'" placeholder="'+x('Type a task, then press Enter','พิมพ์งาน แล้วกด Enter')+'" maxlength="120" autocomplete="off" enterkeyhint="done" data-fk="qa">'
-    +'<input class="inp" type="time" name="tm" aria-label="'+x('Time (required)','เวลา (ต้องใส่)')+'" data-fk="qt"></div>'
-    +'<p class="err" id="qa-err" role="alert" hidden></p><p class="qa-hint">'+x('Every task needs a time. Pick a time and it is added.','งานต้องมีเวลาเสมอ เลือกเวลาแล้วระบบจะเพิ่มให้')+'</p>'
+    +'<form class="qa" data-submit="quickAdd" novalidate><input class="inp" name="t" aria-label="'+x('New task for today','งานใหม่วันนี้')+'" placeholder="'+x('Type a task, then press Enter','พิมพ์งาน แล้วกด Enter')+'" maxlength="120" autocomplete="off" enterkeyhint="next" data-fk="qa">'
     +'<button class="vh" type="submit" tabindex="-1" aria-hidden="true"></button></form>';
   if(rows.length)h+='<ul class="list">'+rows.map(r=>r.kind==='rt'?rtTodayRow(r.i,r.done,k):taskRow(r.i,k,{over:r.over})).join('')+'</ul>';
   else if(all.length&&fl!=='all')h+=empty(x('No tasks match this filter.','ไม่มีงานที่ตรงกับตัวกรองนี้'),x('Show all','แสดงทั้งหมด'),'setFilter','data-v="all"');
@@ -680,6 +709,60 @@ function openFilter(){
   const all=todayList(),cnt={all:all.length,open:all.filter(r=>!r.done).length,done:all.filter(r=>r.done).length,star:all.filter(r=>r.kind==='task'&&r.i.star).length};
   openSheet('<h2 id="sheet-t">'+x('Filter tasks','กรองงาน')+'</h2><div class="pick">'+FILTERS().map(f=>'<button type="button" class="pk" data-act="setFilter" data-v="'+f[0]+'" aria-pressed="'+(todayFilter===f[0])+'"><b>'+esc(f[1])+'</b><small>'+cnt[f[0]]+x(' tasks',' งาน')+'</small></button>').join('')
     +'</div><div class="actions" style="margin-top:14px"><span></span><button type="button" class="btn" data-act="closeSheet">'+x('Cancel','ยกเลิก')+'</button></div>','pick');
+}
+
+/* Today: previous days. Read only: what was done and what was not, for any day before today. */
+function rtActiveOn(r,key){ /* routines have no start date, so use the first day it was ever ticked (or the day it was created) */
+  let s=r.since||'';
+  if(!s){const lg=S.routines.log;Object.keys(lg).forEach(k=>{if(lg[k]&&lg[k].indexOf(r.id)>-1&&(!s||k<s))s=k})}
+  return!s||key>=s;
+}
+function histDay(key){
+  const rows=[],wd=fromKey(key).getDay(),dn=rtDoneSet(key);
+  S.schedule.items.forEach(i=>{
+    const done=isDone(i,key);
+    if(!done&&!occursOn(i,key))return;
+    let note='';
+    if(done&&isOneOff(i)&&isKey(i.date)&&i.date!==key)note=x('Planned ','กำหนดไว้ ')+fShort(fromKey(i.date));
+    else if(!done&&isOneOff(i)){const later=i.doneDates.filter(d=>d!==key).sort()[0];if(later)note=x('Done ','เสร็จเมื่อ ')+fShort(fromKey(later))}
+    rows.push({kind:'task',i:i,done:done,note:note});
+  });
+  S.routines.items.forEach(r=>{
+    const done=dn.has(r.id),due=(!r.days||!r.days.length||r.days.indexOf(wd)>-1)&&rtActiveOn(r,key);
+    if(done||due)rows.push({kind:'rt',i:r,done:done,note:''});
+  });
+  rows.sort((a,b)=>timeCmp(a.i,b.i));
+  return rows;
+}
+function histClamp(){
+  const yk=dateKey(addDays(new Date(),-1));
+  if(!isKey(histKey)||histKey>yk)histKey=yk;
+  if(!isKey(histEnd)||histEnd>yk)histEnd=yk;
+  const start=dateKey(addDays(fromKey(histEnd),-6));
+  if(histKey<start||histKey>histEnd){const e=dateKey(addDays(fromKey(histKey),3));histEnd=e>yk?yk:e}
+}
+function histRow(r){
+  const i=r.i,meta=[];
+  if(i.time)meta.push('<span class="mono">'+esc(i.time)+(r.kind==='task'&&i.end?'–'+esc(i.end):'')+'</span>');
+  if(r.kind==='rt')meta.push('<span class="pill">'+x('Routine','กิจวัตร')+'</span>');
+  if(r.note)meta.push('<span class="pill ink">'+esc(r.note)+'</span>');
+  return'<li class="task'+(r.done?' is-done':'')+((r.kind==='task'&&i.star)?' is-star':'')+'"><span class="hchk'+(r.done?' on':'')+'" aria-hidden="true">'+(r.done?CHECK:'')+'</span>'
+    +'<div class="task-main"><span class="task-t">'+esc(tr(i,'title'))+'</span>'+(meta.length?'<span class="task-m">'+meta.join('')+'</span>':'')+'</div></li>';
+}
+function vHist(){
+  histClamp();
+  const yk=dateKey(addDays(new Date(),-1)),d=fromKey(histKey),day=histDay(histKey),open=day.filter(r=>!r.done),done=day.filter(r=>r.done);
+  let strip='';
+  for(let n=6;n>=0;n--){
+    const k=dateKey(addDays(fromKey(histEnd),-n)),dd=fromKey(k),rr=histDay(k),dc=rr.filter(z=>z.done).length;
+    strip+='<button type="button" class="hday" data-act="histDay" data-k="'+k+'" aria-pressed="'+(k===histKey)+'" aria-label="'+esc(fDay(dd))+(rr.length?', '+dc+'/'+rr.length:'')+'"><span class="hw">'+esc(wdName(wdi(dd),'short'))+'</span><b>'+dd.getDate()+'</b><span class="hf mono">'+(rr.length?dc+'/'+rr.length:'–')+'</span></button>';
+  }
+  const sec=(title,list,none)=>'<section class="sec"><div class="sec-h"><h2>'+title+'</h2><span class="sub mono">'+list.length+'</span></div>'+(list.length?'<ul class="list">'+list.map(histRow).join('')+'</ul>':empty(none))+'</section>';
+  const h='<div class="g12"><div><button type="button" class="btn sm quiet" data-act="histClose">'+CHEV(-1)+x('Today','วันนี้')+'</button></div>'
+    +'<div class="hstrip" role="group" aria-label="'+x('Choose a day','เลือกวัน')+'">'+strip+'</div>'
+    +'<div class="row-h"><b>'+esc(fDay(d))+'</b><input class="inp" style="width:auto;min-height:40px" type="date" id="hdate" value="'+histKey+'" max="'+yk+'" aria-label="'+x('Pick date','เลือกวันที่')+'"></div></div>';
+  if(!day.length)return h+'<section class="sec">'+empty(x('Nothing was planned on this day.','วันนั้นไม่มีงานหรือกิจวัตร'))+'</section>';
+  return h+sec(x('Not done','ยังไม่เสร็จ'),open,x('Everything was done.','ทำครบทุกอย่าง'))+sec(x('Done','เสร็จแล้ว'),done,x('Nothing was ticked off.','ยังไม่ได้ติ๊กอะไรเลย'));
 }
 
 /* 3 Scheduled */
@@ -943,6 +1026,7 @@ function centerTab(){
 }
 function render(soft){
   const v=$('#view'),a=document.activeElement;
+  if(soft&&tw)return; /* the time wheel is open: do not rebuild the page under it */
   if(soft&&a&&v.contains(a)&&(a.tagName==='INPUT'||a.tagName==='TEXTAREA'))return;
   const fk=(a&&v.contains(a)&&a.dataset&&a.dataset.fk)||null;
   v.innerHTML=loaded?VIEWS[view]():skeleton();
@@ -950,14 +1034,16 @@ function render(soft){
   $$('.xt').forEach(t=>{if(t.dataset.v===view)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current')});
   centerTab();
   $('#eyebrow').textContent=fDay(new Date());
-  const pt=$('#ptitle');pt.textContent=tabName(view);pt.className=view==='brief'?'big':'';
+  const pt=$('#ptitle');pt.textContent=(view==='today'&&histOn)?x('Previous days','วันก่อนๆ'):tabName(view);pt.className=view==='brief'?'big':'';
   $('#gear').setAttribute('aria-label',x('Settings','ตั้งค่า'));
+  const hb=$('#hbtn');if(hb){hb.hidden=!(loaded&&view==='today'&&!histOn);hb.innerHTML=HIST+x('Previous days','วันก่อนๆ')}
   $('#notice').innerHTML=noticeHtml();
   paintStatus();
   if(fk){const el=v.querySelector('[data-fk="'+fk+'"]');if(el)el.focus({preventScroll:true})}
 }
 const readHash=()=>{const h=location.hash.replace('#','');return VIEW_IDS.indexOf(h)>-1?h:'brief'};
 function go(v){
+  histOn=false;
   view=VIEW_IDS.indexOf(v)>-1?v:'brief';
   try{if(location.hash!=='#'+view)location.hash=view}catch(e){}
   render();window.scrollTo(0,0);
@@ -978,6 +1064,7 @@ function fieldHtml(f){
   const id='f-'+f.name,val=f.value==null?'':f.value;let ctl;
   if(f.type==='textarea')ctl='<textarea class="inp" id="'+id+'" name="'+f.name+'" rows="'+(f.rows||3)+'" placeholder="'+esc(f.placeholder||'')+'">'+esc(val)+'</textarea>';
   else if(f.type==='select')ctl='<select class="inp" id="'+id+'" name="'+f.name+'">'+f.options.map(o=>'<option value="'+esc(o[0])+'"'+(String(o[0])===String(val)?' selected':'')+'>'+esc(o[1])+'</option>').join('')+'</select>';
+  else if(f.type==='time')ctl='<input type="hidden" name="'+f.name+'" value="'+esc(val)+'"><button type="button" class="inp tf" id="'+id+'" data-act="pickTime" data-f="'+f.name+'" aria-haspopup="dialog">'+timeBtn(val)+'</button>';
   else if(f.type==='days')ctl='<div class="chips" role="group" aria-label="'+esc(f.label)+'">'+[1,2,3,4,5,6,0].map(d=>'<label class="cp"><input type="checkbox" name="'+f.name+'" value="'+d+'"'+((val||[]).indexOf(d)>-1?' checked':'')+'><span>'+esc(wdName((d+6)%7,'short'))+'</span></label>').join('')+'</div>';
   else if(f.type==='chips')ctl='<div class="chips" role="radiogroup" aria-label="'+esc(f.label)+'">'+f.options.map(o=>'<label class="cp"><input type="radio" name="'+f.name+'" value="'+esc(o[0])+'"'+(String(o[0])===String(val)?' checked':'')+'><span>'+esc(o[1])+'</span></label>').join('')+'</div>';
   else ctl='<input class="inp'+(f.big?' big':'')+'" id="'+id+'" name="'+f.name+'" type="'+(f.type||'text')+'" value="'+esc(val)+'" placeholder="'+esc(f.placeholder||'')+'"'+(f.type==='number'?' inputmode="decimal" step="any" min="0"':'')+' autocomplete="off">';
@@ -1023,10 +1110,80 @@ function openForm(cfg){
       clearTimeout(t);cfg.onDelete();closeForm();render();
     });
   }
-  const first=form.querySelector('input:not([type=checkbox]):not([type=radio]),textarea,select');
+  const first=form.querySelector('input:not([type=checkbox]):not([type=radio]):not([type=hidden]),textarea,select');
   if(first&&!cfg.noFocus)first.focus({preventScroll:true});
 }
+/* ---------- time wheel: the one way to pick a time, everywhere in the app ----------
+   Two columns (hour, minute) that scroll and snap. Each column holds 5 copies of its numbers so it can wrap round
+   (23 then 00, 59 then 00); when it stops near an end it jumps back to the middle copy, which looks identical. */
+const TW_H=64,TW_REP=5;
+let tw=null,twFocus=null,twAt=0;
+const hm=(h,m)=>pad(h)+':'+pad(m);
+const nextHour=()=>{const h=new Date().getHours()+1;return h>23?'23:59':hm(h,0)};
+const timeBtn=v=>'<span class="'+(v?'tv':'none')+'">'+(v?esc(v):x('No time','ไม่ระบุเวลา'))+'</span>'+CLOCK;
+const twVal=()=>tw?hm(tw.h.v,tw.m.v):'';
+function twCol(id,n,label,v){
+  let it='';
+  for(let r=0;r<TW_REP;r++)for(let k=0;k<n;k++)it+='<div class="tw-i" aria-hidden="true">'+pad(k)+'</div>';
+  return'<div class="tw-col" id="'+id+'" role="spinbutton" tabindex="0" aria-label="'+label+'" aria-valuemin="0" aria-valuemax="'+(n-1)+'" aria-valuenow="'+v+'">'+it+'</div>';
+}
+function twSync(c,st){
+  const last=c.children.length-1,i=Math.max(0,Math.min(last,Math.round(c.scrollTop/TW_H)));
+  if(i===st.i)return;
+  if(st.i>-1)c.children[st.i].classList.remove('sel');
+  c.children[i].classList.add('sel');
+  st.i=i;st.v=i%st.n;c.setAttribute('aria-valuenow',st.v);
+  const ok=$('#tw-ok');if(ok&&tw)ok.textContent=tw.o.cta?tw.o.cta(twVal()):twVal();
+}
+function twInit(c,st,v){
+  c.scrollTop=(2*st.n+v)*TW_H;
+  twSync(c,st);
+  c.addEventListener('scroll',()=>{
+    twSync(c,st);clearTimeout(st.t);
+    st.t=setTimeout(()=>{if(tw&&(st.i<st.n||st.i>=st.n*(TW_REP-1)))c.scrollTop=(2*st.n+st.i%st.n)*TW_H},160);
+  },{passive:true});
+  c.addEventListener('click',e=>{const it=e.target.closest('.tw-i');if(it)c.scrollTo({top:Array.prototype.indexOf.call(c.children,it)*TW_H,behavior:'smooth'})});
+}
+/* o: {eyebrow, title, value:'HH:MM' (default: the next full hour), optional:true adds a "No time" button, cta(v) button text, onPick(v), onCancel()} */
+function openTime(o){
+  const m=/^(\d{2}):(\d{2})$/.exec(o.value||'')||/^(\d{2}):(\d{2})$/.exec(nextHour());
+  const h0=Math.min(23,+m[1]),m0=Math.min(59,+m[2]);
+  twFocus=document.activeElement;twAt=Date.now();
+  tw={o:o,h:{n:24,i:-1,v:h0},m:{n:60,i:-1,v:m0}};
+  $('#twsheet').innerHTML='<div class="tw-h"><div><p class="tw-eb">'+esc(o.eyebrow||x('Set a time','ตั้งเวลา'))+'</p><h2 id="tw-t">'+esc(o.title||x('Time','เวลา'))+'</h2></div><button type="button" class="link-btn" data-act="twCancel">'+x('Cancel','ยกเลิก')+'</button></div>'
+    +'<div class="tw-wheel">'+twCol('tw-h',24,x('Hour','ชั่วโมง'),h0)+'<div class="tw-sep" aria-hidden="true">:</div>'+twCol('tw-m',60,x('Minute','นาที'),m0)+'</div>'
+    +'<div class="tw-act"><button type="button" class="btn primary wide" id="tw-ok" data-act="twDone"></button>'+(o.optional?'<button type="button" class="btn wide" data-act="twNone">'+x('No time','ไม่ระบุเวลา')+'</button>':'')+'</div>';
+  $('#tw').hidden=false;document.body.style.overflow='hidden';
+  twInit($('#tw-h'),tw.h,h0);twInit($('#tw-m'),tw.m,m0);
+  $('#twsheet').focus({preventScroll:true});
+}
+function twClose(restore){
+  if(!tw)return;
+  const f=twFocus;tw=null;
+  $('#tw').hidden=true;$('#twsheet').innerHTML='';
+  if($('#ov').hidden)document.body.style.overflow='';
+  if(restore&&f&&f.isConnected)f.focus({preventScroll:true});
+}
+function twKey(e){
+  if(e.key==='Escape'){e.preventDefault();const cb=tw.o.onCancel;twClose(true);if(cb)cb();return}
+  const c=e.target&&e.target.classList&&e.target.classList.contains('tw-col')?e.target:null;
+  if(c){
+    const d={ArrowUp:-1,ArrowDown:1,PageUp:-5,PageDown:5}[e.key];
+    if(d){e.preventDefault();c.scrollTop=Math.max(0,Math.min(c.children.length-1,Math.round(c.scrollTop/TW_H)+d))*TW_H;return} /* from where the column really is, so quick key repeats add up */
+    if(e.key==='Enter'){e.preventDefault();act('twDone',{});return}
+  }
+  if(e.key==='Tab'){
+    const f=$$('button,.tw-col',$('#twsheet')).filter(z=>!z.disabled&&z.offsetParent!==null);
+    if(!f.length)return;
+    const a=f[0],z=f[f.length-1],cur=document.activeElement;
+    if(e.shiftKey&&(cur===a||cur===$('#twsheet'))){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&cur===z){e.preventDefault();a.focus()}
+  }
+}
+$('#tw').addEventListener('mousedown',e=>{if(e.target.id==='tw'&&Date.now()-twAt>400){const cb=tw&&tw.o.onCancel;twClose(true);if(cb)cb()}});
+
 document.addEventListener('keydown',e=>{
+  if(tw){twKey(e);return}
   const ov=$('#ov');if(!ov||ov.hidden)return;
   if(e.key==='Escape'){closeForm();return}
   if(e.key==='Tab'){
@@ -1079,7 +1236,7 @@ function formRoutine(id){
       if(!v.days.length)return x('Pick at least one day.','เลือกอย่างน้อย 1 วัน');
       const days=v.days.length===7?[]:v.days;
       if(r){r.title=title;r.time=v.time||'';r.days=days;delete r.seed}
-      else S.routines.items.push({id:uid(),title:title,time:v.time||'',days:days});
+      else S.routines.items.push({id:uid(),title:title,time:v.time||'',days:days,since:todayKey()});
       touch('routines');
     },
     onDelete:r?()=>{S.routines.items=S.routines.items.filter(z=>z!==r);touch('routines')}:null});
@@ -1528,17 +1685,17 @@ function toggleDone(id,key){
   touch('schedule');render();
   if(ticked)celebrate();
 }
+/* Enter on the task bar opens the time wheel; picking a time adds the task. Every task has a time, so the wheel has no "No time". */
 function quickAdd(f,inp,val){
-  const tm=f.elements.tm,err=$('#qa-err');
   if(!val){inp.focus();return}
-  if(!tm||!/^\d{2}:\d{2}$/.test(tm.value)){
-    if(err){err.textContent=x('Pick a time for this task first.','เลือกเวลาของงานนี้ก่อน');err.hidden=false}
-    if(tm){tm.focus();try{if(tm.showPicker)tm.showPicker()}catch(e){}}
-    return;
-  }
-  S.schedule.items.push({id:uid(),title:val,date:todayKey(),time:tm.value,end:'',note:'',repeat:'none',doneDates:[],star:false});
-  touch('schedule');inp.value='';tm.value='';render();
-  const t2=$('form.qa input[name=t]');if(t2)t2.focus({preventScroll:true}); /* ready for the next task */
+  inp.blur();
+  openTime({eyebrow:x('Set a time, today','ตั้งเวลา วันนี้'),title:val,value:nextHour(),optional:false,cta:v=>x('Add at ','เพิ่มงานเวลา ')+v,
+    onPick:v=>{
+      S.schedule.items.push({id:uid(),title:val,date:todayKey(),time:v,end:'',note:'',repeat:'none',doneDates:[],star:false});
+      touch('schedule');render();
+      const t2=$('form.qa input[name=t]');if(t2)t2.focus({preventScroll:true}); /* ready for the next task */
+    },
+    onCancel:()=>{const t2=$('form.qa input[name=t]');if(t2){t2.value=val;t2.focus({preventScroll:true})}}});
 }
 function act(a,ds){
   switch(a){
@@ -1549,6 +1706,23 @@ function act(a,ds){
     case'cancelRestore':pendingRestore=null;restoreNote='';repaintSheet();break;
     case'doRestore':doRestore();break;
     case'closeSheet':closeForm();break;
+    /* time wheel */
+    case'twDone':{if(!tw)break;const v=twVal(),cb=tw.o.onPick;twClose(false);cb(v);break}
+    case'twNone':{if(!tw)break;const cb=tw.o.onPick;twClose(true);cb('');break}
+    case'twCancel':{if(!tw)break;const cb=tw.o.onCancel;twClose(true);if(cb)cb();break}
+    case'pickTime':{ /* a time field in a form: opens the same wheel, "No time" clears it */
+      const form=$('#mf'),inp=form&&form.elements[ds.f],btn=form&&$('#f-'+ds.f,form);if(!inp||!btn)break;
+      const lab=$('label[for="f-'+ds.f+'"]',form),st=form.elements.time;
+      let def='';
+      if(ds.f==='end'&&st&&st.value){const p=st.value.split(':').map(Number),t=Math.min(23*60+59,p[0]*60+p[1]+60);def=hm(Math.floor(t/60),t%60)}
+      openTime({eyebrow:x('Set a time','ตั้งเวลา'),title:lab?lab.textContent.replace(/\s*\(.*\)\s*$/,''):'',value:inp.value||def,optional:true,cta:v=>x('Set ','ตั้งเป็น ')+v,
+        onPick:v=>{inp.value=v;btn.innerHTML=timeBtn(v);btn.focus({preventScroll:true})}});
+      break;
+    }
+    /* previous days */
+    case'histOpen':{const yk=dateKey(addDays(new Date(),-1));histOn=true;histKey=yk;histEnd=yk;render();window.scrollTo(0,0);break}
+    case'histClose':histOn=false;render();window.scrollTo(0,0);break;
+    case'histDay':histKey=ds.k;render();break;
     case'holdEdit':{const o=holdTarget(holdSpec);if(!o||!o.edit){closeForm();break}closeForm();o.edit();break}
     case'holdDelete':doDelete(holdSpec);break;
     case'undo':doUndo();break;
@@ -1636,13 +1810,7 @@ document.addEventListener('input',e=>{
   dTimer=setTimeout(()=>{const g=$('#dgrid');if(view==='diary'&&g){const all=diaryAll();g.innerHTML=diaryGrid(all);const c=$('#dcount');if(c)c.textContent=all.length}},900);
 });
 document.addEventListener('change',e=>{
-  if(e.target.name==='tm'&&e.target.form&&e.target.form.dataset.submit==='quickAdd'){
-    /* picking a time finishes the add: with a title typed it is added, otherwise jump to the title box */
-    const f=e.target.form,t=f.elements.t;
-    if(!e.target.value)return;
-    if(t.value.trim())f.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));else t.focus();
-    return;
-  }
+  if(e.target.id==='hdate'){const v=e.target.value,yk=dateKey(addDays(new Date(),-1));if(isKey(v)&&v<=yk){histKey=v;render()}return}
   if(e.target.id==='ddate'){const v=e.target.value;if(isKey(v)&&v<=todayKey()){diaryKey=v;render()}}
 });
 window.addEventListener('hashchange',()=>{const v=readHash();if(v!==view){view=v;render();window.scrollTo(0,0)}});
@@ -1781,7 +1949,8 @@ if('serviceWorker' in navigator){
     if(!hadSW)return;
     setTimeout(function(){
       var a=document.activeElement,ov=document.getElementById('ov');
-      if((ov&&!ov.hidden)||(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return;
+      var twv=document.getElementById('tw');
+      if((ov&&!ov.hidden)||(twv&&!twv.hidden)||(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))return;
       location.reload();
     },1200);
   });
