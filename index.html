@@ -504,7 +504,7 @@ function pruned(n){
   if(b==='inbox'&&d.items.length>200)d.items=d.items.slice(-200);
   return d;
 }
-function touch(n){dirty[n]=true;clearTimeout(timers[n]);timers[n]=setTimeout(()=>flush(n),500);setSave('saving')}
+function touch(n){if(n==='schedule'||n==='routines'||n==='settings')natSync();dirty[n]=true;clearTimeout(timers[n]);timers[n]=setTimeout(()=>flush(n),500);setSave('saving')}
 async function flush(n,retried){
   timers[n]=null;
   if(!col||!dirty[n])return;
@@ -1440,7 +1440,41 @@ function openPreview(list,from){
    checked every 15 seconds while the app is open or in the background, and anything missed in the last hour is shown
    the next time the app is opened. */
 const NS_KEY='hb1notif',DEF_REMIND='09:00',CATCHUP=60*60*1000;
-const notifPerm=()=>('Notification' in window)?Notification.permission:'unsupported';
+/* Inside the Android app (Capacitor shell) the phone itself holds the alarms, so reminders arrive with the app closed. */
+const NAT=(function(){try{const c=window.Capacitor;return !!(c&&c.isNativePlatform&&c.isNativePlatform()&&c.nativePromise)}catch(e){return false}})();
+const APK_URL='https://github.com/kinsivakorn-sketch/-Home-Base/releases/download/android/home-base.apk';
+const nat=(m,o,pl)=>window.Capacitor.nativePromise(pl||'LocalNotifications',m,o||{});
+const NAT_DAYS=14,NAT_MAX=60,NAT_CH='hb-remind';
+let natPerm='default',natTimer=0,natBusy=false,natAgain=false,natCount=-1;
+const natId=str=>{let h=7;for(let i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))|0;return (Math.abs(h)%2147483000)+1000};
+function natSync(){if(!NAT)return;clearTimeout(natTimer);natTimer=setTimeout(natRun,700)}
+async function natRun(){
+  if(!loaded)return;
+  if(natBusy){natAgain=true;return}
+  natBusy=true;
+  try{
+    const pend=await nat('getPending');
+    const old=(pend&&pend.notifications||[]).map(n=>({id:n.id}));
+    if(old.length)await nat('cancel',{notifications:old});
+    natCount=0;
+    if(S.settings.notify&&natPerm==='granted'){
+      const now=Date.now(),seen={};
+      const list=remindEvents(now,now+NAT_DAYS*864e5).slice(0,NAT_MAX).map(e=>{let id=natId(e.id);while(seen[id])id++;seen[id]=1;
+        return{id:id,title:e.title,body:e.body,channelId:NAT_CH,autoCancel:true,schedule:{at:new Date(e.at).toISOString(),allowWhileIdle:true}}});
+      if(list.length)await nat('schedule',{notifications:list});
+      natCount=list.length;
+    }
+  }catch(e){natCount=-1}
+  natBusy=false;
+  if(natAgain){natAgain=false;natSync()}
+  repaintSheet();
+}
+function natInit(){
+  if(!NAT)return;
+  nat('createChannel',{id:NAT_CH,name:'Home Base',description:'Reminders',importance:4,visibility:1,vibration:true}).catch(()=>{});
+  nat('checkPermissions').then(r=>{natPerm=r&&r.display==='granted'?'granted':r&&r.display==='denied'?'denied':'default';natSync();repaintSheet()}).catch(()=>{});
+}
+const notifPerm=()=>NAT?natPerm:('Notification' in window)?Notification.permission:'unsupported';
 const notifOn=()=>!!S.settings.notify&&notifPerm()==='granted';
 let nState=(function(){try{const o=JSON.parse(localStorage.getItem(NS_KEY));if(o&&typeof o==='object')return{last:+o.last||0,fired:(o.fired&&typeof o.fired==='object')?o.fired:{}}}catch(e){}return{last:0,fired:{}}})();
 const saveN=()=>{try{localStorage.setItem(NS_KEY,JSON.stringify(nState))}catch(e){}};
@@ -1465,6 +1499,7 @@ function remindEvents(t0,t1){
   return out.sort((p,q)=>p.at-q.at);
 }
 async function showN(ev){
+  if(NAT){try{await nat('schedule',{notifications:[{id:natId('now|'+ev.tag+'|'+Date.now()),title:ev.title,body:ev.body,channelId:NAT_CH,autoCancel:true}]});return true}catch(e){return false}}
   const o={body:ev.body,tag:ev.tag,icon:'icons/icon-192.png',data:{view:'today'}};
   try{
     const reg=await Promise.race([navigator.serviceWorker.ready,new Promise((_,no)=>setTimeout(()=>no(new Error('sw')),3000))]);
@@ -1474,6 +1509,7 @@ async function showN(ev){
 function checkReminders(){
   if(!loaded)return;
   const now=Date.now();
+  if(NAT){nState.last=now;saveN();return} /* the phone's own alarms do the work in the Android app */
   if(!notifOn()){nState.last=now;saveN();return} /* keep the clock fresh so switching on later does not replay old items */
   const t0=Math.max(nState.last||now,now-CATCHUP);
   nState.last=now;
@@ -1492,7 +1528,8 @@ async function setNotify(on){
   if(p0==='unsupported')notifNote='unsupported';
   else{
     let p=p0;
-    if(p==='default'){try{p=await Notification.requestPermission()}catch(e){p=notifPerm()}}
+    if(NAT){if(p!=='granted'){try{const r=await nat('requestPermissions');natPerm=r&&r.display==='granted'?'granted':'denied'}catch(e){natPerm='denied'}p=natPerm}}
+    else if(p==='default'){try{p=await Notification.requestPermission()}catch(e){p=notifPerm()}}
     if(p==='granted'){S.settings.notify=true;touch('settings');nState.last=Date.now();saveN()}
     else notifNote=p==='denied'?'denied':'asked';
   }
@@ -1501,6 +1538,7 @@ async function setNotify(on){
 function notifHtml(seg){
   const p=notifPerm(),on=notifOn();let msg;
   if(p==='unsupported'||notifNote==='unsupported')msg=x('This browser does not support notifications.','เบราว์เซอร์นี้ไม่รองรับการแจ้งเตือน');
+  else if(NAT&&(p==='denied'||notifNote==='denied'))msg=x('Notifications are blocked for this app. Open the phone Settings, Apps, Home Base, Notifications, allow them, then come back and switch this on.','การแจ้งเตือนของแอปนี้ถูกปิดไว้ ไปที่ การตั้งค่าของมือถือ แอป Home Base การแจ้งเตือน แล้วเปิดอนุญาต จากนั้นกลับมาเปิดอีกครั้ง');
   else if(p==='denied'||notifNote==='denied')msg=x('Notifications are blocked for this site. Open the site settings in Chrome, allow Notifications, then come back and switch this on.','การแจ้งเตือนถูกบล็อกไว้ ไปที่การตั้งค่าเว็บไซต์ใน Chrome แล้วอนุญาตการแจ้งเตือน จากนั้นกลับมาเปิดอีกครั้ง');
   else if(notifNote==='asked')msg=x('Permission was not given. Switch on again and tap Allow.','ยังไม่ได้อนุญาต เปิดอีกครั้งแล้วกดอนุญาต');
   else if(notifNote==='failed')msg=x('Could not show a notification. Check the Notifications permission for this site.','แสดงแจ้งเตือนไม่ได้ ตรวจสอบสิทธิ์การแจ้งเตือนของเว็บนี้');
@@ -1508,7 +1546,8 @@ function notifHtml(seg){
   else msg=x('Get a notification when it is time for a task, routine or scheduled item.','รับแจ้งเตือนเมื่อถึงเวลาของงาน กิจวัตร และกำหนดการ');
   return'<div class="set-g"><span class="lbl">'+x('Notifications','การแจ้งเตือน')+'</span>'+seg([['on',x('On','เปิด')],['off',x('Off','ปิด')]],on?'on':'off','setNotify')+'<small role="status">'+msg+'</small>'
     +(on?'<div><button type="button" class="btn sm" data-act="notifTest">'+x('Send a test','ส่งแจ้งเตือนทดสอบ')+'</button></div>':'')
-    +'<small>'+x('Limit: a web app cannot wake itself once it is fully closed. Reminders arrive on time while the app is open or recently used. After it was closed, anything you missed in the last hour shows up when you open it again.','ข้อจำกัด: เว็บแอปปลุกตัวเองไม่ได้เมื่อปิดแอปสนิท แจ้งเตือนจึงตรงเวลาตอนเปิดแอปไว้หรือเพิ่งใช้งาน ถ้าปิดแอปไปแล้ว จะเห็นงานที่พลาดไม่เกิน 1 ชั่วโมงเมื่อเปิดแอปอีกครั้ง')+'</small></div>';
+    +(NAT?'<small>'+x('This Android app sets alarms on the phone itself, so reminders arrive even when the app is closed. Alarms are set '+NAT_DAYS+' days ahead and refreshed every time you open the app or change something.'+(on&&natCount>=0?' Alarms set now: '+natCount+'.':''),'แอป Android นี้ตั้งปลุกไว้ในเครื่องโดยตรง จึงแจ้งเตือนได้แม้ปิดแอป ตั้งล่วงหน้า '+NAT_DAYS+' วัน และตั้งใหม่ทุกครั้งที่เปิดแอปหรือแก้ไขรายการ'+(on&&natCount>=0?' ตอนนี้ตั้งปลุกไว้ '+natCount+' รายการ':''))+'</small>'
+      :'<small>'+x('Limit: a web app cannot wake itself once it is fully closed. Reminders arrive on time while the app is open or recently used. After it was closed, anything you missed in the last hour shows up when you open it again.','ข้อจำกัด: เว็บแอปปลุกตัวเองไม่ได้เมื่อปิดแอปสนิท แจ้งเตือนจึงตรงเวลาตอนเปิดแอปไว้หรือเพิ่งใช้งาน ถ้าปิดแอปไปแล้ว จะเห็นงานที่พลาดไม่เกิน 1 ชั่วโมงเมื่อเปิดแอปอีกครั้ง')+'</small><small>'+x('To get reminders with the app closed, install the Android app version: ','ถ้าต้องการให้แจ้งเตือนแม้ปิดแอป ให้ติดตั้งเวอร์ชันแอป Android: ')+'<a href="'+APK_URL+'">'+x('Download Home Base for Android','ดาวน์โหลด Home Base สำหรับ Android')+'</a></small>')+'</div>';
 }
 
 /* ---------- celebration when a task is ticked off ---------- */
@@ -1816,7 +1855,7 @@ document.addEventListener('change',e=>{
 window.addEventListener('hashchange',()=>{const v=readHash();if(v!==view){view=v;render();window.scrollTo(0,0)}});
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden)return;
-  checkReminders();
+  checkReminders();natSync();
   if(Date.now()-newsAt>1800000)loadNews();
   const nk=todayKey();
   if(nk!==lastKey){
@@ -1836,6 +1875,7 @@ function onSnap(snap){
     S[d.id]=nv;changed=true;
   });
   const first=!loaded;loaded=true;
+  if(first)natInit();else if(changed)natSync();
   if(first||changed){applyTheme();render(true);repaintSheet()}
 }
 /* ---------- on-device storage: replaces the Claude database ---------- */
@@ -1874,6 +1914,14 @@ const EXPORTABLE=n=>isDoc(n)&&n!=='brief'&&n!=='inbox';
 function exportData(){
   const out={app:'home-base',v:1,at:new Date().toISOString(),docs:{}};
   Object.keys(S).forEach(n=>{if(EXPORTABLE(n))out.docs[n]=pruned(n)});
+  if(NAT){
+    const fn='home-base-backup-'+todayKey()+'.json';
+    nat('writeFile',{path:fn,data:JSON.stringify(out),directory:'DOCUMENTS',encoding:'utf8'},'Filesystem')
+      .then(()=>{restoreNote=x('Backup file saved in the Documents folder: ','บันทึกไฟล์สำรองแล้ว อยู่ในโฟลเดอร์ Documents: ')+fn})
+      .catch(()=>{restoreNote=x('Could not save the backup file.','บันทึกไฟล์สำรองไม่สำเร็จ')})
+      .then(repaintSheet);
+    return;
+  }
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(out)],{type:'application/json'}));
   a.download='home-base-backup-'+todayKey()+'.json';

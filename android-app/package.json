@@ -1,0 +1,16 @@
+{
+  "name": "home-base-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android shell for Home Base. It loads the live site and adds on-phone alarms for reminders.",
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/filesystem": "^6.0.0",
+    "@capacitor/local-notifications": "^6.1.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.2.0"
+  }
+}

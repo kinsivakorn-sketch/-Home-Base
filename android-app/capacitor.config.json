@@ -1,0 +1,12 @@
+{
+  "appId": "com.kinsivakorn.homebase",
+  "appName": "Home Base",
+  "webDir": "www",
+  "server": {
+    "url": "https://kinsivakorn-sketch.github.io/-Home-Base/",
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#000000"
+  }
+}
